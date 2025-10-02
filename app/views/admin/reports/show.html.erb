@@ -1,0 +1,103 @@
+<div class="container" style="max-width: 1200px;">
+  <%= link_to "← Back to Dashboard", admin_reports_path, class: "usa-link", style: "display: block; margin-bottom: var(--spacing-3);" %>
+
+  <!-- Header with context -->
+  <div class="report-header">
+    <div>
+      <h1 class="report-title">
+        <%= @report.project_type.presence || "Project" %>
+        <% if @report.location.present? %>
+          in <%= @report.location %>
+        <% end %>
+      </h1>
+      <p class="report-subtitle">Report #<%= @report.id %> • Submitted <%= @report.created_at.strftime("%B %d, %Y") %></p>
+    </div>
+    <div class="report-meta">
+      <span class="usa-tag status-badge"><%= @report.status %></span>
+      <% if @report.timeline_impact.present? %>
+        <% case @report.timeline_impact %>
+        <% when "Weeks delayed" %>
+          <span class="impact-badge impact-badge--weeks">⏱️ Weeks</span>
+        <% when "Months delayed" %>
+          <span class="impact-badge impact-badge--months">⏰ Months</span>
+        <% when "Years delayed" %>
+          <span class="impact-badge impact-badge--years">🚨 Years</span>
+        <% when "Project abandoned" %>
+          <span class="impact-badge impact-badge--abandoned">❌ Abandoned</span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Project Description (Quick Context) -->
+  <div class="detail-card" style="margin-bottom: var(--spacing-3);">
+    <h3>Project</h3>
+    <div class="text-box" style="margin-top: var(--spacing-1);">
+      <%= simple_format(@report.project_description) %>
+    </div>
+  </div>
+
+  <!-- THE STORY - Most Important -->
+  <div class="report-story-card">
+    <h2>The Red Tape Story</h2>
+    <div class="report-story-content">
+      <%= simple_format(@report.issue_description) %>
+    </div>
+  </div>
+
+  <!-- Supporting Details Grid -->
+  <div class="report-detail-grid">
+    <!-- Left: Red Tape Details -->
+    <div>
+      <div class="detail-card">
+        <h3>Red Tape Details</h3>
+
+        <div style="margin-bottom: var(--spacing-3);">
+          <strong>Issue Categories</strong>
+          <div class="tag-list">
+            <% if @report.issue_categories.present? %>
+              <% @report.issue_categories.each do |category| %>
+                <span class="usa-tag" style="background-color: #E7F6F8; color: var(--sky-blue);"><%= category %></span>
+              <% end %>
+            <% else %>
+              <span class="text-small">None specified</span>
+            <% end %>
+          </div>
+        </div>
+
+        <div style="margin-bottom: var(--spacing-3);">
+          <strong>Departments Involved</strong>
+          <div class="tag-list">
+            <% if @report.departments.present? %>
+              <% @report.departments.each do |dept| %>
+                <span class="usa-tag" style="background-color: #FEF4E6; color: var(--charcoal);"><%= dept %></span>
+              <% end %>
+            <% else %>
+              <span class="text-small">None specified</span>
+            <% end %>
+          </div>
+        </div>
+
+        <div>
+          <strong>Financial Impact</strong>
+          <div style="margin-top: var(--spacing-1);">
+            <%= @report.financial_impact.presence || "Not specified" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Contact Info -->
+    <div>
+      <div class="detail-card">
+        <h3>Contact Information</h3>
+        <div class="field"><strong>Name:</strong> <%= @report.name.presence || "[Anonymous]" %></div>
+        <div class="field"><strong>Email:</strong> <%= mail_to @report.email %></div>
+        <div class="field">
+          <strong>Privacy:</strong>
+          <%= @report.anonymous? ? "Keep anonymous" : "Can share name" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

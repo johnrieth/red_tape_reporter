@@ -1,0 +1,16 @@
+/* Success page specific styles */
+.success-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    color: #15803d;
+}
+
+.share-box {
+    background: #f7f9fc;
+    padding: 12px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 14px;
+    margin-top: 12px;
+    word-break: break-all;
+}

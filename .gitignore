@@ -123,3 +123,4 @@ $RECYCLE.BIN/
 # Ignore spring pidfiles and sockets
 /spring/*.pid
 .spring/
+/config/credentials/production.key

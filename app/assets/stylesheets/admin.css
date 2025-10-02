@@ -1,0 +1,428 @@
+/*
+ * Admin Dashboard - Professional LA + USWDS Style
+ */
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-4);
+}
+
+.stat-card {
+  background: white;
+  border: var(--border-width) solid var(--gray-10);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-3);
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: var(--spacing-1);
+}
+
+.stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--gray-50);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  font-weight: 600;
+}
+
+/* USWDS Table Styles */
+.usa-table,
+.reports-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  background-color: white;
+  margin-bottom: var(--spacing-4);
+}
+
+.usa-table th,
+.usa-table td,
+.reports-table th,
+.reports-table td {
+  padding: var(--spacing-2);
+  text-align: left;
+  border-bottom: var(--border-width) solid var(--gray-10);
+  font-size: var(--font-size-sm);
+  line-height: 1.3;
+}
+
+.usa-table th,
+.reports-table th {
+  background-color: var(--gray-5);
+  font-weight: 700;
+  color: var(--charcoal);
+  text-transform: uppercase;
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.025em;
+}
+
+.usa-table tbody tr:hover,
+.reports-table tbody tr:hover {
+  background-color: var(--gray-5);
+}
+
+.contact-info {
+  font-weight: 600;
+  color: var(--charcoal);
+}
+
+.contact-email {
+  font-size: var(--font-size-xs);
+  color: var(--gray-50);
+  margin-top: 0.25rem;
+  display: block;
+}
+
+.truncate {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* USWDS-style Status Badge */
+.usa-tag,
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  background-color: var(--warning-yellow);
+  color: var(--charcoal);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.usa-tag--new,
+.status-badge--new {
+  background-color: #E7F6F8;
+  color: var(--sky-blue);
+}
+
+.usa-tag--reviewed,
+.status-badge--reviewed {
+  background-color: #ECF3EC;
+  color: var(--success-green);
+}
+
+/* Links */
+.usa-link,
+.btn-link {
+  color: var(--sky-blue);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  text-decoration: underline;
+}
+
+.usa-link:hover,
+.btn-link:hover {
+  color: #004996;
+}
+
+.usa-link:visited {
+  color: #54278F;
+}
+
+/* Report Detail Page */
+.report-detail {
+  margin-bottom: var(--spacing-4);
+  padding-bottom: var(--spacing-4);
+  border-bottom: var(--border-width) solid var(--gray-10);
+}
+
+.report-detail:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* Auth Pages - Professional Style */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--gray-5);
+  padding: var(--spacing-3);
+}
+
+.auth-card {
+  background: white;
+  border: var(--border-width) solid var(--gray-10);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-6);
+  max-width: 28rem;
+  width: 100%;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: var(--spacing-4);
+}
+
+.auth-header h1 {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: var(--spacing-1);
+}
+
+.auth-header p {
+  color: var(--gray-50);
+  font-size: var(--font-size-base);
+}
+
+.auth-input {
+  width: 100%;
+  padding: var(--spacing-1);
+  border: var(--border-width) solid var(--gray-50);
+  border-radius: 0;
+  font-size: var(--font-size-base);
+  transition: all 0.15s ease-in-out;
+}
+
+.auth-input:focus {
+  outline: 0.25rem solid #2491FF;
+  outline-offset: 0;
+  border-color: var(--charcoal);
+}
+
+.btn-auth {
+  width: 100%;
+  padding: var(--spacing-2);
+  background-color: var(--sunset-orange);
+  border: 0;
+  border-radius: var(--border-radius-md);
+  color: white;
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  margin-top: var(--spacing-1);
+}
+
+.btn-auth:hover {
+  background-color: #C44B2A;
+}
+
+.btn-auth:focus {
+  outline: 0.25rem solid #2491FF;
+  outline-offset: 0.25rem;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: var(--spacing-3);
+}
+
+.auth-link {
+  color: var(--sky-blue);
+  text-decoration: underline;
+  font-size: var(--font-size-sm);
+}
+
+.auth-link:hover {
+  color: #004996;
+}
+
+.public-link {
+  margin-top: var(--spacing-3);
+  text-align: center;
+}
+
+.public-link a {
+  color: var(--sky-blue);
+  text-decoration: underline;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+}
+
+.public-link a:hover {
+  color: #004996;
+}
+
+/* Admin Header */
+.admin-header {
+  background-color: var(--charcoal);
+  color: white;
+  padding: var(--spacing-2) 0;
+  margin-bottom: var(--spacing-4);
+}
+
+.admin-header h1 {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  color: white;
+}
+
+/* Dashboard Cards */
+.dashboard-card {
+  background: white;
+  border: var(--border-width) solid var(--gray-10);
+  border-left: var(--border-width-thick) solid var(--palm-green);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-3);
+  margin-bottom: var(--spacing-3);
+}
+
+.dashboard-card h2 {
+  font-size: var(--font-size-lg);
+  margin-top: 0;
+  margin-bottom: var(--spacing-2);
+  color: var(--charcoal);
+}
+
+/* Empty State */
+.usa-prose--empty {
+  text-align: center;
+  padding: var(--spacing-6) var(--spacing-3);
+  color: var(--gray-50);
+}
+
+.usa-prose--empty p {
+  font-size: var(--font-size-md);
+}
+
+/* Report Detail Layout */
+.report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-3);
+  padding-bottom: var(--spacing-3);
+  border-bottom: var(--border-width) solid var(--gray-10);
+}
+
+.report-title {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  color: var(--charcoal);
+}
+
+.report-subtitle {
+  margin: var(--spacing-1) 0 0 0;
+  font-size: var(--font-size-base);
+  color: var(--gray-50);
+  font-weight: 400;
+}
+
+.report-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.report-story-card {
+  background: white;
+  border: var(--border-width-thick) solid var(--palm-green);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+}
+
+.report-story-card h2 {
+  margin: 0 0 var(--spacing-3) 0;
+  font-size: var(--font-size-lg);
+  color: var(--charcoal);
+}
+
+.report-story-content {
+  background-color: var(--gray-5);
+  padding: var(--spacing-3);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+}
+
+.report-detail-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--spacing-3);
+}
+
+@media (max-width: 1024px) {
+  .report-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.detail-card {
+  background: white;
+  border: var(--border-width) solid var(--gray-10);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-3);
+  margin-bottom: var(--spacing-3);
+}
+
+.detail-card:last-child {
+  margin-bottom: 0;
+}
+
+.detail-card h3 {
+  margin: 0 0 var(--spacing-2) 0;
+  padding: 0;
+  border: none;
+  font-size: var(--font-size-md);
+  color: var(--charcoal);
+}
+
+.detail-card .field {
+  margin-bottom: var(--spacing-1);
+}
+
+.detail-card .field:last-child {
+  margin-bottom: 0;
+}
+
+.text-box {
+  background-color: var(--gray-5);
+  padding: var(--spacing-2);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-sm);
+  margin-top: var(--spacing-2);
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: var(--spacing-1);
+}
+
+.impact-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+}
+
+.impact-badge--weeks {
+  background-color: #FEF4E6;
+  color: var(--charcoal);
+}
+
+.impact-badge--months {
+  background-color: #FEEBC8;
+  color: var(--charcoal);
+}
+
+.impact-badge--years {
+  background-color: #FED7D7;
+  color: var(--error-red);
+}
+
+.impact-badge--abandoned {
+  background-color: #F4E3DB;
+  color: var(--error-red);
+}

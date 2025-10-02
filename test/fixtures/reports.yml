@@ -1,0 +1,33 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: John Doe
+  email: john@example.com
+  project_description: Sample construction project
+  issue_description: Delayed permit approval and inspection
+  status: new
+  project_type: New construction
+  location: Los Angeles
+  issue_categories: '["Permits", "Inspections"]'
+  departments: '["Building & Safety"]'
+  timeline_impact: 3-6 months
+  financial_impact: $10,000-$50,000
+  anonymous: false
+  verification_token: token123abc
+  verified_at: <%= 1.day.ago %>
+
+two:
+  name: Jane Smith
+  email: jane@example.com
+  project_description: Housing development project
+  issue_description: Missing documentation requirements causing major delays
+  status: new
+  project_type: Accessory dwelling unit (ADU)
+  location: Santa Monica
+  issue_categories: '["Plan review", "Permits"]'
+  departments: '["Planning", "Building & Safety"]'
+  timeline_impact: Less than 3 months
+  financial_impact: $1,000-$10,000
+  anonymous: false
+  verification_token: token456def
+  verified_at: <%= 2.days.ago %>

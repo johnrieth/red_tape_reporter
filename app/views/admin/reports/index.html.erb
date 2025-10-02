@@ -1,0 +1,58 @@
+<div class="container" style="max-width: 1000px;">
+  <h1>Red Tape Reports Dashboard</h1>
+  
+  <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px;">
+    <div class="stat-card">
+      <div class="stat-number"><%= @total_reports %></div>
+      <div class="stat-label">Total Reports</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number"><%= @new_reports %></div>
+      <div class="stat-label">New Reports</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <% if @reports.any? %>
+      <table class="reports-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Contact</th>
+            <th>Project</th>
+            <th>Status</th>
+            <th>Submitted</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @reports.each do |report| %>
+            <tr>
+              <td><strong>#<%= report.id %></strong></td>
+              <td>
+                <div class="contact-info"><%= report.name.presence || "[Anonymous]" %></div>
+                <div class="contact-email"><%= report.email %></div>
+              </td>
+              <td>
+                <div class="truncate"><%= truncate(report.project_description, length: 60) %></div>
+              </td>
+              <td>
+                <span class="status-badge"><%= report.status %></span>
+              </td>
+              <td class="text-small">
+                <%= time_ago_in_words(report.created_at) %> ago
+              </td>
+              <td>
+                <%= link_to "View", admin_report_path(report), class: "btn-link" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <div style="text-align: center; padding: 40px 0;">
+        <p class="text-small">No reports submitted yet.</p>
+      </div>
+    <% end %>
+  </div>
+</div>
