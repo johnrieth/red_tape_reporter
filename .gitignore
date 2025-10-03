@@ -50,7 +50,7 @@
 /config/master.key
 /config/credentials/*.key
 /config/credentials.yml.enc
-/config/credentials/*.yml.enc
+# Allow environment-specific encrypted credentials (production.yml.enc, etc)
 
 # Ignore Kamal secrets
 .kamal/secrets
