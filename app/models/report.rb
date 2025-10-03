@@ -61,7 +61,7 @@ class Report < ApplicationRecord
 
     def set_defaults
         return unless new_record?
-        self.status ||= 'new'
+        self.status ||= "new"
         self.departments ||= []
         self.issue_categories ||= []
     end

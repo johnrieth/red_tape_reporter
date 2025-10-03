@@ -16,8 +16,8 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
           issue_description: "Experiencing significant delays with permit approvals and inspections",
           project_type: "New construction",
           location: "Los Angeles",
-          issue_categories: ["Permits"],
-          departments: ["Building & Safety"],
+          issue_categories: [ "Permits" ],
+          departments: [ "Building & Safety" ],
           timeline_impact: "Less than 3 months",
           financial_impact: "$1,000-$10,000"
         }

@@ -1,7 +1,7 @@
 # app/controllers/reports_controller.rb
 class ReportsController < ApplicationController
   allow_unauthenticated_access
-  
+
   def new
     @report = Report.new
   end
@@ -26,10 +26,10 @@ class ReportsController < ApplicationController
 
   def report_params
     params.require(:report).permit(
-      :name, 
-      :email, 
+      :name,
+      :email,
       :project_type,
-      :project_description, 
+      :project_description,
       :location,
       :issue_description,
       :timeline_impact,

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
 
   root "reports#new"
-  resources :reports, only: [:new, :create] do
+  resources :reports, only: [ :new, :create ] do
     collection do
       get :success
     end
@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get "verify/:token", to: "report_verifications#verify", as: :verify_report
 
   namespace :admin do
-    resources :reports, only: [:index, :show]
+    resources :reports, only: [ :index, :show ]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

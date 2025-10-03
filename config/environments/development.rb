@@ -36,7 +36,7 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :resend
   config.action_mailer.resend_settings = {
-    api_key: Rails.application.credentials.dig(:resend, :api_key) || ENV['RESEND_API_KEY']
+    api_key: Rails.application.credentials.dig(:resend, :api_key) || ENV["RESEND_API_KEY"]
   }
 
   # Make template changes take effect immediately.
