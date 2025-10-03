@@ -1,9 +1,9 @@
 <!-- app/views/reports/new.html.erb -->
 <div class="container">
-  <!-- Hero Section - Make it more welcoming -->
+  <!-- Hero Section -->
   <h1 class="hero-title">Stuck in Red Tape?</h1>
   <p class="hero-subtitle">
-    We want to help you build! Tell us about the bureaucratic obstacles you're 
+    We want to help you build! Tell us about the bureaucratic obstacles you're
     facing so we can advocate for real solutions.
   </p>
 
@@ -12,7 +12,7 @@
     🏛️ We're here to help cut through LA's building bureaucracy
   </div>
 
-  <!-- Flash Messages (keep as-is) -->
+  <!-- Flash Messages -->
   <% if notice %>
     <div class="alert alert-success">
       <h4>Thank you!</h4>
@@ -34,142 +34,133 @@
   <!-- Form Card -->
   <div class="card">
     <%= form_with model: @report, local: true do |form| %>
-      
 
+      <!-- SECTION 1: Essential Information -->
+      <div class="form-section">
+        <h2 class="form-section-header">Tell Us What Happened</h2>
+        <p class="form-section-description">We need these details to understand your situation and follow up with you.</p>
 
-<!-- Contact Information -->
-<h3>Contact Information</h3>
-<p class="help-text">We keep your information private and won't share it without your permission.</p>
-
-<div class="form-group">
-  <%= form.label :name, "Name (optional)" %>
-  <%= form.text_field :name, placeholder: "Your name" %>
-  <div class="help-text">We can keep your report anonymous to city officials</div>
-</div>
-
-<div class="form-group">
-  <%= form.label :email, "Email *" %>
-  <%= form.email_field :email, required: true, placeholder: "your@email.com" %>
-  <div class="help-text">Required for follow-up. Will be kept confidential.</div>
-</div>
-
-      <!-- Rest of form stays the same... -->
-      <h3>Project Details</h3>
-      
-      <div class="form-group">
-        <%= form.label :project_type, "Project Type *" %>
-        <%= form.select :project_type, 
-            Report::PROJECT_TYPES,
-            { prompt: "Select project type" },
-            { required: true } %>
-      </div>
-
-      <div class="form-group">
-        <%= form.label :project_description, "Project Description *" %>
-        <%= form.text_area :project_description, required: true, rows: 3,
-            placeholder: "Building a backyard ADU for my mother" %>
-      </div>
-
-      <div class="form-group">
-        <%= form.label :location, "Location *" %>
-        <%= form.text_field :location, required: true,
-            placeholder: "Address or general area (e.g., Hollywood, Downtown LA)" %>
-        <div class="help-text">You can be as general or specific as you're comfortable with</div>
-      </div>
-
-      <!-- Red Tape Issues -->
-      <h3>Red Tape Issues</h3>
-
-      <div class="form-group">
-        <label>Issue Categories * (Select all that apply)</label>
-        <div class="help-text">Not sure? That's okay - skip this and we'll figure it out from your story</div>
-        <div class="checkbox-grid">
-          <% Report::ISSUE_CATEGORIES.each do |category| %>
-            <div class="checkbox-item">
-              <%= check_box_tag 'report[issue_categories][]', category,
-                  @report.issue_categories.include?(category),
-                  id: "report_issue_categories_#{category.parameterize.underscore}" %>
-              <%= label_tag "report_issue_categories_#{category.parameterize.underscore}", 
-                  category, class: "checkbox-label" %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <%= form.label :issue_description, "Tell us your story *" %>
-        <%= form.text_area :issue_description, required: true, rows: 5,
-            placeholder: "I applied for my garage conversion permit in March. It's now October and I'm still waiting. The city asked for the same drainage plan three times. Each time I had to pay my architect $500 to resubmit. No one can tell me when I'll actually get approved." %>
-      </div>
-
-      <div class="form-group">
-        <label>Departments Involved * (Select all that apply)</label>
-        <div class="help-text">Don't know which departments? We can figure it out from your story</div>
-        <div class="checkbox-grid">
-          <% Report::DEPARTMENTS.each do |dept| %>
-            <div class="checkbox-item">
-              <%= check_box_tag 'report[departments][]', dept,
-                  @report.departments.include?(dept),
-                  id: "report_departments_#{dept.parameterize.underscore}" %>
-              <%= label_tag "report_departments_#{dept.parameterize.underscore}", 
-                  dept, class: "checkbox-label" %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-
-      <!-- Impact -->
-      <div class="form-row">
         <div class="form-group">
-          <%= form.label :timeline_impact, "Timeline Impact *" %>
-          <%= form.select :timeline_impact,
-              Report::TIMELINE_IMPACTS,
-              { prompt: "Select timeline impact" },
+          <%= form.label :email, "Your Email" %>
+          <%= form.email_field :email, required: true, placeholder: "your@email.com" %>
+          <div class="help-text">🔒 Required for follow-up. Kept confidential and never shared.</div>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :project_type, "What type of project?" %>
+          <%= form.select :project_type,
+              Report::PROJECT_TYPES,
+              { prompt: "Select your project type" },
               { required: true } %>
         </div>
-        
+
         <div class="form-group">
-          <%= form.label :financial_impact, "Financial Impact (optional)" %>
+          <%= form.label :project_description, "Describe your project" %>
+          <%= form.text_area :project_description, required: true, rows: 3,
+              placeholder: "Example: Building a backyard ADU for my mother to live in" %>
+          <div class="help-text">Just a brief description - a sentence or two is fine</div>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :location, "Where is this project?" %>
+          <%= form.text_field :location, required: true,
+              placeholder: "Address or general area (e.g., Hollywood, 90042)" %>
+          <div class="help-text">Be as general or specific as you're comfortable with</div>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :issue_description, "What happened? Tell us your story" %>
+          <%= form.text_area :issue_description, required: true, rows: 6,
+              placeholder: "Example: I applied for my garage conversion permit in March. It's now October and I'm still waiting. The city asked for the same drainage plan three times. Each time I had to pay my architect $500 to resubmit. No one can tell me when I'll actually get approved." %>
+          <div class="help-text">Be specific about delays, unclear requirements, conflicting information, or extra costs</div>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :timeline_impact, "How long has this delayed your project?" %>
+          <%= form.select :timeline_impact,
+              Report::TIMELINE_IMPACTS,
+              { prompt: "Select delay timeframe" },
+              { required: true } %>
+        </div>
+      </div>
+
+      <!-- SECTION 2: Optional Details -->
+      <div class="form-section">
+        <h2 class="form-section-header">Help Us Understand (Optional)</h2>
+        <p class="form-section-description">This info helps us identify patterns, but skip anything you're unsure about.</p>
+
+        <div class="form-group">
+          <%= form.label :name, "Your Name (optional - you can stay anonymous)" %>
+          <%= form.text_field :name, placeholder: "Leave blank to remain anonymous" %>
+          <div class="help-text">We can keep your report anonymous to city officials if you prefer</div>
+        </div>
+
+        <div class="form-group">
+          <label>Which issues are you experiencing? (optional)</label>
+          <div class="help-text">Select any that apply. Not sure? That's okay - skip this section.</div>
+          <div class="checkbox-grid">
+            <% Report::ISSUE_CATEGORIES.each do |category| %>
+              <div class="checkbox-item">
+                <%= check_box_tag 'report[issue_categories][]', category,
+                    @report.issue_categories.include?(category),
+                    id: "report_issue_categories_#{category.parameterize.underscore}" %>
+                <%= label_tag "report_issue_categories_#{category.parameterize.underscore}",
+                    category, class: "checkbox-label" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Which departments are involved? (optional)</label>
+          <div class="help-text">Don't know? We can figure it out from your story.</div>
+          <div class="checkbox-grid">
+            <% Report::DEPARTMENTS.each do |dept| %>
+              <div class="checkbox-item">
+                <%= check_box_tag 'report[departments][]', dept,
+                    @report.departments.include?(dept),
+                    id: "report_departments_#{dept.parameterize.underscore}" %>
+                <%= label_tag "report_departments_#{dept.parameterize.underscore}",
+                    dept, class: "checkbox-label" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :financial_impact, "How much has this cost you? (optional)" %>
           <%= form.text_field :financial_impact,
-              placeholder: "e.g., $50,000 in additional costs" %>
+              placeholder: "e.g., $50,000 in additional costs, lost income, etc." %>
+          <div class="help-text">Include permit fees, professional fees, lost income, or holding costs</div>
         </div>
       </div>
 
       <!-- Submit Button -->
-      <div class="form-group">
-        <%= form.submit "Share My Story", class: "btn btn-primary" %>
+      <div class="form-actions">
+        <%= form.submit "Share My Story", class: "btn btn-primary", data: { disable_with: "Submitting..." } %>
+        <p class="privacy-note">
+          🔒 Your information will be used by YIMBY LA to advocate for policy changes.
+          Personal details may be shared with relevant officials only with your explicit consent.
+        </p>
       </div>
-
-      <!-- Privacy note below button -->
-      <p class="privacy-note">
-        Your information will be used by YIMBY LA to advocate for policy changes. 
-        Personal details may be shared with relevant officials only with your explicit consent.
-      </p>
     <% end %>
   </div>
 
-  <!-- How advocacy works (keep as-is, it's good!) -->
-  <div class="highlight-box margin-bottom">
-    <h2>How advocacy works</h2>
-    <p><strong>You share your experience</strong> – permits, delays, unclear requirements</p>
-    <p><strong>We identify patterns</strong> – which departments, what issues come up most</p>
-    <p><strong>We advocate for change</strong> – meeting with city officials, proposing solutions</p>
-    <p style="margin-bottom: 0;"><strong>Everyone benefits</strong> – clearer processes, faster approvals, more housing</p>
-  </div>
 
-  <!-- Footer (keep as-is) -->
+
+  <!-- Footer -->
   <div class="footer">
     <div class="brand-section">
       <div class="text-small">An initiative by</div>
       <div class="brand-name">YIMBY LA</div>
       <div class="brand-tagline">Building a more abundant Los Angeles</div>
     </div>
-    
+
     <p>
       Your story becomes part of our advocacy work to make LA's building process work better for everyone.
     </p>
     <div class="text-small">
-      <p>Questions? Email us at <a href="mailto:hello@yimby-la.org">hello@yimby-la.org</a></p>
+      <p>Questions? Email us at <a href="mailto:hello@redtape.la">hello@redtape.la</a></p>
     </div>
   </div>
 </div>
