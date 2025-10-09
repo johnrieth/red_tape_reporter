@@ -27,10 +27,12 @@ class Report < ApplicationRecord
     DEPARTMENTS = [
         "Building & Safety",
         "Planning",
-        "Public Works",
-        "Housing",
+        "Water & Power",
+        "Bureau of Engineering",
+        "Housing Authority",
+        "Housing Department",
         "Fire Department",
-        "Transportation",
+        "Sanitation Bureau",
         "Other"
     ].freeze
 
