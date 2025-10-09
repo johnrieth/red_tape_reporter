@@ -1,1 +1,23 @@
-# See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+# robots.txt for redtape.la
+# Last updated: October 9, 2025
+# Optimized for Rails 8 with Propshaft
+
+# Allow all crawlers to access the site
+User-agent: *
+Disallow: /admin/
+Disallow: /session
+Disallow: /passwords/
+Disallow: /verify/
+Disallow: /up
+
+# Crawl budget optimization
+Disallow: /*.json$
+Disallow: /*?*
+
+# Allow access to Propshaft assets
+Allow: /assets/
+Allow: /packs/
+Allow: /images/
+
+# Sitemap location
+Sitemap: https://redtape.la/sitemaps/sitemap.xml

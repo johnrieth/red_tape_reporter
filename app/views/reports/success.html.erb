@@ -15,29 +15,32 @@
     <p style="margin-bottom: 0;"><strong>Updates:</strong> If your specific case becomes part of our advocacy work, we'll let you know</p>
   </div>
 
-  <div class="card">
-    <h3>You can help even more</h3>
-    <p>Know others dealing with LA's red tape? Share this tool with them:</p>
-    <div style="background: #f7f9fc; padding: 12px; border-radius: 6px; font-family: monospace; font-size: 14px; margin-top: 12px;">
-      <%= request.base_url %>
-    </div>
-    <p style="margin-top: 16px; margin-bottom: 0;">
-      <%= link_to "Share another story", root_path, class: "btn-link" %>
-    </p>
+<div class="card" data-controller="clipboard">
+  <h3>You can help even more</h3>
+  <p>Know others dealing with LA's red tape? Share this tool with them:</p>
+  <div style="background: #f7f9fc; padding: 12px; border-radius: 6px; font-family: monospace; font-size: 14px; margin-top: 12px; display: flex; justify-content: space-between; align-items: center;">
+    <span data-clipboard-target="url"><%= request.base_url %></span>
+    <button data-action="click->clipboard#copy" data-clipboard-target="button" style="background: #4a6cf7; color: white; border: none; border-radius: 4px; cursor: pointer; padding: 4px 8px; font-size: 12px;" title="Copy to clipboard">
+      Copy
+    </button>
   </div>
-
+  <p style="margin-top: 16px; margin-bottom: 0;">
+    <%= link_to "Share another story", new_report_path, class: "btn-link" %>
+  </p>
+</div>
+<!--
   <div class="info-box">
     <h3>Stay connected</h3>
     <p style="margin-bottom: 8px;">Want to stay informed about our advocacy work?</p>
     <p style="margin: 0;">
       <a href="https://yimbyla.org" target="_blank">Visit TK</a> to join our mailing list and learn about upcoming advocacy opportunities.
     </p>
-  </div>
+  </div> -->
 
   <div class="footer">
     <div class="brand-section">
       <div class="text-small">An initiative by</div>
-      <div class="brand-name">TK & TK</div>
+      <div class="brand-name" style="color: #0b3d66;">Red Tape LA</div>
       <div class="brand-tagline">Building a more abundant Los Angeles</div>
     </div>
     
