@@ -2,13 +2,17 @@
 class ReportsController < ApplicationController
   allow_unauthenticated_access
 
+  def index
+    # Landing page
+  end
+
   def new
     @report = Report.new
   end
 
   def create
     @report = Report.new(report_params)
-    @report.anonymous = report_params[:name].blank?
+    @report.anonymous = true
 
     if @report.save
       ReportMailer.verification(@report).deliver_later
@@ -26,7 +30,6 @@ class ReportsController < ApplicationController
 
   def report_params
     params.require(:report).permit(
-      :name,
       :email,
       :project_type,
       :project_description,

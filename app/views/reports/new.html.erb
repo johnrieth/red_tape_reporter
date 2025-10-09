@@ -1,16 +1,11 @@
 <!-- app/views/reports/new.html.erb -->
+<% content_for :title, "Report Your Experience | Red Tape LA" %>
 <div class="container">
-  <!-- Hero Section -->
-  <h1 class="hero-title">Stuck in Red Tape?</h1>
+  <!-- Header -->
+  <h1 class="hero-title">Report Your Experience</h1>
   <p class="hero-subtitle">
-    We want to help you build! Tell us about the bureaucratic obstacles you're
-    facing so we can advocate for real solutions.
+    Tell us what went wrong with LA's building process—permits, inspections, zoning, fees, or other issues. Your report takes 5 minutes and helps document systemic problems.
   </p>
-
-  <!-- Callout box -->
-  <div class="callout-box">
-    🏛️ We're here to help cut through LA's building bureaucracy
-  </div>
 
   <!-- Flash Messages -->
   <% if notice %>
@@ -37,14 +32,15 @@
 
       <!-- SECTION 1: Essential Information -->
       <div class="form-section">
-        <h2 class="form-section-header">Tell Us What Happened</h2>
-        <p class="form-section-description">We need these details to understand your situation and follow up with you.</p>
+        <h2 class="form-section-header">Your Experience</h2>
+        <p class="form-section-description">These details help us understand your situation and verify your report.</p>
 
         <div class="form-group">
           <%= form.label :email, "Your Email" %>
           <%= form.email_field :email, required: true, placeholder: "your@email.com" %>
-          <div class="help-text">🔒 Required for follow-up. Kept confidential and never shared.</div>
+          <div class="help-text">Required for verification. Never shared with officials or publicly.</div>
         </div>
+
 
         <div class="form-group">
           <%= form.label :project_type, "What type of project?" %>
@@ -69,10 +65,10 @@
         </div>
 
         <div class="form-group">
-          <%= form.label :issue_description, "What happened? Tell us your story" %>
+          <%= form.label :issue_description, "What went wrong with the building process?" %>
           <%= form.text_area :issue_description, required: true, rows: 6,
               placeholder: "Example: I applied for my garage conversion permit in March. It's now October and I'm still waiting. The city asked for the same drainage plan three times. Each time I had to pay my architect $500 to resubmit. No one can tell me when I'll actually get approved." %>
-          <div class="help-text">Be specific about delays, unclear requirements, conflicting information, or extra costs</div>
+          <div class="help-text">Include specific details about delays, unclear requirements, conflicting information, or unexpected costs</div>
         </div>
 
         <div class="form-group">
@@ -86,14 +82,8 @@
 
       <!-- SECTION 2: Optional Details -->
       <div class="form-section">
-        <h2 class="form-section-header">Help Us Understand (Optional)</h2>
-        <p class="form-section-description">This info helps us identify patterns, but skip anything you're unsure about.</p>
-
-        <div class="form-group">
-          <%= form.label :name, "Your Name (optional - you can stay anonymous)" %>
-          <%= form.text_field :name, placeholder: "Leave blank to remain anonymous" %>
-          <div class="help-text">We can keep your report anonymous to city officials if you prefer</div>
-        </div>
+        <h2 class="form-section-header">Additional Details (Optional)</h2>
+        <p class="form-section-description">This helps us identify patterns across reports. Skip anything you're unsure about.</p>
 
         <div class="form-group">
           <label>Which issues are you experiencing? (optional)</label>
@@ -128,19 +118,18 @@
         </div>
 
         <div class="form-group">
-          <%= form.label :financial_impact, "How much has this cost you? (optional)" %>
+          <%= form.label :financial_impact, "Financial impact (optional)" %>
           <%= form.text_field :financial_impact,
-              placeholder: "e.g., $50,000 in additional costs, lost income, etc." %>
-          <div class="help-text">Include permit fees, professional fees, lost income, or holding costs</div>
+              placeholder: "e.g., $50,000 in extra costs, $2,000/month holding costs, lost income" %>
+          <div class="help-text">Estimate additional costs beyond normal permit fees (architect fees, holding costs, lost income, etc.)</div>
         </div>
       </div>
 
       <!-- Submit Button -->
       <div class="form-actions">
-        <%= form.submit "Share My Story", class: "btn btn-primary", data: { disable_with: "Submitting..." } %>
+        <%= form.submit "Submit Report", class: "btn btn-primary", data: { disable_with: "Submitting..." } %>
         <p class="privacy-note">
-          🔒 Your information will be used by YIMBY LA to advocate for policy changes.
-          Personal details may be shared with relevant officials only with your explicit consent.
+          Your information will be used to advocate for policy changes. All reports are anonymized when shared with officials.
         </p>
       </div>
     <% end %>
@@ -151,13 +140,30 @@
   <!-- Footer -->
   <div class="footer">
     <div class="brand-section">
-      <div class="text-small">An initiative by</div>
-      <div class="brand-name">YIMBY LA</div>
-      <div class="brand-tagline">Building a more abundant Los Angeles</div>
+      <div class="brand-name" style="color: #0b3d66;">Red Tape LA</div>
+      <div class="text-small" style="margin-top: 0.5rem;">A coalition initiative by Group A, Group B, & Group C</div>
+    </div>
+
+    <!-- Coalition Partners (supports text, logo, or both) -->
+    <div style="display: flex; justify-content: center; align-items: center; gap: 2rem; margin: 1.5rem 0; flex-wrap: wrap;">
+      <!-- Partner 1: Text only example -->
+      <div style="font-size: 0.875rem; color: #454545; font-weight: 600;">Group A</div>
+
+      <!-- Partner 2: Logo + Text example (uncomment when you have logos) -->
+      <!-- <div style="display: flex; flex-direction: column; align-items: center; gap: 0.25rem;">
+        <img src="/logos/group-b.png" alt="Group B" style="height: 40px; width: auto;">
+        <div style="font-size: 0.75rem; color: #757575;">Group B</div>
+      </div> -->
+
+      <!-- Partner 3: Logo only example (uncomment when you have logos) -->
+      <!-- <img src="/logos/group-c.svg" alt="Group C" style="height: 40px; width: auto;"> -->
+
+      <div style="font-size: 0.875rem; color: #454545; font-weight: 600;">Group B</div>
+      <div style="font-size: 0.875rem; color: #454545; font-weight: 600;">Group C</div>
     </div>
 
     <p>
-      Your story becomes part of our advocacy work to make LA's building process work better for everyone.
+      Your report becomes part of our advocacy work to make LA's building process work better for everyone.
     </p>
     <div class="text-small">
       <p>Questions? Email us at <a href="mailto:hello@redtape.la">hello@redtape.la</a></p>

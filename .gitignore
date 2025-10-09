@@ -124,3 +124,5 @@ $RECYCLE.BIN/
 /spring/*.pid
 .spring/
 /config/credentials/production.key
+
+UX_RECOMMENDATIONS.md

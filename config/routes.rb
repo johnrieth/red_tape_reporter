@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   resource :session
   resources :passwords, param: :token
 
-  root "reports#new"
-  resources :reports, only: [ :new, :create ] do
+  root "reports#index"
+  resources :reports, only: [ :index, :new, :create ] do
     collection do
       get :success
     end

@@ -1,0 +1,69 @@
+<!-- app/views/reports/index.html.erb -->
+<% content_for :title, "Stuck in Red Tape? Report LA Building Issues | Red Tape LA" %>
+<div class="container" style="max-width: 48rem;">
+  <!-- Hero Section -->
+  <h1 class="hero-title" style="margin-bottom: 1rem;">Stuck in Red Tape?</h1>
+  <p class="hero-subtitle" style="margin-bottom: 2.5rem; font-size: 1.0625rem; line-height: 1.6;">
+    Document your experience with LA's building process—permits, inspections, zoning, fees, and more—so we can identify patterns and advocate for improvements.
+  </p>
+
+  <!-- What This Is -->
+  <div class="card" style="margin-bottom: 2rem; padding: 2.5rem;">
+    <p style="font-size: 1rem; line-height: 1.7; margin-bottom: 1.5rem;">
+      Red Tape LA is collecting firsthand accounts of problems in LA's building process. We're documenting delays, unclear requirements, conflicting information, and unnecessary costs across permits, inspections, zoning, fees, and more to build evidence for specific policy reforms.
+    </p>
+    <p style="font-size: 1rem; line-height: 1.7; margin: 0; color: #454545;">
+      <strong>This is a new project.</strong> We can't promise your individual issue will be resolved, but we can promise your experience will be documented and used as part of our advocacy work with city officials.
+    </p>
+  </div>
+
+  <!-- How It Works -->
+  <div class="card" style="margin-bottom: 2.5rem; padding: 2.5rem;">
+    <h2 style="font-size: 1.375rem; font-weight: 700; margin: 0 0 1.5rem 0;">How It Works</h2>
+    <ol style="margin: 0; padding-left: 1.5rem; font-size: 1rem; line-height: 1.8;">
+      <li style="margin-bottom: 0.75rem;"><strong>Submit your report</strong> — Takes about 5 minutes</li>
+      <li style="margin-bottom: 0.75rem;"><strong>Verify your email</strong> — We'll send a confirmation link</li>
+      <li style="margin-bottom: 0.75rem;"><strong>We review your submission</strong> — Within 48 Hours</li>
+      <li style="margin-bottom: 0.75rem;"><strong>Your story joins our database</strong> — Used to identify systemic issues</li>
+      <li style="margin-bottom: 0;"><strong>We share findings with officials</strong> — Patterns and anonymized data only</li>
+    </ol>
+    <p style="font-size: 0.9375rem; line-height: 1.6; margin: 1.5rem 0 0 0; padding: 1.25rem; background-color: #f7f3ee; border-left: 3px solid #0b3d66;">
+      <strong>Privacy:</strong> Your contact information stays private. We only share patterns and anonymized data with officials, never your personal details.
+    </p>
+  </div>
+
+  <!-- CTA Button -->
+  <div style="text-align: center; margin-bottom: 3rem;">
+    <%= link_to "Report an Issue", new_report_path, class: "btn-primary", style: "display: inline-block; width: auto; padding: 1.125rem 3rem; text-decoration: none; font-size: 1.25rem;" %>
+  </div>
+
+  <!-- Footer -->
+  <div style="text-align: center; padding-top: 2rem; border-top: 1px solid #e6e6e6;">
+    <div style="font-size: 1.25rem; font-weight: 700; color: #0b3d66; margin-bottom: 0.75rem;">Red Tape LA</div>
+    <p style="font-size: 0.875rem; color: #757575; margin: 0 0 1rem 0;">
+      A coalition initiative by Group A, Group B, & Group C
+    </p>
+
+    <!-- Coalition Partners (supports text, logo, or both) -->
+    <div style="display: flex; justify-content: center; align-items: center; gap: 2rem; margin: 1.5rem 0; flex-wrap: wrap;">
+      <!-- Partner 1: Text only example -->
+      <div style="font-size: 0.875rem; color: #454545; font-weight: 600;">Group A</div>
+
+      <!-- Partner 2: Logo + Text example (uncomment when you have logos) -->
+      <!-- <div style="display: flex; flex-direction: column; align-items: center; gap: 0.25rem;">
+        <img src="/logos/group-b.png" alt="Group B" style="height: 40px; width: auto;">
+        <div style="font-size: 0.75rem; color: #757575;">Group B</div>
+      </div> -->
+
+      <!-- Partner 3: Logo only example (uncomment when you have logos) -->
+      <!-- <img src="/logos/group-c.svg" alt="Group C" style="height: 40px; width: auto;"> -->
+
+      <div style="font-size: 0.875rem; color: #454545; font-weight: 600;">Group B</div>
+      <div style="font-size: 0.875rem; color: #454545; font-weight: 600;">Group C</div>
+    </div>
+
+    <p style="font-size: 0.875rem; margin: 1rem 0 0 0;">
+      Questions? <a href="mailto:hello@redtape.la" style="color: #0b3d66;">hello@redtape.la</a>
+    </p>
+  </div>
+</div>
