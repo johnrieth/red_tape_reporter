@@ -1,30 +1,22 @@
 <div class="container">
-  <div style="text-align: center; padding: var(--spacing-6) 0;">
+  <header style="text-align: center; padding: var(--spacing-6) 0;">
     <h1 class="hero-title" style="color: var(--palm-green);">✓ Verified!</h1>
     <p class="hero-subtitle">
       Thank you for verifying your report. Your story is now part of our advocacy work to fix LA's red tape.
     </p>
+  </header>
 
-    <div class="highlight-box">
+  <main>
+    <section class="highlight-box">
       <h2>What happens next</h2>
       <p><strong>Weekly review:</strong> Our team reviews all reports and identifies patterns</p>
       <p><strong>Advocacy action:</strong> We use these stories in meetings with city officials and in policy proposals</p>
-    </div>
+    </section>
 
-    <div style="margin-top: var(--spacing-5);">
+    <div style="margin-top: var(--spacing-5); text-align: center;">
       <%= link_to "Submit Another Report", new_report_path, class: "btn btn-primary" %>
     </div>
-  </div>
+  </main>
 
-  <div class="footer">
-    <div class="brand-section">
-      <div class="text-small">An initiative by</div>
-      <div class="brand-name" style="color: #0b3d66;">Red Tape LA</div>
-      <div class="brand-tagline">Building a more abundant Los Angeles</div>
-    </div>
-
-    <div class="text-small">
-      <p>Questions? Email us at <a href="mailto:hello@redtape.la">hello@redtape.la</a></p>
-    </div>
-  </div>
+  <%= render "shared/footer" %>
 </div>

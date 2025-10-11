@@ -1,33 +1,35 @@
 <!-- app/views/reports/new.html.erb -->
 <% content_for :title, "Report Your Experience | Red Tape LA" %>
 <div class="container">
-  <!-- Header -->
-  <h1 class="hero-title">Report Your Experience</h1>
-  <p class="hero-subtitle">
-    Tell us what went wrong with LA's building process—permits, inspections, zoning, fees, or other issues. Your report takes 5 minutes and helps document systemic problems.
-  </p>
+  <header>
+    <h1 class="hero-title">Report Your Experience</h1>
+    <p class="hero-subtitle">
+      Tell us what went wrong with LA's building process—permits, inspections, zoning, fees, or other issues. Your report takes 5 minutes and helps document systemic problems.
+    </p>
+  </header>
 
-  <!-- Flash Messages -->
-  <% if notice %>
-    <div class="alert alert-success">
-      <h4>Thank you!</h4>
-      <p style="margin: 0;"><%= notice %></p>
-    </div>
-  <% end %>
+  <main>
+    <!-- Flash Messages -->
+    <% if notice %>
+      <div class="alert alert-success">
+        <h4>Thank you!</h4>
+        <p style="margin: 0;"><%= notice %></p>
+      </div>
+    <% end %>
 
-  <% if @report.errors.any? %>
-    <div class="alert alert-error">
-      <h4>Please fix the following:</h4>
-      <ul>
-        <% @report.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <% if @report.errors.any? %>
+      <div class="alert alert-error">
+        <h4>Please fix the following:</h4>
+        <ul>
+          <% @report.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-  <!-- Form Card -->
-  <div class="card">
+    <!-- Form Card -->
+    <section class="card">
     <%= form_with model: @report, local: true do |form| %>
 
       <!-- SECTION 1: Essential Information -->
@@ -133,40 +135,8 @@
         </p>
       </div>
     <% end %>
-  </div>
+    </section>
+  </main>
 
-
-
-  <!-- Footer -->
-  <div class="footer">
-    <div class="brand-section">
-      <div class="brand-name" style="color: #0b3d66;">Red Tape LA</div>
-      <div class="text-small" style="margin-top: 0.5rem;">A coalition initiative by Group A, Group B, & Group C</div>
-    </div>
-
-    <!-- Coalition Partners (supports text, logo, or both) -->
-    <div style="display: flex; justify-content: center; align-items: center; gap: 2rem; margin: 1.5rem 0; flex-wrap: wrap;">
-      <!-- Partner 1: Text only example -->
-      <div style="font-size: 0.875rem; color: #454545; font-weight: 600;">Group A</div>
-
-      <!-- Partner 2: Logo + Text example (uncomment when you have logos) -->
-      <!-- <div style="display: flex; flex-direction: column; align-items: center; gap: 0.25rem;">
-        <img src="/logos/group-b.png" alt="Group B" style="height: 40px; width: auto;">
-        <div style="font-size: 0.75rem; color: #757575;">Group B</div>
-      </div> -->
-
-      <!-- Partner 3: Logo only example (uncomment when you have logos) -->
-      <!-- <img src="/logos/group-c.svg" alt="Group C" style="height: 40px; width: auto;"> -->
-
-      <div style="font-size: 0.875rem; color: #454545; font-weight: 600;">Group B</div>
-      <div style="font-size: 0.875rem; color: #454545; font-weight: 600;">Group C</div>
-    </div>
-
-    <p>
-      Your report becomes part of our advocacy work to make LA's building process work better for everyone.
-    </p>
-    <div class="text-small">
-      <p>Questions? Email us at <a href="mailto:hello@redtape.la">hello@redtape.la</a></p>
-    </div>
-  </div>
+  <%= render "shared/footer" %>
 </div>
