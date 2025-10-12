@@ -52,6 +52,13 @@ env:
     # Log everything from Rails
     # RAILS_LOG_LEVEL: debug
 
+    # Thruster optimizations for better asset serving and caching
+    THRUSTER_CACHE_SIZE: "268435456"        # 256MB HTTP cache (default: 64MB)
+    THRUSTER_MAX_CACHE_ITEM_SIZE: "5242880" # 5MB max item size (default: 1MB)
+    THRUSTER_GZIP_COMPRESSION_ENABLED: "true"  # Enable gzip compression
+    THRUSTER_X_SENDFILE_ENABLED: "true"        # Enable X-Sendfile for efficient file serving
+    THRUSTER_HTTP_IDLE_TIMEOUT: "120"          # 2 minutes idle timeout (default: 60s)
+
 # Aliases are triggered with "bin/kamal <alias>". You can overwrite arguments on invocation:
 # "bin/kamal logs -r job" will tail logs from the first server in the job section.
 aliases:

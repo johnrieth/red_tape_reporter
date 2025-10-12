@@ -83,6 +83,6 @@ Rails.application.configure do
   # Skip DNS rebinding protection for the default health check endpoint.
   config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
-  # Add to production.rb for better crawl performance
-  config.middleware.use Rack::Deflater
+  # Note: Compression is handled by Thruster (not Rack::Deflater)
+  # Thruster provides gzip compression with better performance
 end
