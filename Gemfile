@@ -62,7 +62,7 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "rack-attack", "~> 6.7"
+gem "rack-attack", "~> 6.8"
 
 gem "resend", "~> 0.10"
 
