@@ -64,6 +64,6 @@ end
 
 gem "rack-attack", "~> 6.7"
 
-gem "resend", "~> 0.10"
+gem "resend", "~> 0.26"
 
 gem "sitemap_generator", "~> 6.3"
