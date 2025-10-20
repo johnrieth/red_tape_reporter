@@ -108,6 +108,51 @@ body {
     border-bottom-color: var(--la-gold);
 }
 
+/* Hamburger menu button - hidden on desktop */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+    transition: transform 0.2s ease;
+}
+
+.hamburger:hover {
+    transform: scale(1.05);
+}
+
+.hamburger:focus {
+    outline: 2px solid var(--la-gold);
+    outline-offset: 2px;
+}
+
+.hamburger__line {
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Hamburger animation when active */
+.hamburger--active .hamburger__line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger--active .hamburger__line:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger--active .hamburger__line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
 /* Forms - tight spacing */
 .form-section {
     background-color: white;
@@ -402,9 +447,63 @@ button[type="submit"]:focus {
 
 /* Responsive */
 @media (max-width: 768px) {
+    /* Show hamburger menu, hide desktop nav links */
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 3.5rem;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--la-navy);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: var(--spacing-lg);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-links--open {
+        transform: translateX(0);
+    }
+
+    .nav-links li {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-links li:last-child {
+        border-bottom: none;
+    }
+
+    .nav-link {
+        display: block;
+        padding: var(--spacing-lg);
+        border-bottom: none;
+        font-size: 1.125rem;
+        min-height: 44px;
+    }
+
+    .nav-links button {
+        width: 100%;
+        text-align: left;
+        padding: var(--spacing-lg);
+        min-height: 44px;
+        background-color: var(--la-gold);
+        color: var(--la-charcoal);
+        font-weight: 700;
+        border-radius: var(--border-radius);
+        margin-top: var(--spacing-md);
+    }
+
     .hero-banner {
-        padding: 4rem 1rem;
-        min-height: 300px;
+        padding: 3rem 1rem;
+        min-height: 250px;
     }
 
     .hero-banner__title {
@@ -416,10 +515,31 @@ button[type="submit"]:focus {
     }
 }
 
-/* Responsive */
+/* Responsive - Small phones and better touch targets */
 @media (max-width: 640px) {
     .checkbox-grid {
         grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+
+    /* Bigger touch targets for checkboxes */
+    .checkbox-item {
+        gap: var(--spacing-md);
+        padding: var(--spacing-sm);
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+
+    input[type="checkbox"] {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-top: 0;
+    }
+
+    .checkbox-label {
+        font-size: 1rem;
+        line-height: 1.4;
     }
 
     .container,
@@ -431,8 +551,21 @@ button[type="submit"]:focus {
         padding: var(--spacing-lg);
     }
 
+    .form-group {
+        margin-bottom: var(--spacing-xl);
+    }
+
+    /* Ensure all buttons are touch-friendly */
+    .btn-primary,
+    button[type="submit"] {
+        min-height: 48px;
+        font-size: 1.0625rem;
+        padding: var(--spacing-lg) var(--spacing-xl);
+    }
+
     .nav-container {
         min-height: 3rem;
+        padding: 0 var(--spacing-md);
     }
 
     .nav-brand .brand-link {
@@ -445,5 +578,44 @@ button[type="submit"]:focus {
 
     .story-counter__label {
         font-size: 1rem;
+    }
+
+    /* Better spacing for form inputs on mobile */
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea,
+    select {
+        padding: var(--spacing-md);
+        font-size: 1rem;
+        min-height: 44px;
+    }
+
+    textarea {
+        min-height: 120px;
+    }
+}
+
+/* Extra small phones */
+@media (max-width: 480px) {
+    .hero-banner {
+        padding: 2rem 1rem;
+        min-height: 200px;
+    }
+
+    .hero-banner__title {
+        font-size: 1.75rem;
+    }
+
+    .hero-banner__subtitle {
+        font-size: 1rem;
+    }
+
+    .story-counter__number {
+        font-size: 2rem;
+    }
+
+    .form-section-header {
+        font-size: 1.25rem;
     }
 }

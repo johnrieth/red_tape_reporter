@@ -31,21 +31,21 @@
         <tbody>
           <% @reports.each do |report| %>
             <tr>
-              <td><strong>#<%= report.id %></strong></td>
-              <td>
+              <td data-label="ID"><strong>#<%= report.id %></strong></td>
+              <td data-label="Contact">
                 <div class="contact-info"><%= report.name.presence || "[Anonymous]" %></div>
                 <div class="contact-email"><%= report.email %></div>
               </td>
-              <td>
+              <td data-label="Project">
                 <div class="truncate"><%= truncate(report.project_description, length: 60) %></div>
               </td>
-              <td>
+              <td data-label="Status">
                 <span class="status-badge"><%= report.status %></span>
               </td>
-              <td class="text-small">
+              <td data-label="Submitted" class="text-small">
                 <%= time_ago_in_words(report.created_at) %> ago
               </td>
-              <td>
+              <td data-label="">
                 <%= link_to "View", admin_report_path(report), class: "btn-link" %>
               </td>
             </tr>

@@ -532,22 +532,27 @@ textarea {
     width: 100%;
   }
 
-  /* Mobile nav */
+  /* Mobile nav - hamburger menu handled in application.css */
   .nav-container {
     padding: 0 1rem;
     min-height: 3rem;
   }
 
-  .nav-links {
-    gap: 0.75rem;
-  }
-
-  .nav-link {
-    font-size: 0.875rem;
-  }
-
   .brand-link {
     font-size: 1rem;
+  }
+
+  /* Hero sections on mobile */
+  .hero-about {
+    padding: 3rem 1rem;
+  }
+
+  .hero-about__title {
+    font-size: 2rem;
+  }
+
+  .hero-about__subtitle {
+    font-size: 1.125rem;
   }
 }
 
