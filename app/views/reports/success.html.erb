@@ -3,7 +3,7 @@
     <div style="font-size: 48px; margin-bottom: 16px;">✓</div>
     <h1>Thank you for sharing your story</h1>
     <p class="large-text">
-      Your report helps us build a stronger case for reforming LA's building process.
+      <%= "Your report helps us build a stronger case for reforming LA's building process." %>
     </p>
   </header>
 
@@ -11,13 +11,13 @@
     <section class="highlight-box">
       <h2>What happens next</h2>
       <p><strong>Within 24 hours:</strong> We'll email you to verify you're not a bot</p>
-      <p><strong>Weekly review:</strong> Our team reviews all reports and identifies patterns</p>
+      <p><strong>Weekly review:</strong> Reports are reviewed weekly</p>
       <p><strong>Advocacy action:</strong> We use these stories in meetings with city officials and in policy proposals</p>
     </section>
 
     <section class="card" data-controller="clipboard">
       <h3>You can help even more</h3>
-      <p>Know others dealing with LA's red tape? Share this tool with them:</p>
+      <p>Know others dealing with LA&apos;s red tape? Share this tool with them:</p>
       <div style="background: #f7f9fc; padding: 12px; border-radius: 6px; font-family: monospace; font-size: 14px; margin-top: 12px; display: flex; justify-content: space-between; align-items: center;">
         <span data-clipboard-target="url"><%= request.base_url %></span>
         <button data-action="click->clipboard#copy" data-clipboard-target="button" style="background: #4a6cf7; color: white; border: none; border-radius: 4px; cursor: pointer; padding: 4px 8px; font-size: 12px;" title="Copy to clipboard">
@@ -38,5 +38,5 @@
       </section> -->
   </main>
 
-  <%= render "shared/footer" %>
+ 
 </div>

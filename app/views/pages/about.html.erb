@@ -1,0 +1,87 @@
+<!-- app/views/pages/about.html.erb -->
+<div class="page-container">
+  
+  <!-- Page Header -->
+  <header class="page-header">
+    <h1 class="page-header__title">About Red Tape LA</h1>
+    <p class="page-header__subtitle">
+      Building a more abundant Los Angeles by documenting and reforming bureaucratic barriers
+    </p>
+  </header>
+
+  <main>
+    <!-- Mission Section -->
+    <section class="content-section">
+      <h2 class="content-section__title">Our Mission</h2>
+      <div class="content-section__body">
+        <p>
+          We're documenting the real-world impact of bureaucratic red tape
+          on building and development in Los Angeles. Every report helps us
+          build evidence for specific policy reforms.
+        </p>
+      </div>
+    </section>
+
+    <!-- Why It Matters - using highlight card -->
+    <div class="highlight-card">
+      <h3 class="highlight-card__title">Why This Matters</h3>
+      <div class="highlight-card__body">
+        <p>
+          Every delay, every excessive fee, and every bureaucratic hurdle
+          affects real people and real projects. Your stories help us identify
+          patterns and advocate for change.
+        </p>
+      </div>
+    </div>
+
+    <!-- How We Help - using feature grid -->
+    <section class="content-section">
+      <h2 class="content-section__title">How We Help</h2>
+      
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-card__icon">📊</div>
+          <h3 class="feature-card__title">Collect Data</h3>
+          <p class="feature-card__body">
+            We gather firsthand accounts of problems in LA's building process
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card__icon">🔍</div>
+          <h3 class="feature-card__title">Find Patterns</h3>
+          <p class="feature-card__body">
+            We analyze reports to identify systemic issues and bottlenecks
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card__icon">📢</div>
+          <h3 class="feature-card__title">Advocate for Change</h3>
+          <p class="feature-card__body">
+            We present evidence to city officials and push for policy reforms
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card__icon">🏗️</div>
+          <h3 class="feature-card__title">Build Abundance</h3>
+          <p class="feature-card__body">
+            Our goal: make it easier to build housing and create opportunity
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <h2 class="cta-section__title">Have a story to share?</h2>
+      <p class="cta-section__body">
+        Your experience helps us build the case for reform
+      </p>
+      <%= link_to "Submit Your Report", new_report_path, class: "cta-section__button" %>
+    </div>
+  </main>
+
+
+</div>
