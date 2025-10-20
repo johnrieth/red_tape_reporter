@@ -1,46 +1,70 @@
-<% content_for :title, "Stuck in Red Tape? Report LA Building Issues | Red Tape LA" %>
+<% content_for :meta_title, "LA's Building Process Is Broken - Report Your Experience | Red Tape LA" %>
+<% content_for :meta_description, "Share your experience with LA's broken building process. Document permit delays, inspection backlogs, zoning confusion, and excessive fees. Help us build evidence for reform." %>
 
 <div class="hero-banner">
-  <div class="container" style="max-width: 48rem;">
-    <h1 class="hero-banner__title">Stuck in Red Tape?</h1>
+  <div class="container-narrow">
+    <h1 class="hero-banner__title">LA's Building Process Is Broken</h1>
     <p class="hero-banner__subtitle">
-      Document your experience with LA's building process—permits, inspections, 
-      zoning, fees, and more—so we can identify patterns and advocate for improvements.
+      Share your experience with permits, inspections, zoning, fees, or any other 
+      bureaucratic barrier. We're building the evidence for reform.
     </p>
   </div>
 </div>
 
-<div class="container" style="max-width: 48rem;">
-  <main>
-    <!-- What This Is -->
-    <section class="card" style="margin-bottom: 2rem; padding: 2.5rem;">
-      <p style="font-size: 1rem; line-height: 1.7; margin-bottom: 1.5rem;">
-        Red Tape LA is collecting firsthand accounts of problems in LA&apos;s building process. We&apos;re documenting delays, unclear requirements, conflicting information, and unnecessary costs across permits, inspections, zoning, fees, and more to build evidence for specific policy reforms.
-      </p>
-      <p style="font-size: 1rem; line-height: 1.7; margin: 0; color: #454545;">
-        <strong>This is a new project.</strong> We can&apos;t promise your individual issue will be resolved, but we can promise your experience will be documented and used as part of our advocacy work with city officials.
-      </p>
-    </section>
+<div class="container-narrow">
 
-    <!-- How It Works -->
-    <section class="card" style="margin-bottom: 2.5rem; padding: 2.5rem;">
-      <h2 style="font-size: 1.375rem; font-weight: 700; margin: 0 0 1.5rem 0;">How It Works</h2>
-      <ol style="margin: 0; padding-left: 1.5rem; font-size: 1rem; line-height: 1.8;">
-        <li style="margin-bottom: 0.75rem;"><strong>Submit your report</strong> — Takes about 5 minutes</li>
-        <li style="margin-bottom: 0.75rem;"><strong>Verify your email</strong> — We&apos;ll send a confirmation link</li>
-        <li style="margin-bottom: 0.75rem;"><strong>We review your submission</strong> — Within 48 Hours</li>
-        <li style="margin-bottom: 0.75rem;"><strong>Your story joins our database</strong> — Used to identify systemic issues</li>
-        <li style="margin-bottom: 0;"><strong>We share findings with officials</strong> — Patterns and anonymized data only</li>
-      </ol>
-      <p style="font-size: 0.9375rem; line-height: 1.6; margin: 1.5rem 0 0 0; padding: 1.25rem; background-color: #f7f3ee; border-left: 3px solid #0b3d66;">
-        <strong>Privacy:</strong> Your contact information stays private. We only share patterns and anonymized data with officials, never your personal details.
-      </p>
+  <!-- Story Counter -->
+  <% if @verified_reports_count > 0 %>
+    <section class="section">
+      <div class="story-counter">
+        <div class="story-counter__number"><%= @verified_reports_count %></div>
+        <div class="story-counter__label"><%= @verified_reports_count == 1 ? 'verified story collected' : 'verified stories collected' %></div>
+      </div>
     </section>
+  <% end %>
 
-    <!-- CTA Button -->
-    <div style="text-align: center; margin-bottom: 3rem;">
-      <%= link_to "Report an Issue", new_report_path, class: "btn-primary", style: "display: inline-block; width: auto; padding: 1.125rem 3rem; text-decoration: none; font-size: 1.25rem;" %>
+  <!-- What We Do -->
+  <section class="section">
+    <p class="text-large">
+      Red Tape LA collects firsthand accounts of problems in LA's building process. 
+      We're documenting delays, unclear requirements, conflicting information, and 
+      unnecessary costs across permits, inspections, zoning, fees, and more.
+    </p>
+    <p class="text-large">
+      When patterns become visible, they become harder to ignore. Your story helps 
+      build the case for change.
+    </p>
+    <p class="text-large">
+      <strong>This is a new, volunteer project.</strong> I'm John Rieth, an LA 
+      resident who started this because everyone complains about red tape, but no 
+      one was systematically documenting it. I can't promise your individual issue 
+      will be resolved, but I can promise your experience will be documented and 
+      used to push for reform with city officials.
+    </p>
+  </section>
+
+  <!-- How It Works -->
+  <section class="section">
+    <h2>How It Works</h2>
+    <ol class="big-list">
+      <li><strong>Submit your report</strong> — Takes about 5 minutes</li>
+      <li><strong>Verify your email</strong> — I'll send a confirmation link</li>
+      <li><strong>Your story is reviewed</strong> — Personally by me</li>
+      <li><strong>Your story joins the database</strong> — Used to identify systemic issues</li>
+      <li><strong>Findings shared with officials</strong> — Patterns and anonymized data only</li>
+    </ol>
+
+    <div class="callout callout--midnight">
+      <p class="mb-0">
+        <strong>Privacy:</strong> Your contact information stays private. I only share 
+        patterns and anonymized data with officials, never your personal details.
+      </p>
     </div>
-  </main>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-cta">
+    <%= link_to "Share Your Story", new_report_path, class: "btn btn-primary btn-large" %>
+  </section>
 
 </div>

@@ -1,87 +1,120 @@
-<!-- app/views/pages/about.html.erb -->
-<div class="page-container">
-  
-  <!-- Page Header -->
-  <header class="page-header">
-    <h1 class="page-header__title">About Red Tape LA</h1>
-    <p class="page-header__subtitle">
-      Building a more abundant Los Angeles by documenting and reforming bureaucratic barriers
+<% content_for :meta_title, "About Red Tape LA - Documenting LA's Building Bureaucracy" %>
+<% content_for :meta_description, "Red Tape LA is a volunteer project documenting bureaucratic barriers in LA's building process. Learn how we collect stories, analyze patterns, and advocate for housing reform." %>
+
+<div class="hero-about">  <!-- new class -->
+  <div class="container-narrow">
+    <h1 class="hero-about__title">About Red Tape LA</h1>
+    <p class="hero-about__subtitle">
+      Documenting the red tape blocking housing in Los Angeles
     </p>
-  </header>
+  </div>
+</div>
 
-  <main>
-    <!-- Mission Section -->
-    <section class="content-section">
-      <h2 class="content-section__title">Our Mission</h2>
-      <div class="content-section__body">
-        <p>
-          We're documenting the real-world impact of bureaucratic red tape
-          on building and development in Los Angeles. Every report helps us
-          build evidence for specific policy reforms.
-        </p>
-      </div>
-    </section>
+<div class="container-narrow">
 
-    <!-- Why It Matters - using highlight card -->
-    <div class="highlight-card">
-      <h3 class="highlight-card__title">Why This Matters</h3>
-      <div class="highlight-card__body">
-        <p>
-          Every delay, every excessive fee, and every bureaucratic hurdle
-          affects real people and real projects. Your stories help us identify
-          patterns and advocate for change.
-        </p>
-      </div>
-    </div>
+  <!-- What Red Tape LA Does -->
+  <section class="section">
+    <h2>What This Project Does</h2>
+    <p class="text-large">
+      Red Tape LA is building a systematic record of dysfunction in LA's building 
+      process. Every submission gets reviewed, tagged, and added to our database. 
+      We track patterns across neighborhoods, project types, city departments, and 
+      types of barriers.
+    </p>
+    <p class="text-large">
+      The goal isn't to shame individual bureaucrats—it's to show city officials 
+      exactly where the system is breaking down. Permits stuck in LADBS for 18 months? 
+      Zoning contradictions between departments? Plan check delays with no explanation? 
+      We document it all.
+    </p>
+    <p class="text-large">
+      Every two months, I publish reports with findings. These reports go to City 
+      Council members, journalists, advocacy organizations, and anyone else pushing 
+      for reform. The more evidence we collect, the harder it becomes to ignore.
+    </p>
+  </section>
 
-    <!-- How We Help - using feature grid -->
-    <section class="content-section">
-      <h2 class="content-section__title">How We Help</h2>
-      
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="feature-card__icon">📊</div>
-          <h3 class="feature-card__title">Collect Data</h3>
-          <p class="feature-card__body">
-            We gather firsthand accounts of problems in LA's building process
-          </p>
-        </div>
+  <!-- What I'm NOT -->
+  <section class="section">
+    <h2>What I'm Not</h2>
+    <ul class="checklist">
+      <li>I'm not affiliated with the city government</li>
+      <li>I can't help with individual cases or provide legal advice</li>
+      <li>I'm not a permit expediter or paid consultant</li>
+      <li>I don't work for developers or the real estate industry</li>
+    </ul>
+  </section>
 
-        <div class="feature-card">
-          <div class="feature-card__icon">🔍</div>
-          <h3 class="feature-card__title">Find Patterns</h3>
-          <p class="feature-card__body">
-            We analyze reports to identify systemic issues and bottlenecks
-          </p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-card__icon">📢</div>
-          <h3 class="feature-card__title">Advocate for Change</h3>
-          <p class="feature-card__body">
-            We present evidence to city officials and push for policy reforms
-          </p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-card__icon">🏗️</div>
-          <h3 class="feature-card__title">Build Abundance</h3>
-          <p class="feature-card__body">
-            Our goal: make it easier to build housing and create opportunity
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <div class="cta-section">
-      <h2 class="cta-section__title">Have a story to share?</h2>
-      <p class="cta-section__body">
-        Your experience helps us build the case for reform
+  <!-- Current Status -->
+  <section class="section">
+    <div class="highlight">
+      <h3 class="mb-1">Current Status</h3>
+      <p>
+        <strong>This is a one-person, volunteer project.</strong> I started it
+        because I believe LA can do better. I review every report personally,
+        publish findings every two months, and use the data to create public
+        pressure for reform.
       </p>
-      <%= link_to "Submit Your Report", new_report_path, class: "cta-section__button" %>
+      <p class="mb-0">
+        It's early days, but I'm committed to this work. Other cities have
+        streamlined their building processes. LA can too.
+      </p>
     </div>
-  </main>
+  </section>
 
+  <!-- The Goal -->
+  <section class="section">
+    <h2>The Goal</h2>
+    <p class="text-large">
+      When residents, journalists, and city officials can see documented patterns 
+      of bureaucratic failures—permit delays, inspection backlogs, zoning confusion, 
+      excessive fees, conflicting requirements—it becomes harder to ignore the problem.
+    </p>
+    <p class="text-large">
+      I'm publishing reports regularly, sharing findings with local media, and
+      making the data available to anyone pushing for housing reform. The more
+      stories we collect, the stronger the case for change.
+    </p>
+    <p class="text-large mb-0">
+      LA can build the housing we need. First, we need to document what's blocking us.
+    </p>
+  </section>
+
+  <!-- Get Involved -->
+  <section class="section">
+    <h2>Get Involved</h2>
+
+    <p class="text-large">
+      <strong>If you've tried to build housing in LA:</strong> Share your story—whether
+      it's permits, inspections, zoning, fees, or any other bureaucratic barrier.
+      It takes 5 minutes and helps build the case for reform.
+    </p>
+
+    <p class="text-large">
+      <strong>If you're with a housing advocacy organization:</strong> Let's
+      partner. This data can support your work too.
+    </p>
+
+    <p class="text-large">
+      <strong>If you care about LA housing:</strong> Share this site with
+      anyone you know who's struggled with LA's building process. The more stories
+      we collect, the stronger our case.
+    </p>
+
+    <p class="text-large mb-0">
+      <strong>Questions or want to help?</strong> Email me at
+      <a href="mailto:john@redtape.la">john@redtape.la</a>
+    </p>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-cta">
+    <h2 class="mb-2">Ready to Share Your Story?</h2>
+    <p class="lead mb-3">
+      Your experience with permits, inspections, zoning, fees, or any bureaucratic
+      barrier helps document the problem and build pressure for change.
+    </p>
+    <%= link_to "Submit Your Report", new_report_path, class: "btn btn-primary btn-large" %>
+  </section>
 
 </div>

@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Stuck in Red Tape? Report LA Building Issues | Red Tape LA" %></title>
-    <meta name="description" content="Report problems with LA's building process—permits, inspections, zoning, fees, and more. Help us document bureaucratic delays and advocate for policy reforms.">
+    <title><%= meta_title %></title>
+    <meta name="description" content="<%= meta_description %>">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<%= page_url %>">
+    <meta property="og:title" content="<%= meta_title %>">
+    <meta property="og:description" content="<%= meta_description %>">
+    <meta property="og:image" content="<%= meta_image %>">
+    <meta property="og:site_name" content="Red Tape LA">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="<%= page_url %>">
+    <meta name="twitter:title" content="<%= meta_title %>">
+    <meta name="twitter:description" content="<%= meta_description %>">
+    <meta name="twitter:image" content="<%= meta_image %>">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="<%= page_url %>">
 
     <%= yield :head %>
 
@@ -30,7 +48,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "basecamp", "application", "admin", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 

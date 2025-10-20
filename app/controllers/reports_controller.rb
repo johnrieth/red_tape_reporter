@@ -4,6 +4,7 @@ class ReportsController < ApplicationController
 
   def index
     # Landing page
+    @verified_reports_count = Report.verified.count
   end
 
   def new

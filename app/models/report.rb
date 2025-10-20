@@ -4,6 +4,7 @@ class Report < ApplicationRecord
     scope :identified, -> { where(anonymous: false) }
     scope :new_reports, -> { where(status: "new") }
     scope :recent, -> { order(created_at: :desc) }
+    scope :verified, -> { where.not(verified_at: nil) }
 
     # Choices used by form selects and checkboxes in the views.
     # These are application-level lists; change as needed.

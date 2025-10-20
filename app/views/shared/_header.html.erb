@@ -1,19 +1,16 @@
 <nav class="main-navigation">
-    <div class="nav-container">
+  <div class="nav-container">
     <div class="nav-brand">
-    <%= link_to "Red Tape LA", root_path, class: "brand-link" %>
+      <%= link_to "Red Tape LA", root_path, class: "brand-link" %>
     </div>
     <ul class="nav-links">
-        <li><%= link_to "Home", root_path, class: "nav-link" %></li>
-        <li><%= link_to "Share Your Story", new_report_path, class: "nav-link" %></li>
-        <li><%= link_to "About", about_path, class: "nav-link" %></li>
-        <% if authenticated? %>
-            <li><%= link_to "Admin", admin_reports_path, class: "nav-link" %></li>
-            <li><%= button_to "Sign Out", session_path, method: :delete %></li>
-        <% else %>
-        <li><%= link_to "Sign In", new_session_path, class: "nav-link" %></li>
-        <% end %>
+      <li><%= link_to "Home", root_path, class: "nav-link" %></li>
+      <li><%= link_to "Share Your Story", new_report_path, class: "nav-link" %></li>
+      <li><%= link_to "About", about_path, class: "nav-link" %></li>
+      <% if authenticated? %>
+        <li><%= link_to "Admin", admin_reports_path, class: "nav-link" %></li>
+        <li><%= button_to "Sign Out", session_path, method: :delete %></li>
+      <% end %>
     </ul>
-    </div>
+  </div>
 </nav>
-        
