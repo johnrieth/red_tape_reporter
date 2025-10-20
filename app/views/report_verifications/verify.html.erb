@@ -1,22 +1,21 @@
+<% content_for :meta_title, "Report Verified - Thank You! | Red Tape LA" %>
+<% content_for :meta_description, "Your Red Tape LA report has been verified. Thank you for contributing to our advocacy work for building process reform." %>
+
 <div class="container">
-  <header style="text-align: center; padding: var(--spacing-6) 0;">
+  <div style="text-align: center; padding: var(--spacing-6) 0;">
     <h1 class="hero-title" style="color: var(--palm-green);">✓ Verified!</h1>
     <p class="hero-subtitle">
       Thank you for verifying your report. Your story is now part of our advocacy work to fix LA&apos;s red tape.
     </p>
-  </header>
+  </div>
 
-  <main>
-    <section class="highlight-box">
-      <h2>What happens next</h2>
-      <p><strong>Weekly review:</strong> Our team reviews all reports and identifies patterns</p>
-      <p><strong>Advocacy action:</strong> We use these stories in meetings with city officials and in policy proposals</p>
-    </section>
+  <section class="highlight-box">
+    <h2>What happens next</h2>
+    <p><strong>Weekly review:</strong> Our team reviews all reports and identifies patterns</p>
+    <p><strong>Advocacy action:</strong> We use these stories in meetings with city officials and in policy proposals</p>
+  </section>
 
-    <div style="margin-top: var(--spacing-5); text-align: center;">
-      <%= link_to "Submit Another Report", new_report_path, class: "btn btn-primary" %>
-    </div>
-  </main>
-
-  <%= render "shared/footer" %>
+  <div style="margin-top: var(--spacing-5); text-align: center;">
+    <%= link_to "Submit Another Report", new_report_path, class: "btn btn-primary" %>
+  </div>
 </div>

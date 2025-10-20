@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
   <head>
+    <meta charset="UTF-8">
     <title><%= meta_title %></title>
     <meta name="description" content="<%= meta_description %>">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -40,13 +41,13 @@
 
   <!-- Apple / Android touch icons -->
   <link rel="apple-touch-icon" href="/favicon-180x180.png">
-  <link rel="apple-touch-icon" sizes="192x192" href="/favicon-192x192.png">
-  <link rel="apple-touch-icon" sizes="512x512" href="/favicon-512x512.png">
+
 
   <!-- Fallback icons & theme -->
   <meta name="theme-color" content="#ffffff">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag "basecamp", "application", "admin", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
@@ -54,7 +55,9 @@
 
   <body>
     <%= render "shared/header" %>
+    <main class="main-content" role="main">
     <%= yield %>
+    </main>
     <%= render "shared/footer" %>
   </body>
 </html>

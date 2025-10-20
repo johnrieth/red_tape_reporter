@@ -1,3 +1,6 @@
+<% content_for :meta_title, "Report ##{@report.id} - #{@report.project_type} | Red Tape LA Admin" %>
+<% content_for :meta_description, "View detailed report about #{@report.project_type} submitted #{@report.created_at.strftime('%B %d, %Y')}." %>
+
 <div class="container" style="max-width: 1200px;">
   <%= link_to "← Back to Dashboard", admin_reports_path, class: "usa-link", style: "display: block; margin-bottom: var(--spacing-3);" %>
 
