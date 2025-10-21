@@ -2,8 +2,8 @@
 <% content_for :meta_description, "Thank you for sharing your experience. Your story helps us document LA's building bureaucracy and advocate for meaningful reform." %>
 
 <div class="container">
-  <header style="text-align: center; padding: 40px 0;">
-    <div style="font-size: 48px; margin-bottom: 16px;">✓</div>
+  <header class="success-header">
+    <div class="success-checkmark">✓</div>
     <h1>Thank you for sharing your story</h1>
     <p class="large-text">
       <%= "Your report helps us build a stronger case for reforming LA's building process." %>
@@ -21,25 +21,25 @@
     <section class="card" data-controller="clipboard">
       <h3>You can help even more</h3>
       <p>Know others dealing with LA&apos;s red tape? Share this tool with them:</p>
-      <div style="background: #f7f9fc; padding: 12px; border-radius: 6px; font-family: monospace; font-size: 14px; margin-top: 12px; display: flex; justify-content: space-between; align-items: center;">
+      <div class="clipboard-url-box">
         <span data-clipboard-target="url"><%= request.base_url %></span>
-        <button data-action="click->clipboard#copy" data-clipboard-target="button" style="background: #4a6cf7; color: white; border: none; border-radius: 4px; cursor: pointer; padding: 4px 8px; font-size: 12px;" title="Copy to clipboard">
+        <button data-action="click->clipboard#copy" data-clipboard-target="button" class="clipboard-copy-btn" title="Copy to clipboard">
           Copy
         </button>
       </div>
-      <p style="margin-top: 16px; margin-bottom: 0;">
+      <p class="mt-4 mb-0">
         <%= link_to "Share another story", new_report_path, class: "btn-link" %>
       </p>
     </section>
     <!--
       <section class="info-box">
         <h3>Stay connected</h3>
-        <p style="margin-bottom: 8px;">Want to stay informed about our advocacy work?</p>
-        <p style="margin: 0;">
+        <p class="mb-1">Want to stay informed about our advocacy work?</p>
+        <p class="mb-0">
           <a href="https://yimbyla.org" target="_blank">Visit TK</a> to join our mailing list and learn about upcoming advocacy opportunities.
         </p>
       </section> -->
   </main>
 
- 
+
 </div>

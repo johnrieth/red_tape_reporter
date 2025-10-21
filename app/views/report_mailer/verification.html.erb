@@ -51,12 +51,12 @@
 
   <h1>Thanks for sharing your story!</h1>
 
-  <p>We received your red tape report about your <%= @report.project_type.presence || "project" %>. Before we can review it, we need to verify that you\'re a real person (not a bot!).</p>
+  <p>We received your red tape report about your <%= @report.project_type.presence || "project" %>. Before we can review it, we need to verify that you're a real person (not a bot!).</p>
 
   <p>Please click the button below to verify your email and activate your report:</p>
 
   <div style="text-align: center;">
-    <%= link_to "Verify My Report", @verification_url, class: "button", style: "background-color: #0b3d66; color: white; padding: 16px 32px; text-decoration: none; border-radius: 8px; font-weight: 600; display: inline-block;" %>
+    <%= link_to "Verify My Report", @verification_url, style: "background-color: #0b3d66; color: white; padding: 16px 32px; text-decoration: none; border-radius: 8px; font-weight: 600; display: inline-block;" %>
   </div>
 
   <p style="font-size: 14px; color: #757575;">Or copy and paste this link into your browser:<br>
@@ -64,7 +64,7 @@
 
   <p><strong>What happens next?</strong></p>
   <ul>
-    <li>We\'ll review your report</li>
+    <li>We'll review your report</li>
     <li>Your story becomes part of our advocacy work</li>
     <li>We'll use this data to push for policy changes</li>
   </ul>

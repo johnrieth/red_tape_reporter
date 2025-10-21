@@ -6,10 +6,10 @@
 :root {
     /* Tight spacing scale */
     --spacing-xs: 0.25rem; /* 4px */
-    --spacing-sm: 0.5rem;  /* 8px */
+    --spacing-sm: 0.5rem; /* 8px */
     --spacing-md: 0.75rem; /* 12px */
-    --spacing-lg: 1rem;    /* 16px */
-    --spacing-xl: 1.5rem;  /* 24px */
+    --spacing-lg: 1rem; /* 16px */
+    --spacing-xl: 1.5rem; /* 24px */
 
     /* Colors from basecamp */
     --la-navy: #0b3d66;
@@ -447,17 +447,83 @@ button[type="submit"]:focus {
     text-align: center;
 }
 
-.mb-0 { margin-bottom: 0; }
-.mb-1 { margin-bottom: var(--spacing-sm); }
-.mb-2 { margin-bottom: var(--spacing-md); }
-.mb-3 { margin-bottom: var(--spacing-lg); }
+.mb-0 {
+    margin-bottom: 0;
+}
+.mb-1 {
+    margin-bottom: var(--spacing-sm);
+}
+.mb-2 {
+    margin-bottom: var(--spacing-md);
+}
+.mb-3 {
+    margin-bottom: var(--spacing-lg);
+}
+.mt-0 {
+    margin-top: 0;
+}
+.mt-1 {
+    margin-top: var(--spacing-sm);
+}
+.mt-2 {
+    margin-top: var(--spacing-md);
+}
+.mt-3 {
+    margin-top: var(--spacing-lg);
+}
+.mt-4 {
+    margin-top: var(--spacing-xl);
+}
+
+/* Success page specific styles */
+.success-header {
+    text-align: center;
+    padding: 2.5rem 0;
+}
+
+.success-checkmark {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.clipboard-url-box {
+    background: #f7f9fc;
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 0.875rem;
+    margin-top: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.clipboard-copy-btn {
+    background: #4a6cf7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.clipboard-copy-btn:hover {
+    background: #3a5cd7;
+}
+
+.color-navy {
+    color: var(--la-navy);
+}
 
 /* Hero banner with LA background */
 .hero-banner {
-    background-image: linear-gradient(
-        rgba(10, 37, 64, 0.7),
-        rgba(10, 37, 64, 0.5)
-    ), url('la-banner.webp');
+    background-image:
+        linear-gradient(rgba(10, 37, 64, 0.7), rgba(10, 37, 64, 0.5)),
+        url("la-banner.webp");
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -472,10 +538,9 @@ button[type="submit"]:focus {
 
 /* Fallback for browsers that don't support WebP */
 .no-webp .hero-banner {
-    background-image: linear-gradient(
-        rgba(10, 37, 64, 0.7),
-        rgba(10, 37, 64, 0.5)
-    ), url('la-banner.jpg');
+    background-image:
+        linear-gradient(rgba(10, 37, 64, 0.7), rgba(10, 37, 64, 0.5)),
+        url("la-banner.jpg");
 }
 
 .hero-banner__title {

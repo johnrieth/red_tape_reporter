@@ -1,15 +1,15 @@
 <% content_for :meta_title, "Reports Dashboard - Admin | Red Tape LA" %>
 <% content_for :meta_description, "Admin dashboard for managing Red Tape LA reports. View, review, and track submitted reports." %>
 
-<div class="container" style="max-width: 1000px;">
+<div class="container">
   <h1>Red Tape Reports Dashboard</h1>
 
-  <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px;">
+  <div class="stats-grid">
     <div class="stat-card">
       <div class="stat-number"><%= @total_approved %></div>
       <div class="stat-label">Approved Reports</div>
     </div>
-    <div class="stat-card" style="<%= 'background-color: #fef3c7; border-color: #f59e0b;' if @pending_review_count > 0 %>">
+    <div class="stat-card <%= 'stat-card--pending' if @pending_review_count > 0 %>">
       <div class="stat-number"><%= @pending_review_count %></div>
       <div class="stat-label">Pending Review</div>
     </div>
@@ -19,19 +19,15 @@
     </div>
   </div>
 
-  <div class="filter-tabs" style="display: flex; gap: 8px; margin-bottom: 16px; border-bottom: 2px solid #e5e7eb;">
+  <div class="filter-tabs">
     <%= link_to "All", admin_reports_path(filter: "all"),
-        class: "filter-tab #{@filter == 'all' ? 'active' : ''}",
-        style: "padding: 8px 16px; text-decoration: none; color: #374151; border-bottom: 2px solid #{@filter == 'all' ? '#2563eb' : 'transparent'}; margin-bottom: -2px;" %>
+        class: "filter-tab #{@filter == 'all' ? 'filter-tab--active' : ''}" %>
     <%= link_to "Pending Review", admin_reports_path(filter: "pending_review"),
-        class: "filter-tab #{@filter == 'pending_review' ? 'active' : ''}",
-        style: "padding: 8px 16px; text-decoration: none; color: #374151; border-bottom: 2px solid #{@filter == 'pending_review' ? '#2563eb' : 'transparent'}; margin-bottom: -2px;" %>
+        class: "filter-tab #{@filter == 'pending_review' ? 'filter-tab--active' : ''}" %>
     <%= link_to "Approved", admin_reports_path(filter: "approved"),
-        class: "filter-tab #{@filter == 'approved' ? 'active' : ''}",
-        style: "padding: 8px 16px; text-decoration: none; color: #374151; border-bottom: 2px solid #{@filter == 'approved' ? '#2563eb' : 'transparent'}; margin-bottom: -2px;" %>
+        class: "filter-tab #{@filter == 'approved' ? 'filter-tab--active' : ''}" %>
     <%= link_to "Unverified", admin_reports_path(filter: "unverified"),
-        class: "filter-tab #{@filter == 'unverified' ? 'active' : ''}",
-        style: "padding: 8px 16px; text-decoration: none; color: #374151; border-bottom: 2px solid #{@filter == 'unverified' ? '#2563eb' : 'transparent'}; margin-bottom: -2px;" %>
+        class: "filter-tab #{@filter == 'unverified' ? 'filter-tab--active' : ''}" %>
   </div>
 
   <div class="card">
@@ -73,7 +69,7 @@
         </tbody>
       </table>
     <% else %>
-      <div style="text-align: center; padding: 40px 0;">
+      <div class="usa-prose--empty">
         <p class="text-small">No reports submitted yet.</p>
       </div>
     <% end %>
