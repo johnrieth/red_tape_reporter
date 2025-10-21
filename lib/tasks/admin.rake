@@ -58,7 +58,7 @@ namespace :admin do
   end
 
   desc "Promote existing user to admin"
-  task :promote, [:email] => :environment do |t, args|
+  task :promote, [ :email ] => :environment do |t, args|
     if args.email.blank?
       puts "ERROR: Email address is required"
       puts "Usage: rails admin:promote[user@example.com]"
@@ -82,7 +82,7 @@ namespace :admin do
   end
 
   desc "Revoke admin privileges from user"
-  task :demote, [:email] => :environment do |t, args|
+  task :demote, [ :email ] => :environment do |t, args|
     if args.email.blank?
       puts "ERROR: Email address is required"
       puts "Usage: rails admin:demote[user@example.com]"

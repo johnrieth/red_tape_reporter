@@ -3,15 +3,15 @@ class Admin::ReportsController < Admin::BaseController
     # Filter by status
     @filter = params[:filter] || "all"
     @reports = case @filter
-               when "pending_review"
+    when "pending_review"
                  Report.pending_review.recent
-               when "approved"
+    when "approved"
                  Report.approved.recent
-               when "unverified"
+    when "unverified"
                  Report.unverified.recent
-               else
+    else
                  Report.not_deleted.recent
-               end
+    end
 
     # Stats
     @total_approved = Report.approved.count
