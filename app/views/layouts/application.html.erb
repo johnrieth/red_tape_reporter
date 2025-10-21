@@ -65,7 +65,21 @@
   <body>
     <%= render "shared/header" %>
     <main class="main-content" role="main">
-    <%= yield %>
+      <% if flash[:notice] %>
+        <div class="container" style="max-width: 64rem;">
+          <div class="alert alert-success" role="alert">
+            <%= flash[:notice] %>
+          </div>
+        </div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div class="container" style="max-width: 64rem;">
+          <div class="alert alert-error" role="alert">
+            <%= flash[:alert] %>
+          </div>
+        </div>
+      <% end %>
+      <%= yield %>
     </main>
     <%= render "shared/footer" %>
   </body>

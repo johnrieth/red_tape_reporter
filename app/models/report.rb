@@ -1,10 +1,14 @@
 class Report < ApplicationRecord
     # Scopes
-    scope :anonymous, -> { where(anonymous: true) }
-    scope :identified, -> { where(anonymous: false) }
-    scope :new_reports, -> { where(status: "new") }
+    scope :not_deleted, -> { where(deleted_at: nil) }
+    scope :anonymous, -> { not_deleted.where(anonymous: true) }
+    scope :identified, -> { not_deleted.where(anonymous: false) }
+    scope :new_reports, -> { not_deleted.where(status: "new") }
     scope :recent, -> { order(created_at: :desc) }
-    scope :verified, -> { where.not(verified_at: nil) }
+    scope :verified, -> { not_deleted.where.not(verified_at: nil) }
+    scope :approved, -> { not_deleted.where.not(approved_at: nil) }
+    scope :pending_review, -> { not_deleted.where.not(verified_at: nil).where(approved_at: nil) }
+    scope :unverified, -> { not_deleted.where(verified_at: nil) }
 
     # Choices used by form selects and checkboxes in the views.
     # These are application-level lists; change as needed.
@@ -58,6 +62,22 @@ class Report < ApplicationRecord
 
     def verified?
         verified_at.present?
+    end
+
+    def approved?
+        approved_at.present?
+    end
+
+    def deleted?
+        deleted_at.present?
+    end
+
+    def soft_delete
+        update(deleted_at: Time.current)
+    end
+
+    def approve
+        update(approved_at: Time.current, status: "approved")
     end
 
     private

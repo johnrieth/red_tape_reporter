@@ -13,7 +13,11 @@ Rails.application.routes.draw do
   get "verify/:token", to: "report_verifications#verify", as: :verify_report
 
   namespace :admin do
-    resources :reports, only: [ :index, :show ]
+    resources :reports, only: [ :index, :show, :destroy ] do
+      member do
+        patch :approve
+      end
+    end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get "about", to: "pages#about"

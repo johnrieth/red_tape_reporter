@@ -3,8 +3,8 @@ class ReportsController < ApplicationController
   allow_unauthenticated_access
 
   def index
-    # Landing page
-    @verified_reports_count = Report.verified.count
+    # Landing page - only show approved reports count
+    @verified_reports_count = Report.approved.count
   end
 
   def new

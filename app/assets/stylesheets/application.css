@@ -24,6 +24,50 @@
     --border-radius: 0.25rem;
 }
 
+/* Card */
+.card {
+    background: white;
+    border: 2px solid #d1ccc1;
+    border-radius: var(--border-radius);
+    padding: 2rem 2.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Card section headings */
+.card h2 {
+    color: var(--la-navy);
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin-bottom: var(--spacing-lg);
+    margin-top: 0;
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 3px solid var(--la-gold);
+}
+
+/* Checklist styling */
+.checklist {
+    list-style: none;
+    padding-left: 0;
+    margin: var(--spacing-md) 0 0 0;
+}
+
+.checklist li {
+    padding-left: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+    position: relative;
+    font-size: 1.0625rem;
+    line-height: 1.5;
+}
+
+.checklist li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--la-success);
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
 /* Reset */
 * {
     box-sizing: border-box;
@@ -32,7 +76,7 @@
 body {
     margin: 0;
     padding: 0;
-    background: var(--la-sand);
+    background: #e8e3db; /* Darker beige for better contrast */
     color: var(--la-charcoal);
 }
 
@@ -156,10 +200,11 @@ body {
 /* Forms - tight spacing */
 .form-section {
     background-color: white;
-    border: 1px solid #ddd;
+    border: 2px solid #d1ccc1;
     border-radius: var(--border-radius);
     padding: var(--spacing-xl);
     margin-bottom: var(--spacing-lg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .form-section-header {
@@ -317,18 +362,23 @@ button[type="submit"]:focus {
     border-left: 4px solid;
     margin-bottom: var(--spacing-lg);
     border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 2px solid;
+    border-left-width: 4px;
 }
 
 .alert-success {
     background: #e9f6ee;
-    border-left-color: var(--la-success);
-    color: var(--la-success);
+    border-color: var(--la-success);
+    color: #1a5a2a;
+    font-weight: 600;
 }
 
 .alert-error {
     background: #fff4f4;
-    border-left-color: var(--la-danger);
-    color: var(--la-danger);
+    border-color: var(--la-danger);
+    color: #a03430;
+    font-weight: 600;
 }
 
 .alert h4 {

@@ -21,9 +21,10 @@ SitemapGenerator::Sitemap.sitemaps_path = 'sitemaps/'
   SitemapGenerator::Sitemap.create do
     # Add your static pages with appropriate priorities and change frequencies
     add root_path, changefreq: 'weekly', priority: 1.0
+    add about_path, changefreq: 'monthly', priority: 0.9
     add new_report_path, changefreq: 'monthly', priority: 0.8
     add success_reports_path, changefreq: 'monthly', priority: 0.6
-    
+
     # Note: We're excluding admin pages, session, password, and verification pages
     # as they either contain sensitive information or have limited SEO value
     
