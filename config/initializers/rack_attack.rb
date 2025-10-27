@@ -4,10 +4,15 @@ class Rack::Attack
     [429, { 'Content-Type' => 'text/plain' }, ['Too Many Requests. Please try again later.']]
   end
 
-  # Logging for monitoring
-  self.notifier = ->(type, req, options) {
-    Rails.logger.info "[Rack::Attack] #{type}: #{req.ip} - #{req.path}"
-  }
+  # Instrumentation for monitoring
+  self.notifier = ActiveSupport::Notifications
+
+  # Subscribe to rack attack events for logging
+  ActiveSupport::Notifications.subscribe(/rack_attack/) do |name, started, finished, unique_id, payload|
+    request = payload[:request]
+    event_type = request.env["rack.attack.match_type"]
+    Rails.logger.info "[Rack::Attack] #{event_type}: #{request.ip} - #{request.path}"
+  end
 
   # Allow local IPs (safelist)
   safelist("allow localhost") do |req|

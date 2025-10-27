@@ -5,19 +5,11 @@
   <header>
     <h1 class="hero-title">Share Your Story</h1>
     <p class="hero-subtitle">
-      Tell us about permits, inspections, zoning, fees, or any other bureaucratic 
-      barrier that delayed your project. Takes 5 minutes.
+      Tell us about permits, inspections, zoning, fees, or any other bureaucratic
+      barrier that delayed your project. Takes less 5 minutes.
     </p>
   </header>
-  <main>
-    <!-- Flash Messages -->
-    <% if notice %>
-      <div class="alert alert-success">
-        <h4>Thank you!</h4>
-        <p style="margin: 0;"><%= notice %></p>
-      </div>
-    <% end %>
-
+    <!-- Validation Errors -->
     <% if @report.errors.any? %>
       <div class="alert alert-error">
         <h4>Please fix the following:</h4>
@@ -34,13 +26,13 @@
     <%= form_with model: @report, local: true do |form| %>
 
       <!-- SECTION 1: Essential Information -->
-      <div class="form-section">
-        <h2 class="form-section-header">Your Experience</h2>
+      <fieldset>
+        <legend class="form-section-header">Your Experience</legend>
         <p class="form-section-description">These details help us understand your situation and verify your report.</p>
 
         <div class="form-group">
           <%= form.label :email, "Your Email" %>
-          <%= form.email_field :email, required: true, placeholder: "your@email.com" %>
+          <%= form.email_field :email, required: true, placeholder: "your@email.com", autocomplete: "email" %>
           <div class="help-text">Required for verification. Never shared with officials or publicly.</div>
         </div>
 
@@ -55,7 +47,7 @@
 
         <div class="form-group">
           <%= form.label :project_description, "Describe your project" %>
-          <%= form.text_area :project_description, required: true, rows: 3,
+          <%= form.text_area :project_description, required: true, rows: 3, maxlength: 500,
               placeholder: "Example: Building a backyard ADU for my mother to live in" %>
           <div class="help-text">Just a brief description - a sentence or two is fine</div>
         </div>
@@ -69,7 +61,7 @@
 
         <div class="form-group">
           <%= form.label :issue_description, "What went wrong with the building process?" %>
-          <%= form.text_area :issue_description, required: true, rows: 6,
+          <%= form.text_area :issue_description, required: true, rows: 6, maxlength: 2000,
               placeholder: "Example: I applied for my garage conversion permit in March. It&apos;s now October and I'm still waiting. The city asked for the same drainage plan three times. Each time I had to pay my architect $500 to resubmit. No one can tell me when I'll actually get approved." %>
           <div class="help-text">Include specific details about delays, unclear requirements, conflicting information, or unexpected costs</div>
         </div>
@@ -81,16 +73,16 @@
               { prompt: "Select delay timeframe" },
               { required: true } %>
         </div>
-      </div>
+      </fieldset>
 
       <!-- SECTION 2: Optional Details -->
-      <div class="form-section">
-        <h2 class="form-section-header">Additional Details (Optional)</h2>
-        <p class="form-section-description">This helps us identify patterns across reports. Skip anything you're unsure about.</p>
+      <fieldset>
+        <legend class="form-section-header">Additional Details (Optional)</legend>
+        <p class="form-section-description">This helps us identify patterns across reports. Skip anything you don't feel like sharing.</p>
 
         <div class="form-group">
-          <label>Which issues are you experiencing? (optional)</label>
-          <div class="help-text">Select any that apply. Not sure? That's okay - skip this section.</div>
+          <label>Which issues are you experiencing?</label>
+          <div class="help-text">Select any that apply.</div>
           <div class="checkbox-grid">
             <% Report::ISSUE_CATEGORIES.each do |category| %>
               <div class="checkbox-item">
@@ -105,8 +97,8 @@
         </div>
 
         <div class="form-group">
-          <label>Which departments are involved? (optional)</label>
-          <div class="help-text">Don&apos;t know? We can figure it out from your story.</div>
+          <label>Which departments are involved?</label>
+          <div class="help-text">Select any that apply.</div>
           <div class="checkbox-grid">
             <% Report::DEPARTMENTS.each do |dept| %>
               <div class="checkbox-item">
@@ -119,25 +111,23 @@
             <% end %>
           </div>
         </div>
-
         <div class="form-group">
-          <%= form.label :financial_impact, "Financial impact (optional)" %>
+          <%= form.label :financial_impact, "Financial impact" %>
           <%= form.text_field :financial_impact,
               placeholder: "e.g., $50,000 in extra costs, $2,000/month holding costs, lost income" %>
           <div class="help-text">Estimate additional costs beyond normal permit fees (architect fees, holding costs, lost income, etc.)</div>
         </div>
-      </div>
+      </fieldset>
 
       <!-- Submit Button -->
       <div class="form-actions">
-        <%= form.submit "Submit Report", class: "btn btn-primary", data: { disable_with: "Submitting..." } %>
+        <%= form.submit "Submit Your Story", class: "btn btn-gold btn-large", data: { disable_with: "Submitting..." } %>
         <p class="privacy-note">
           Your information will be used to advocate for policy changes. All reports are anonymized when shared with officials.
         </p>
       </div>
     <% end %>
     </section>
-  </main>
 
 
 </div>

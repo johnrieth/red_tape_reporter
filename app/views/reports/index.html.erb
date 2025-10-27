@@ -1,13 +1,15 @@
-<% content_for :meta_title, "LA's Building Process Is Broken - Report Your Experience | Red Tape LA" %>
-<% content_for :meta_description, "Share your experience with LA's broken building process. Document permit delays, inspection backlogs, zoning confusion, and excessive fees. Help us build evidence for reform." %>
+<% content_for :meta_title, "LA Needs Housing. The System Is Stopping It. Tell Us Why. | Red Tape LA" %>
+<% content_for :meta_description, "Share your experience with building housing in LA. Tell us what's slowing you down. Permit delays, inspection backlogs, zoning confusion, excessive fees, or something else. We're using your stories to demand the policy changes LA needs." %>
 
 <div class="hero-banner">
   <div class="container-narrow">
-    <h1 class="hero-banner__title">LA's Building Process Is Broken</h1>
+    <h1 class="hero-banner__title">LA Needs Housing. The System Is Stopping It.</h1>
     <p class="hero-banner__subtitle">
-      Share your experience with permits, inspections, zoning, fees, or any other
-      bureaucratic barrier. We're building the evidence for reform.
+      Tell us what's slowing you down.
     </p>
+    <section class="banner-section-cta">
+      <%= link_to "Share Your Story", new_report_path, class: "btn btn-gold btn-large" %>
+    </section>
   </div>
 </div>
 
@@ -23,48 +25,76 @@
     </section>
   <% end %>
 
-  <!-- What We Do -->
-  <section class="section">
-    <p class="text-large">
-      Red Tape LA collects firsthand accounts of problems in LA's building process.
-      We're documenting delays, unclear requirements, conflicting information, and
-      unnecessary costs across permits, inspections, zoning, fees, and more.
-    </p>
-    <p class="text-large">
-      When patterns become visible, they become harder to ignore. Your story helps
-      build the case for change.
-    </p>
-    <p class="text-large">
-      <strong>This is a new, volunteer project.</strong> I'm John Rieth, an LA
-      resident who started this because everyone complains about red tape, but no
-      one was systematically documenting it. I can't promise your individual issue
-      will be resolved, but I can promise your experience will be documented and
-      used to push for reform with city officials.
-    </p>
-  </section>
+  <div class="container-narrow">
 
-  <!-- How It Works -->
-  <section class="section">
-    <h2>How It Works</h2>
-    <ol class="big-list">
-      <li><strong>Submit your report</strong> — Takes about 5 minutes</li>
-      <li><strong>Verify your email</strong> — I'll send a confirmation link</li>
-      <li><strong>Your story is reviewed</strong> — Personally by me</li>
-      <li><strong>Your story joins the database</strong> — Used to identify systemic issues</li>
-      <li><strong>Findings shared with officials</strong> — Patterns and anonymized data only</li>
-    </ol>
+    <!-- Story Counter -->
+    <% if @verified_reports_count > 0 %>
+      <section class="section">
+        <div class="story-counter">
+          <div class="story-counter__number"><%= @verified_reports_count %></div>
+          <div class="story-counter__label"><%= @verified_reports_count == 1 ? 'verified story collected' : 'verified stories collected' %></div>
+        </div>
+      </section>
+    <% end %>
 
-    <div class="callout callout--midnight">
-      <p class="mb-0">
-        <strong>Privacy:</strong> Your contact information stays private. I only share
-        patterns and anonymized data with officials, never your personal details.
+    <!-- What We Do -->
+    <section class="section">
+      <h2 class="section-title">What We Do</h2>
+      <p class="text-large">
+        LA's housing bureaucracy is broken. Everyone knows it, but no one's been tracking it systematically.
       </p>
-    </div>
-  </section>
+      <p class="text-large">
+        We're collecting real experiences from people trying to build housing in LA. Permit delays. Conflicting requirements. Inspection backlogs. Excessive fees. Unclear zoning rules.
+      </p>
+      <p class="text-large">
+        Your story becomes data. Data becomes evidence. Evidence drives change.
+      </p>
+    </section>
 
-  <!-- CTA -->
-  <section class="section-cta">
-    <%= link_to "Share Your Story", new_report_path, class: "btn btn-primary btn-large" %>
-  </section>
+    <!-- Who We Are -->
+    <section class="section">
+      <h2 class="section-title">Who We Are</h2>
+      <p class="text-large">
+        We're Angelenos tired of watching our city's housing crisis worsen while the system stays broken.
+      </p>
+      <p class="text-large">
+        We're a small team collecting data and pushing city officials for systemic reform.
+      </p>
+      <p class="text-large">
+        <strong>Here's how we work together:</strong>
+      </p>
+      <p class="text-large">
+        You share what happened. We document it, look for patterns, and take findings to city officials.
+      </p>
+      <p class="text-large">
+        We can't fix your individual permit issue. But we can make sure it counts toward fixing the system.
+      </p>
 
-</div>
+    </section>
+
+
+    <!-- How It Works -->
+    <section class="section">
+      <h2 class="section-title">How It Works</h2>
+
+      <ol class="process-list">
+        <li><strong>Share your story</strong> — Takes about 5 minutes</li>
+        <li><strong>Verify your email</strong> — We'll email you a link</li>
+        <li><strong>Your story is reviewed</strong> — By our team</li>
+        <li><strong>Your story joins the database</strong> — We look for patterns across all submission</li>
+        <li><strong>We share our findings</strong> — Anonymized data only, never personal details</li>
+      </ol>
+
+      <div class="callout callout--midnight">
+        <p class="mb-0">
+          <strong>Privacy:</strong> Your contact information stays private. I only share patterns and anonymized data with officials, never your personal details.
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-cta">
+      <%= link_to "Share Your Story", new_report_path, class: "btn btn-gold btn-large" %>
+    </section>
+
+  </div>
