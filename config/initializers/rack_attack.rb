@@ -20,11 +20,11 @@ class Rack::Attack
   end
 
   # Throttles
-  throttle("reports/ip", limit: 5, period: 1.hour) do |req|
+  throttle("reports/ip", limit: 10, period: 1.hour) do |req|
     req.ip if req.path == "/reports" && req.post?
   end
 
-  throttle("reports/email", limit: 3, period: 1.day) do |req|
+  throttle("reports/email", limit: 5, period: 1.day) do |req|
     if req.path == "/reports" && req.post?
       req.params.dig("report", "email")&.strip&.downcase.presence
     end
