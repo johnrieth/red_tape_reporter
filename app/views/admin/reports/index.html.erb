@@ -30,6 +30,36 @@
         class: "filter-tab #{@filter == 'unverified' ? 'filter-tab--active' : ''}" %>
   </div>
 
+  <!-- Active Filters -->
+  <% if @filter_email.present? || @filter_department.present? || @filter_issue_category.present? %>
+    <div style="margin: 1rem 0; padding: 1rem; background-color: #f0f8fb; border: 1px solid #0b3d66; border-radius: 4px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+          <strong style="color: var(--la-navy);">Active filters:</strong>
+          <% if @filter_email.present? %>
+            <span style="background-color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+              <strong>Email:</strong> <%= @filter_email %>
+              <%= link_to "×", admin_reports_path(filter: @filter, department: @filter_department, issue_category: @filter_issue_category), style: "color: #dc2626; text-decoration: none; font-size: 1.25rem; font-weight: bold; margin-left: 0.25rem;" %>
+            </span>
+          <% end %>
+          <% if @filter_department.present? %>
+            <span style="background-color: #FEF4E6; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+              <strong>Department:</strong> <%= @filter_department %>
+              <%= link_to "×", admin_reports_path(filter: @filter, email: @filter_email, issue_category: @filter_issue_category), style: "color: #dc2626; text-decoration: none; font-size: 1.25rem; font-weight: bold; margin-left: 0.25rem;" %>
+            </span>
+          <% end %>
+          <% if @filter_issue_category.present? %>
+            <span style="background-color: #E7F6F8; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+              <strong>Issue:</strong> <%= @filter_issue_category %>
+              <%= link_to "×", admin_reports_path(filter: @filter, email: @filter_email, department: @filter_department), style: "color: #dc2626; text-decoration: none; font-size: 1.25rem; font-weight: bold; margin-left: 0.25rem;" %>
+            </span>
+          <% end %>
+        </div>
+        <%= link_to "Clear all filters", admin_reports_path(filter: @filter), style: "color: var(--la-navy); text-decoration: underline; font-size: 0.875rem; font-weight: 600;" %>
+      </div>
+    </div>
+  <% end %>
+
   <div class="card">
     <% if @reports.any? %>
       <table class="reports-table">
@@ -48,7 +78,7 @@
           <% @reports.each do |report| %>
             <tr>
               <td data-label="ID"><strong>#<%= report.id %></strong></td>
-              <td data-label="Email"><%= report.email %></td>
+              <td data-label="Email"><%= link_to report.email, admin_reports_path(email: report.email, filter: @filter), style: "color: var(--la-navy); text-decoration: underline;" %></td>
               <td data-label="Project Type"><%= report.project_type %></td>
               <td data-label="Location"><%= truncate(report.location, length: 40) %></td>
               <td data-label="Status">
