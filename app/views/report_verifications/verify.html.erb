@@ -2,20 +2,38 @@
 <% content_for :meta_description, "Your Red Tape LA report has been verified. Thank you for contributing to our advocacy work for building process reform." %>
 
 <div class="container">
-  <div style="text-align: center; padding: var(--spacing-6) 0;">
-    <h1 class="hero-title" style="color: var(--palm-green);">✓ Verified!</h1>
-    <p class="hero-subtitle">
-      Thank you for verifying your report. Your story is now part of our advocacy work to fix LA&apos;s red tape.
+  <header class="success-header">
+    <div class="success-checkmark">✓</div>
+    <h1>Your report is verified</h1>
+    <p class="large-text">
+      Thank you. Your story is now part of our case for fixing LA's building process.
     </p>
-  </div>
+  </header>
 
   <section class="highlight-box">
     <h2>What happens next</h2>
-    <p><strong>Weekly review:</strong> Our team reviews all reports and identifies patterns</p>
-    <p><strong>Advocacy action:</strong> We use these stories in meetings with city officials and in policy proposals</p>
+    <p><strong>Weekly review:</strong> Our team reviews all verified reports and identifies patterns across neighborhoods, departments, and issue types</p>
+    <p><strong>Pattern analysis:</strong> We track which barriers are most common and which departments cause the longest delays</p>
+    <p><strong>Advocacy action:</strong> We use anonymized data in meetings with city officials, share findings with journalists, and publish reports every two months</p>
   </section>
 
-  <div style="margin-top: var(--spacing-5); text-align: center;">
-    <%= link_to "Submit Another Report", new_report_path, class: "btn btn-primary" %>
-  </div>
+  <section class="card" data-controller="clipboard">
+    <h3>Help us collect more stories</h3>
+    <p>Know others dealing with LA&apos;s building red tape? The more stories we collect, the stronger our case for reform.</p>
+    <div class="clipboard-url-box">
+      <span data-clipboard-target="url"><%= request.base_url %></span>
+      <button data-action="click->clipboard#copy" data-clipboard-target="button" class="clipboard-copy-btn" title="Copy to clipboard">
+        Copy
+      </button>
+    </div>
+    <p class="mt-4 mb-0">
+      <%= link_to "Share another story", new_report_path, class: "btn-link" %>
+    </p>
+  </section>
+
+  <section class="card">
+    <h3>Questions about your report?</h3>
+    <p>Your report has been verified and added to our database. We review all submissions personally and use them to identify systemic issues.</p>
+    <p class="mb-0">If you need to update your report or have questions, email <a href="mailto:john@redtape.la">us</a></p>
+  </section>
 </div>

@@ -6,20 +6,21 @@
     <div class="success-checkmark">✓</div>
     <h1>Thank you for sharing your story</h1>
     <p class="large-text">
-      <%= "Your report helps us build a stronger case for reforming LA's building process." %>
+      Your report helps us build a stronger case for reforming LA's building process.
     </p>
   </header>
 
     <section class="highlight-box">
       <h2>What happens next</h2>
       <p><strong>Within 24 hours:</strong> We'll email you to verify you're not a bot</p>
-      <p><strong>Weekly review:</strong> Reports are reviewed weekly</p>
-      <p><strong>Advocacy action:</strong> We use these stories in meetings with city officials and in policy proposals</p>
+      <p><strong>Weekly review:</strong> Our team reviews all verified reports and identifies patterns across neighborhoods, departments, and issue types</p>
+      <p><strong>Pattern analysis:</strong> We track which barriers are most common and which departments cause the longest delays</p>
+      <p><strong>Advocacy action:</strong> We use anonymized data in meetings with city officials, share findings with journalists, and publish reports every two months</p>
     </section>
 
     <section class="card" data-controller="clipboard">
-      <h3>You can help even more</h3>
-      <p>Know others dealing with LA&apos;s red tape? Share this tool with them:</p>
+      <h3>Help us collect more stories</h3>
+      <p>Know others dealing with LA&apos;s building red tape? The more stories we collect, the stronger our case for reform.</p>
       <div class="clipboard-url-box">
         <span data-clipboard-target="url"><%= request.base_url %></span>
         <button data-action="click->clipboard#copy" data-clipboard-target="button" class="clipboard-copy-btn" title="Copy to clipboard">
@@ -30,14 +31,5 @@
         <%= link_to "Share another story", new_report_path, class: "btn-link" %>
       </p>
     </section>
-    <!--
-      <section class="info-box">
-        <h3>Stay connected</h3>
-        <p class="mb-1">Want to stay informed about our advocacy work?</p>
-        <p class="mb-0">
-          <a href="https://yimbyla.org" target="_blank">Visit TK</a> to join our mailing list and learn about upcoming advocacy opportunities.
-        </p>
-      </section> -->
-
 
 </div>

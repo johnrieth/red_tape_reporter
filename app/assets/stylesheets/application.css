@@ -44,6 +44,39 @@
     border-bottom: 3px solid var(--la-gold);
 }
 
+/* Highlight box - primary information section */
+.highlight-box {
+    background: linear-gradient(135deg, #e8f4f8 0%, #f0f8fb 100%);
+    border: 2px solid #0b3d66;
+    border-left: 6px solid #0b3d66;
+    border-radius: var(--border-radius);
+    padding: 2rem 2.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 8px rgba(11, 61, 102, 0.15);
+}
+
+.highlight-box h2 {
+    color: var(--la-navy);
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+}
+
+.highlight-box p {
+    margin: 0.875rem 0;
+    line-height: 1.6;
+}
+
+.highlight-box p:last-child {
+    margin-bottom: 0;
+}
+
+.highlight-box strong {
+    color: var(--la-navy);
+    font-weight: 700;
+}
+
 /* Checklist styling */
 .checklist {
     list-style: none;
@@ -693,6 +726,14 @@ button[type="submit"]:focus {
 
     .story-counter__label {
         font-size: 1rem;
+    }
+
+    .highlight-box {
+        padding: 1.5rem;
+    }
+
+    .highlight-box h2 {
+        font-size: 1.5rem;
     }
 
     /* Better spacing for form inputs on mobile */

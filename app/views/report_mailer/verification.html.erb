@@ -10,6 +10,12 @@
       max-width: 600px;
       margin: 0 auto;
       padding: 20px;
+      background-color: #FAFAFA;
+    }
+    .email-container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 8px;
     }
     .header {
       text-align: center;
@@ -18,60 +24,104 @@
       border-bottom: 2px solid #E6E6E6;
     }
     .brand {
-      color: #E55934;
-      font-size: 24px;
+      color: #0b3d66;
+      font-size: 26px;
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
+    }
+    .tagline {
+      color: #757575;
+      font-size: 14px;
+    }
+    h1 {
+      color: #0b3d66;
+      font-size: 28px;
+      margin-bottom: 24px;
+    }
+    .cta-box {
+      background-color: #F5F5F5;
+      padding: 32px;
+      margin: 32px 0;
+      text-align: center;
+      border-radius: 8px;
     }
     .button {
       display: inline-block;
-      background-color: #E55934;
-      color: white;
-      padding: 16px 32px;
+      background-color: #E6AF2E;
+      color: #1B1B1B;
+      padding: 16px 40px;
       text-decoration: none;
       border-radius: 8px;
       font-weight: 600;
+      font-size: 16px;
+    }
+    .alt-link {
+      font-size: 13px;
+      color: #757575;
+      margin-top: 16px;
+      word-break: break-all;
+    }
+    .info-box {
+      background-color: #F9F9F9;
+      border-left: 4px solid #0b3d66;
+      padding: 20px;
       margin: 24px 0;
+    }
+    .info-box h2 {
+      font-size: 18px;
+      margin-top: 0;
+      margin-bottom: 12px;
+      color: #0b3d66;
+    }
+    .info-box p {
+      margin: 8px 0;
     }
     .footer {
       margin-top: 40px;
       padding-top: 24px;
       border-top: 1px solid #E6E6E6;
-      font-size: 14px;
+      font-size: 13px;
       color: #757575;
       text-align: center;
+    }
+    .footer p {
+      margin: 8px 0;
     }
   </style>
 </head>
 <body>
-  <div class="header">
-    <div class="brand" style="color: #0b3d66;">Red Tape LA</div>
-    <div>Red Tape Reporter</div>
-  </div>
+  <div class="email-container">
+    <div class="header">
+      <div class="brand">Red Tape LA</div>
+      <div class="tagline">Documenting LA's Building Bureaucracy</div>
+    </div>
 
-  <h1>Thanks for sharing your story!</h1>
+    <h1>Verify your report</h1>
 
-  <p>We received your red tape report about your <%= @report.project_type.presence || "project" %>. Before we can review it, we need to verify that you're a real person (not a bot!).</p>
+    <p>Thank you for sharing your experience with LA's building process. We received your report about your <%= @report.project_type.presence || "project" %>.</p>
 
-  <p>Please click the button below to verify your email and activate your report:</p>
+    <p>Before we can add your story to our database, we need to verify you're not a bot. Click the button below to confirm your email:</p>
 
-  <div style="text-align: center;">
-    <%= link_to "Verify My Report", @verification_url, style: "background-color: #0b3d66; color: white; padding: 16px 32px; text-decoration: none; border-radius: 8px; font-weight: 600; display: inline-block;" %>
-  </div>
+    <div class="cta-box">
+      <%= link_to "Verify My Report", @verification_url, class: "button", style: "background-color: #E6AF2E; color: #1B1B1B; padding: 16px 40px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; display: inline-block;" %>
+      <div class="alt-link">
+        Or copy this link: <%= @verification_url %>
+      </div>
+    </div>
 
-  <p style="font-size: 14px; color: #757575;">Or copy and paste this link into your browser:<br>
-  <%= @verification_url %></p>
+    <div class="info-box">
+      <h2>What happens next</h2>
+      <p><strong>Weekly review:</strong> Our team reviews all verified reports and identifies patterns</p>
+      <p><strong>Pattern analysis:</strong> We track which barriers are most common and which departments cause the longest delays</p>
+      <p><strong>Advocacy action:</strong> We use anonymized data in meetings with city officials and publish reports every two months</p>
+    </div>
 
-  <p><strong>What happens next?</strong></p>
-  <ul>
-    <li>We'll review your report</li>
-    <li>Your story becomes part of our advocacy work</li>
-    <li>We'll use this data to push for policy changes</li>
-  </ul>
+    <p><strong>Privacy:</strong> Your contact information stays private. We only share anonymized, aggregated data when advocating for reform.</p>
 
-  <div class="footer">
-    <p>Questions? Email us at hello@redtape.la</p>
-    <p>Red Tape LA - Building a more abundant Los Angeles</p>
+    <div class="footer">
+      <p>Questions? <a href="mailto:contact@redtape.la" style="color: #0b3d66;">Email us</a></p>
+      <p>Red Tape LA – Building the case for housing reform</p>
+    </div>
   </div>
 </body>
 </html>
