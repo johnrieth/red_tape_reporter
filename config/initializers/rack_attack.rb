@@ -1,7 +1,7 @@
 class Rack::Attack
   # Custom response for blocked requests
   Rack::Attack.blocklisted_responder = lambda do |env|
-    [429, { 'Content-Type' => 'text/plain' }, ['Too Many Requests. Please try again later.']]
+    [ 429, { "Content-Type" => "text/plain" }, [ "Too Many Requests. Please try again later." ] ]
   end
 
   # Instrumentation for monitoring
@@ -16,7 +16,7 @@ class Rack::Attack
 
   # Allow local IPs (safelist)
   safelist("allow localhost") do |req|
-    ['127.0.0.1', '::1'].include?(req.ip) || req.ip.start_with?('192.168.')
+    [ "127.0.0.1", "::1" ].include?(req.ip) || req.ip.start_with?("192.168.")
   end
 
   # Throttles

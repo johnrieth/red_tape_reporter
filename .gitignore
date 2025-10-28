@@ -126,3 +126,6 @@ $RECYCLE.BIN/
 /config/credentials/production.key
 
 UX_RECOMMENDATIONS.md
+PRODUCTION_SETUP.md
+DEPLOYMENT_CHECK.md
+README.md
