@@ -1,7 +1,7 @@
 class ReportMailer < ApplicationMailer
   def verification(report)
     @report = report
-    @verification_url = verify_report_url(token: report.verification_token)
+    @verification_url = verify_report_url(token: report.verification_token, host: "redtape.la", protocol: "https")
 
     mail(
       to: report.email,
