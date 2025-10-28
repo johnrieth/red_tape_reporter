@@ -34,7 +34,7 @@
           in <%= @report.location %>
         <% end %>
       </h1>
-      <p class="report-subtitle">Report #<%= @report.id %> • Submitted <%= @report.created_at.strftime("%B %d, %Y") %></p>
+      <p class="report-subtitle">Report #<%= @report.id %> • Submitted <%= @report.created_at.strftime("%B %d, %Y") %> • <%= @report.email %></p>
     </div>
     <div class="report-meta">
       <% if @report.approved? %>
