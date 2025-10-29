@@ -126,7 +126,8 @@ class Admin::ReportsController < Admin::BaseController
         "Timeline Impact",
         "Financial Impact",
         "Issue Categories",
-        "Departments"
+        "Departments",
+        "Solution Ideas"
       ]
 
       reports.each do |report|
@@ -140,7 +141,8 @@ class Admin::ReportsController < Admin::BaseController
           report.timeline_impact,
           report.financial_impact,
           report.issue_categories.join(", "),
-          report.departments.join(", ")
+          report.departments.join(", "),
+          report.solution_ideas
         ]
       end
     end
@@ -265,6 +267,15 @@ class Admin::ReportsController < Admin::BaseController
           pdf.text "Issue Categories: ", inline: true
           pdf.font "Helvetica", size: 10
           pdf.text report.issue_categories.join(", "), inline: true
+          pdf.move_down 5
+        end
+
+        if report.solution_ideas.present?
+          pdf.move_down 5
+          pdf.font "Helvetica", size: 11, style: :bold
+          pdf.text "Solution Ideas from Submitter:"
+          pdf.font "Helvetica", size: 10
+          pdf.text report.solution_ideas
         end
       end
     end

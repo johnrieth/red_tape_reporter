@@ -38,6 +38,7 @@ class ReportsController < ApplicationController
       :issue_description,
       :timeline_impact,
       :financial_impact,
+      :solution_ideas,
       issue_categories: [],
       departments: []
     )

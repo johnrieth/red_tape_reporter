@@ -116,4 +116,13 @@
       </div>
     </div>
   </div>
+
+  <% if @report.solution_ideas.present? %>
+    <div class="detail-card" style="margin-top: var(--spacing-3);">
+      <h3>Solution Ideas from Submitter</h3>
+      <div style="margin-top: var(--spacing-1);">
+        <%= simple_format(@report.solution_ideas) %>
+      </div>
+    </div>
+  <% end %>
 </div>

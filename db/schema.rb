@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_20_234256) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_29_150730) do
   create_table "reports", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -30,6 +30,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_20_234256) do
     t.datetime "verified_at"
     t.datetime "approved_at"
     t.datetime "deleted_at"
+    t.text "solution_ideas"
     t.index ["approved_at"], name: "index_reports_on_approved_at"
     t.index ["deleted_at"], name: "index_reports_on_deleted_at"
     t.index ["verification_token"], name: "index_reports_on_verification_token", unique: true

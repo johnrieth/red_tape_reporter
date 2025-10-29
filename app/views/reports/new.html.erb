@@ -117,6 +117,13 @@
               placeholder: "e.g., $50,000 in extra costs, $2,000/month holding costs, lost income" %>
           <div class="help-text">Estimate additional costs beyond normal permit fees (architect fees, holding costs, lost income, etc.)</div>
         </div>
+
+        <div class="form-group">
+          <%= form.label :solution_ideas, "Have ideas for solutions?" %>
+          <%= form.text_area :solution_ideas, rows: 4, maxlength: 1000,
+              placeholder: "Example: The city should publish clear requirements upfront about transformer capacity before someone designs their project..." %>
+          <div class="help-text">If you have thoughts on specific policy changes that would have helped your situation, we'd love to hear them. But if not, no worries - your story alone is valuable.</div>
+        </div>
       </fieldset>
 
       <!-- Submit Button -->
