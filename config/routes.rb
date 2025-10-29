@@ -14,6 +14,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :reports, only: [ :index, :show, :destroy ] do
+      collection do
+        get :export
+      end
       member do
         patch :approve
       end

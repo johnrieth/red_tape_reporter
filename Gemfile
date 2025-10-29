@@ -68,5 +68,8 @@ gem "resend", "~> 0.10"
 
 gem "sitemap_generator", "~> 6.3"
 
+gem "prawn", "~> 2.4"
+gem "prawn-table", "~> 0.2"
+
 gem "sentry-ruby"
 gem "sentry-rails"
