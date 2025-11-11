@@ -1,11 +1,13 @@
 <% password_digest = BCrypt::Password.create("Secret1*3*5*") %>
 
-one:
-  email_address: one@example.com
+# Admin user - email: admin@example.com, password: Secret1*3*5*
+admin_user:
+  email_address: admin@example.com
   password_digest: <%= password_digest %>
-  admin: false
+  admin: true
 
-two:
-  email_address: two@example.com
+# Regular user (non-admin)
+regular_user:
+  email_address: user@example.com
   password_digest: <%= password_digest %>
   admin: false

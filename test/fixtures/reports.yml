@@ -1,33 +1,77 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+# Verified and approved report
+approved_report:
   name: John Doe
   email: john@example.com
-  project_description: Sample construction project
-  issue_description: Delayed permit approval and inspection
+  project_description: Building an ADU in my backyard for rental income
+  issue_description: Permit approval took 8 months with no feedback from Building & Safety department
+  status: approved
+  project_type: Accessory dwelling unit (ADU)
+  location: Los Angeles
+  issue_categories: '["Permits", "Plan review"]'
+  departments: '["Building & Safety"]'
+  timeline_impact: 6-12 months
+  financial_impact: $10,000-$50,000
+  anonymous: true
+  verification_token: <%= SecureRandom.urlsafe_base64(32) %>
+  verified_at: <%= 3.days.ago %>
+  approved_at: <%= 1.day.ago %>
+  deleted_at: null
+
+# Verified but pending review
+pending_report:
+  name: Jane Smith
+  email: jane@example.com
+  project_description: Commercial renovation project for restaurant conversion
+  issue_description: Zoning requirements were unclear and changed three times during the process
+  status: new
+  project_type: Change of use
+  location: Santa Monica
+  issue_categories: '["Zoning", "Plan review"]'
+  departments: '["Planning", "Building & Safety"]'
+  timeline_impact: 3-6 months
+  financial_impact: $50,000+
+  anonymous: true
+  verification_token: <%= SecureRandom.urlsafe_base64(32) %>
+  verified_at: <%= 2.days.ago %>
+  approved_at: null
+  deleted_at: null
+
+# Unverified report (just submitted)
+unverified_report:
+  name: Bob Johnson
+  email: bob@example.com
+  project_description: New single family home construction in hillside area
+  issue_description: Fire department inspection requirements were not communicated until after foundation was poured
   status: new
   project_type: New construction
   location: Los Angeles
-  issue_categories: '["Permits", "Inspections"]'
-  departments: '["Building & Safety"]'
-  timeline_impact: 3-6 months
-  financial_impact: $10,000-$50,000
-  anonymous: false
-  verification_token: token123abc
-  verified_at: <%= 1.day.ago %>
+  issue_categories: '["Inspections", "Permits"]'
+  departments: '["Fire Department", "Building & Safety"]'
+  timeline_impact: More than 12 months
+  financial_impact: $100,000+
+  anonymous: true
+  verification_token: <%= SecureRandom.urlsafe_base64(32) %>
+  verified_at: null
+  approved_at: null
+  deleted_at: null
 
-two:
-  name: Jane Smith
-  email: jane@example.com
-  project_description: Housing development project
-  issue_description: Missing documentation requirements causing major delays
+# Soft deleted report
+deleted_report:
+  name: Alice Brown
+  email: alice@example.com
+  project_description: Renovation of historic building for office use
+  issue_description: This report contained inappropriate content and was removed
   status: new
-  project_type: Accessory dwelling unit (ADU)
-  location: Santa Monica
-  issue_categories: '["Plan review", "Permits"]'
-  departments: '["Planning", "Building & Safety"]'
+  project_type: Renovation / Remodel
+  location: Downtown LA
+  issue_categories: '["Permits"]'
+  departments: '["Planning"]'
   timeline_impact: Less than 3 months
   financial_impact: $1,000-$10,000
-  anonymous: false
-  verification_token: token456def
-  verified_at: <%= 2.days.ago %>
+  anonymous: true
+  verification_token: <%= SecureRandom.urlsafe_base64(32) %>
+  verified_at: <%= 5.days.ago %>
+  approved_at: null
+  deleted_at: <%= 1.day.ago %>
