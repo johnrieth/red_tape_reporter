@@ -6,6 +6,10 @@ export default class extends Controller {
   static targets = ["menu", "hamburger"]
 
   connect() {
+    console.log("Mobile nav controller connected!")
+    console.log("Menu target:", this.menuTarget)
+    console.log("Hamburger target:", this.hamburgerTarget)
+
     // Close menu when clicking outside
     this.boundCloseOnOutsideClick = this.closeOnOutsideClick.bind(this)
 
@@ -19,12 +23,15 @@ export default class extends Controller {
   }
 
   toggle(event) {
+    console.log("Toggle method called!")
     event.stopPropagation()
     const isOpen = this.menuTarget.classList.contains("nav-links--open")
 
     if (isOpen) {
+      console.log("Closing menu...")
       this.close()
     } else {
+      console.log("Opening menu...")
       this.open()
     }
   }
