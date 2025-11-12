@@ -6,10 +6,6 @@ export default class extends Controller {
   static targets = ["menu", "hamburger"]
 
   connect() {
-    console.log("Mobile nav controller connected!")
-    console.log("Menu target:", this.menuTarget)
-    console.log("Hamburger target:", this.hamburgerTarget)
-
     // Close menu when clicking outside
     this.boundCloseOnOutsideClick = this.closeOnOutsideClick.bind(this)
 
@@ -23,15 +19,12 @@ export default class extends Controller {
   }
 
   toggle(event) {
-    console.log("Toggle method called!")
     event.stopPropagation()
     const isOpen = this.menuTarget.classList.contains("nav-links--open")
 
     if (isOpen) {
-      console.log("Closing menu...")
       this.close()
     } else {
-      console.log("Opening menu...")
       this.open()
     }
   }
@@ -47,6 +40,13 @@ export default class extends Controller {
 
     // Prevent body scroll on mobile when menu is open
     document.body.style.overflow = "hidden"
+
+    // Focus management: Move focus to first menu item for keyboard navigation
+    const firstMenuItem = this.menuTarget.querySelector("a, button")
+    if (firstMenuItem) {
+      // Small delay to ensure transition completes
+      setTimeout(() => firstMenuItem.focus(), 100)
+    }
   }
 
   close() {
@@ -60,6 +60,9 @@ export default class extends Controller {
 
     // Restore body scroll
     document.body.style.overflow = ""
+
+    // Return focus to hamburger button for keyboard navigation
+    this.hamburgerTarget.focus()
   }
 
   closeOnOutsideClick(event) {

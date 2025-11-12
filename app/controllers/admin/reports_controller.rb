@@ -60,6 +60,21 @@ class Admin::ReportsController < Admin::BaseController
     # Calculate statistics
     @stats = calculate_report_stats(@reports)
 
+    # Log export action for each report (audit trail)
+    @reports.each do |report|
+      AuditLog.log_action(
+        report: report,
+        user: Current.user,
+        action_type: :report_exported,
+        ip_address: request.remote_ip,
+        metadata: {
+          format: request.format.symbol.to_s,
+          date_range: { start: start_date, end: end_date },
+          report_count: @reports.count
+        }
+      )
+    end
+
     respond_to do |format|
       format.csv do
         csv_data = generate_csv(@reports)
@@ -85,6 +100,17 @@ class Admin::ReportsController < Admin::BaseController
   def approve
     @report = Report.not_deleted.find(params[:id])
     if @report.approve
+      # Log approval action
+      AuditLog.log_action(
+        report: @report,
+        user: Current.user,
+        action_type: :report_approved,
+        ip_address: request.remote_ip,
+        metadata: {
+          report_id: @report.id,
+          previous_status: @report.status_before_last_save
+        }
+      )
       redirect_to admin_reports_path(filter: "pending_review"), notice: "Report approved successfully."
     else
       redirect_to admin_report_path(@report), alert: "Failed to approve report."
@@ -94,6 +120,17 @@ class Admin::ReportsController < Admin::BaseController
   def destroy
     @report = Report.not_deleted.find(params[:id])
     if @report.soft_delete
+      # Log deletion action
+      AuditLog.log_action(
+        report: @report,
+        user: Current.user,
+        action_type: :report_deleted,
+        ip_address: request.remote_ip,
+        metadata: {
+          report_id: @report.id,
+          deleted_at: @report.deleted_at
+        }
+      )
       redirect_to admin_reports_path(filter: "pending_review"), notice: "Report deleted successfully."
     else
       redirect_to admin_report_path(@report), alert: "Failed to delete report."

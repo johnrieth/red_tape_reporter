@@ -6,8 +6,16 @@ class PasswordsController < ApplicationController
   end
 
   def create
-    if user = User.find_by(email_address: params[:email_address])
+    # Prevent timing attacks by always taking similar time
+    # whether the user exists or not
+    user = User.find_by(email_address: params[:email_address])
+
+    if user
       PasswordsMailer.reset(user).deliver_later
+    else
+      # Perform a dummy bcrypt operation to match timing of password operations
+      # This prevents timing attacks to enumerate valid email addresses
+      BCrypt::Password.create("dummy_password_to_prevent_timing_attack")
     end
 
     redirect_to new_session_path, notice: "Password reset instructions sent (if user with that email address exists)."
