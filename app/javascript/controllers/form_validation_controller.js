@@ -12,8 +12,16 @@ export default class extends Controller {
   connect() {
     // Add validation listeners to all field targets
     this.fieldTargets.forEach(field => {
-      field.addEventListener("blur", () => this.validateField(field))
-      field.addEventListener("input", () => this.clearError(field))
+      // Use different events for different field types
+      if (field.tagName === "SELECT") {
+        // Select fields: validate on change and blur
+        field.addEventListener("change", () => this.validateField(field))
+        field.addEventListener("blur", () => this.validateField(field))
+      } else {
+        // Text/email/textarea fields: validate on blur, clear error on input
+        field.addEventListener("blur", () => this.validateField(field))
+        field.addEventListener("input", () => this.clearError(field))
+      }
 
       // Add character counter if field has maxlength
       if (field.hasAttribute("maxlength") && (field.tagName === "TEXTAREA" || field.type === "text")) {

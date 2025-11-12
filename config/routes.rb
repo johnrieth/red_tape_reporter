@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get "transparency", to: "reports#transparency", as: :transparency
+
   get "verify/:token", to: "report_verifications#verify", as: :verify_report
 
   namespace :admin do

@@ -1,0 +1,208 @@
+<% content_for :meta_title, "Transparency Dashboard | Red Tape LA" %>
+<% content_for :meta_description, "Real data on LA's housing bureaucracy. See which departments cause the most delays, common issues, and timeline impacts from verified reports." %>
+
+<div class="container">
+  <header>
+    <h1 class="hero-title">Transparency Dashboard</h1>
+    <p class="hero-subtitle">
+      Real data on LA's housing bureaucracy from <%= @total_count %> verified reports.
+    </p>
+  </header>
+
+  <% if @total_count == 0 %>
+    <section class="card">
+      <p class="text-large">No verified reports yet. Be the first to <%= link_to "share your story", new_report_path %>.</p>
+    </section>
+  <% else %>
+
+    <!-- Key Statistics -->
+    <section class="dashboard-stats">
+      <div class="stat-card">
+        <div class="stat-number"><%= @total_count %></div>
+        <div class="stat-label">Verified Reports</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-number"><%= @department_stats.length %></div>
+        <div class="stat-label">Departments Mentioned</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-number"><%= @reports_with_financial_impact %></div>
+        <div class="stat-label">Reports with Financial Impact</div>
+      </div>
+    </section>
+
+    <!-- The Problem: Department Bottlenecks -->
+    <section class="section">
+      <div class="card">
+        <h2 class="section-title">The Problem: Which Departments Cause Delays?</h2>
+        <p class="text-large mb-lg">
+          Based on verified reports, these are the departments most frequently mentioned in building delays:
+        </p>
+
+        <% if @department_stats.any? %>
+          <div class="data-table">
+            <table class="stats-table">
+              <thead>
+                <tr>
+                  <th>Department</th>
+                  <th class="text-right">Reports</th>
+                  <th class="text-right">% of Total</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @department_stats.first(10).each do |dept, count| %>
+                  <tr>
+                    <td class="font-semibold"><%= dept %></td>
+                    <td class="text-right"><%= count %></td>
+                    <td class="text-right"><%= number_to_percentage((count.to_f / @total_count * 100), precision: 0) %></td>
+                    <td>
+                      <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: <%= (count.to_f / @department_stats.first[1] * 100).round %>%"></div>
+                      </div>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% else %>
+          <p class="text-muted">No department data available yet.</p>
+        <% end %>
+      </div>
+    </section>
+
+    <!-- What's Going Wrong: Issue Categories -->
+    <section class="section">
+      <div class="card">
+        <h2 class="section-title">What's Going Wrong?</h2>
+        <p class="text-large mb-lg">
+          These are the most common types of bureaucratic problems people face:
+        </p>
+
+        <% if @issue_stats.any? %>
+          <div class="data-table">
+            <table class="stats-table">
+              <thead>
+                <tr>
+                  <th>Issue Type</th>
+                  <th class="text-right">Reports</th>
+                  <th class="text-right">% of Total</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @issue_stats.first(10).each do |issue, count| %>
+                  <tr>
+                    <td class="font-semibold"><%= issue %></td>
+                    <td class="text-right"><%= count %></td>
+                    <td class="text-right"><%= number_to_percentage((count.to_f / @total_count * 100), precision: 0) %></td>
+                    <td>
+                      <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: <%= (count.to_f / @issue_stats.first[1] * 100).round %>%"></div>
+                      </div>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% else %>
+          <p class="text-muted">No issue data available yet.</p>
+        <% end %>
+      </div>
+    </section>
+
+    <!-- How Long It Takes: Timeline Impact -->
+    <section class="section">
+      <div class="card">
+        <h2 class="section-title">How Long Does Bureaucracy Delay Projects?</h2>
+        <p class="text-large mb-lg">
+          Real timeline impacts from verified reports:
+        </p>
+
+        <% if @timeline_stats.any? %>
+          <div class="timeline-grid">
+            <% [
+              "Less than 1 month",
+              "1-3 months",
+              "3-6 months",
+              "6-12 months",
+              "More than 1 year",
+              "Project abandoned"
+            ].each do |timeline| %>
+              <% count = @timeline_stats[timeline] || 0 %>
+              <% next if count == 0 %>
+              <div class="timeline-card">
+                <div class="timeline-count"><%= count %></div>
+                <div class="timeline-label"><%= timeline %></div>
+                <div class="timeline-percent"><%= number_to_percentage((count.to_f / @total_count * 100), precision: 0) %></div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="text-muted">No timeline data available yet.</p>
+        <% end %>
+      </div>
+    </section>
+
+    <!-- Who's Affected: Project Types -->
+    <section class="section">
+      <div class="card">
+        <h2 class="section-title">Who's Being Delayed?</h2>
+        <p class="text-large mb-lg">
+          Types of housing projects experiencing bureaucratic delays:
+        </p>
+
+        <% if @project_stats.any? %>
+          <div class="data-table">
+            <table class="stats-table">
+              <thead>
+                <tr>
+                  <th>Project Type</th>
+                  <th class="text-right">Reports</th>
+                  <th class="text-right">% of Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @project_stats.each do |project_type, count| %>
+                  <tr>
+                    <td class="font-semibold"><%= project_type %></td>
+                    <td class="text-right"><%= count %></td>
+                    <td class="text-right"><%= number_to_percentage((count.to_f / @total_count * 100), precision: 0) %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% else %>
+          <p class="text-muted">No project type data available yet.</p>
+        <% end %>
+      </div>
+    </section>
+
+    <!-- Data Freshness -->
+    <section class="section">
+      <div class="callout callout--midnight">
+        <p class="mb-0">
+          <strong>Data updated in real-time.</strong> This dashboard updates automatically as new reports are verified and approved.
+          <% if @average_days_old %>
+            Average report age: <%= @average_days_old %> days.
+          <% end %>
+        </p>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="section-cta">
+      <h2 class="text-center mb-md">Have Your Own Story?</h2>
+      <p class="text-large text-center mb-lg">
+        Add your experience to the data. It takes 5 minutes and helps drive policy change.
+      </p>
+      <%= link_to "Share Your Story", new_report_path, class: "btn btn-gold btn-large" %>
+    </section>
+
+  <% end %>
+</div>
