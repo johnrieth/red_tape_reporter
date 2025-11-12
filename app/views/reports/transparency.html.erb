@@ -125,14 +125,7 @@
 
         <% if @timeline_stats.any? %>
           <div class="timeline-grid">
-            <% [
-              "Less than 1 month",
-              "1-3 months",
-              "3-6 months",
-              "6-12 months",
-              "More than 1 year",
-              "Project abandoned"
-            ].each do |timeline| %>
+            <% Report::TIMELINE_IMPACTS.each do |timeline| %>
               <% count = @timeline_stats[timeline] || 0 %>
               <% next if count == 0 %>
               <div class="timeline-card">
