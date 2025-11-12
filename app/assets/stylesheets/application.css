@@ -10,6 +10,7 @@
     --spacing-md: 0.75rem; /* 12px */
     --spacing-lg: 1rem; /* 16px */
     --spacing-xl: 1.5rem; /* 24px */
+    --spacing-2xl: 2rem; /* 32px */
 
     /* Colors from basecamp - WCAG AA compliant */
     --la-navy: #0b3d66;
@@ -21,8 +22,17 @@
     --la-danger: #d9534f;
     --la-success: #1f7a3a;
 
-    /* Borders */
+    /* Borders and layout */
     --border-radius: 0.25rem;
+    --radius-md: 0.5rem;
+    --border-light: #e5e7eb;
+
+    /* Typography */
+    --text-primary: #1a1a1a;
+    --text-muted: #6b7280;
+
+    /* Backgrounds */
+    --card-bg: white;
 }
 
 /* Skip Navigation Link - Accessibility */
@@ -956,7 +966,7 @@ button[type="submit"]:focus {
 }
 
 .timeline-card {
-    background: var(--midnight-blue);
+    background: var(--la-midnight);
     border-radius: var(--radius-md);
     padding: var(--spacing-lg);
     text-align: center;
@@ -973,14 +983,16 @@ button[type="submit"]:focus {
 }
 
 .timeline-label {
-    font-size: 0.875rem;
+    font-size: 1rem;
     line-height: 1.4;
     margin-bottom: var(--spacing-xs);
+    font-weight: 600;
 }
 
 .timeline-percent {
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.875rem;
+    color: white;
+    font-weight: 500;
 }
 
 /* Utility Classes */
