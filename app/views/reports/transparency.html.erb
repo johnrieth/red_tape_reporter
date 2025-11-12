@@ -47,17 +47,17 @@
               <thead>
                 <tr>
                   <th>Department</th>
-                  <th class="text-right">Reports</th>
-                  <th class="text-right">% of Total</th>
-                  <th></th>
+                  <th>Reports</th>
+                  <th>% of Total</th>
+                  <th>Frequency</th>
                 </tr>
               </thead>
               <tbody>
                 <% @department_stats.first(10).each do |dept, count| %>
                   <tr>
                     <td class="font-semibold"><%= dept %></td>
-                    <td class="text-right"><%= count %></td>
-                    <td class="text-right"><%= number_to_percentage((count.to_f / @total_count * 100), precision: 0) %></td>
+                    <td><%= count %></td>
+                    <td><%= number_to_percentage((count.to_f / @total_count * 100), precision: 0) %></td>
                     <td>
                       <div class="progress-bar-container">
                         <div class="progress-bar" style="width: <%= (count.to_f / @department_stats.first[1] * 100).round %>%"></div>
@@ -88,17 +88,17 @@
               <thead>
                 <tr>
                   <th>Issue Type</th>
-                  <th class="text-right">Reports</th>
-                  <th class="text-right">% of Total</th>
-                  <th></th>
+                  <th>Reports</th>
+                  <th>% of Total</th>
+                  <th>Frequency</th>
                 </tr>
               </thead>
               <tbody>
                 <% @issue_stats.first(10).each do |issue, count| %>
                   <tr>
                     <td class="font-semibold"><%= issue %></td>
-                    <td class="text-right"><%= count %></td>
-                    <td class="text-right"><%= number_to_percentage((count.to_f / @total_count * 100), precision: 0) %></td>
+                    <td><%= count %></td>
+                    <td><%= number_to_percentage((count.to_f / @total_count * 100), precision: 0) %></td>
                     <td>
                       <div class="progress-bar-container">
                         <div class="progress-bar" style="width: <%= (count.to_f / @issue_stats.first[1] * 100).round %>%"></div>
@@ -124,17 +124,17 @@
         </p>
 
         <% if @timeline_stats.any? %>
-          <div class="timeline-grid">
+          <ul class="timeline-grid" role="list">
             <% Report::TIMELINE_IMPACTS.each do |timeline| %>
               <% count = @timeline_stats[timeline] || 0 %>
               <% next if count == 0 %>
-              <div class="timeline-card">
-                <div class="timeline-count"><%= count %></div>
+              <li class="timeline-card" role="listitem">
+                <div class="timeline-count" aria-label="<%= count %> reports"><%= count %></div>
                 <div class="timeline-label"><%= timeline %></div>
-                <div class="timeline-percent"><%= number_to_percentage((count.to_f / @total_count * 100), precision: 0) %></div>
-              </div>
+                <div class="timeline-percent" aria-label="<%= number_to_percentage((count.to_f / @total_count * 100), precision: 0) %> of total reports"><%= number_to_percentage((count.to_f / @total_count * 100), precision: 0) %></div>
+              </li>
             <% end %>
-          </div>
+          </ul>
         <% else %>
           <p class="text-muted">No timeline data available yet.</p>
         <% end %>
@@ -155,16 +155,16 @@
               <thead>
                 <tr>
                   <th>Project Type</th>
-                  <th class="text-right">Reports</th>
-                  <th class="text-right">% of Total</th>
+                  <th>Reports</th>
+                  <th>% of Total</th>
                 </tr>
               </thead>
               <tbody>
                 <% @project_stats.each do |project_type, count| %>
                   <tr>
                     <td class="font-semibold"><%= project_type %></td>
-                    <td class="text-right"><%= count %></td>
-                    <td class="text-right"><%= number_to_percentage((count.to_f / @total_count * 100), precision: 0) %></td>
+                    <td><%= count %></td>
+                    <td><%= number_to_percentage((count.to_f / @total_count * 100), precision: 0) %></td>
                   </tr>
                 <% end %>
               </tbody>

@@ -897,7 +897,7 @@ button[type="submit"]:focus {
 
 .stats-table th {
     padding: var(--spacing-md);
-    text-align: left;
+    text-align: center;
     font-size: 0.875rem;
     font-weight: 600;
     color: var(--text-muted);
@@ -905,9 +905,18 @@ button[type="submit"]:focus {
     letter-spacing: 0.05em;
 }
 
+.stats-table th:first-child {
+    text-align: left;
+}
+
 .stats-table td {
     padding: var(--spacing-md);
     border-bottom: 1px solid var(--border-light);
+    text-align: center;
+}
+
+.stats-table td:first-child {
+    text-align: left;
 }
 
 .stats-table tbody tr:last-child td {
@@ -917,10 +926,6 @@ button[type="submit"]:focus {
 .stats-table .font-semibold {
     font-weight: 600;
     color: var(--text-primary);
-}
-
-.text-right {
-    text-align: right;
 }
 
 /* Progress Bar */
@@ -945,6 +950,9 @@ button[type="submit"]:focus {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: var(--spacing-lg);
     margin-top: var(--spacing-lg);
+    list-style: none;
+    padding: 0;
+    margin-left: 0;
 }
 
 .timeline-card {
@@ -953,6 +961,7 @@ button[type="submit"]:focus {
     padding: var(--spacing-lg);
     text-align: center;
     color: white;
+    list-style: none;
 }
 
 .timeline-count {
