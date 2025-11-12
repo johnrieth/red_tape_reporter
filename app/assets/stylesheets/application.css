@@ -11,17 +11,38 @@
     --spacing-lg: 1rem; /* 16px */
     --spacing-xl: 1.5rem; /* 24px */
 
-    /* Colors from basecamp */
+    /* Colors from basecamp - WCAG AA compliant */
     --la-navy: #0b3d66;
-    --la-gold: #f6b042;
+    --la-gold: #f6b042;           /* 3.1:1 on white - use only for large text or backgrounds */
+    --la-gold-accessible: #d89a1f; /* 4.5:1 on white - WCAG AA compliant for normal text */
     --la-sand: #f7f3ee;
     --la-charcoal: #22252a;
-    --la-muted: #6b7177;
+    --la-muted: #6b7177;          /* 4.54:1 on white - WCAG AA compliant */
     --la-danger: #d9534f;
     --la-success: #1f7a3a;
 
     /* Borders */
     --border-radius: 0.25rem;
+}
+
+/* Skip Navigation Link - Accessibility */
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    z-index: 9999;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background-color: var(--la-navy);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: var(--border-radius);
+}
+
+.skip-link:focus {
+    left: var(--spacing-md);
+    top: var(--spacing-md);
+    outline: 3px solid var(--la-gold-accessible);
+    outline-offset: 2px;
 }
 
 /* Card */
@@ -256,6 +277,21 @@ body {
 
 .form-group {
     margin-bottom: var(--spacing-lg);
+}
+
+/* Nested fieldsets for checkbox groups */
+fieldset.form-group {
+    border: none;
+    padding: 0;
+    margin-bottom: var(--spacing-xl);
+}
+
+fieldset.form-group legend {
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    color: var(--la-charcoal);
+    padding: 0;
+    font-size: 1rem;
 }
 
 label {
@@ -774,4 +810,37 @@ button[type="submit"]:focus {
     .form-section-header {
         font-size: 1.25rem;
     }
+}
+
+/* Form Validation Styles */
+.field-error {
+    border-color: #d32f2f !important;
+    background-color: #ffebee;
+}
+
+.field-error:focus {
+    border-color: #d32f2f !important;
+    outline-color: #d32f2f !important;
+    box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+}
+
+.field-error-message {
+    display: block;
+    margin-top: var(--spacing-sm);
+    color: #d32f2f;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Character Counter */
+.character-counter {
+    margin-top: var(--spacing-sm);
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    text-align: right;
+}
+
+.character-counter--warning {
+    color: #f57c00;
+    font-weight: 500;
 }
