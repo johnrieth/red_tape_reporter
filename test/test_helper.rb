@@ -21,8 +21,8 @@ module ActiveSupport
         issue_description: "The permit approval process took over 6 months with no clear timeline communicated",
         project_type: "Accessory dwelling unit (ADU)",
         location: "Los Angeles",
-        issue_categories: ["Permits", "Plan review"],
-        departments: ["Building & Safety"],
+        issue_categories: [ "Permits", "Plan review" ],
+        departments: [ "Building & Safety" ],
         timeline_impact: "6-12 months",
         financial_impact: "$10,000-$50,000"
       }

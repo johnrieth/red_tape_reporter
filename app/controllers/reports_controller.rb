@@ -47,7 +47,7 @@ class ReportsController < ApplicationController
     @project_stats = @reports.group(:project_type).count.reject { |k, _| k.blank? }.sort_by { |_, v| -v }
 
     # Financial impact - count how many reports mention financial impact
-    @reports_with_financial_impact = @reports.where.not(financial_impact: [nil, ""]).count
+    @reports_with_financial_impact = @reports.where.not(financial_impact: [ nil, "" ]).count
 
     # Calculate average days since verification (to show data freshness)
     if @total_count > 0
