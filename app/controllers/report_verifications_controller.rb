@@ -10,6 +10,10 @@ class ReportVerificationsController < ApplicationController
       redirect_to root_path, notice: "This report has already been verified. Thank you!"
     else
       @report.update!(verified_at: Time.current, status: "verified")
+
+      # Notify admins about the new verified report
+      AdminNotificationMailer.new_verified_report(@report).deliver_later
+
       # Success - show the verify view
     end
   end

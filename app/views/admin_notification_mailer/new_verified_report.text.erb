@@ -1,0 +1,27 @@
+New Report Verified - Red Tape LA
+===============================================
+
+A new report has been verified and is ready for your review.
+
+Project Type: <%= @report.project_type %>
+Location: <%= @report.location %>
+Timeline Impact: <%= @report.timeline_impact %>
+
+Issue Description:
+<%= @report.issue_description %>
+
+Departments Involved:
+<%= @report.departments.join(", ") %>
+
+Issue Categories:
+<%= @report.issue_categories.join(", ") %>
+
+<% if @report.financial_impact.present? %>
+Financial Impact: <%= @report.financial_impact %>
+<% end %>
+
+Review and approve this report:
+<%= @admin_url %>
+
+---
+Red Tape LA - Documenting LA's housing bureaucracy

@@ -19,23 +19,24 @@ class Rack::Attack
     [ "127.0.0.1", "::1" ].include?(req.ip) || req.ip.start_with?("192.168.")
   end
 
-  # Throttles
-  throttle("reports/ip", limit: 10, period: 1.hour) do |req|
+  # Throttles - More permissive limits to allow legitimate use
+  # Allow multiple reports from the same person/location throughout the day
+  throttle("reports/ip", limit: 20, period: 1.hour) do |req|
     req.ip if req.path == "/reports" && req.post?
   end
 
-  throttle("reports/email", limit: 5, period: 1.day) do |req|
+  throttle("reports/email", limit: 10, period: 1.day) do |req|
     if req.path == "/reports" && req.post?
       req.params.dig("report", "email")&.strip&.downcase.presence
     end
   end
 
-  # Optional: Throttle password resets
-  throttle("password resets/ip", limit: 2, period: 1.hour) do |req|
+  # Allow reasonable password reset attempts
+  throttle("password resets/ip", limit: 5, period: 1.hour) do |req|
     req.ip if req.path == "/passwords" && req.post?
   end
 
-  throttle("password resets/email", limit: 1, period: 1.day) do |req|
+  throttle("password resets/email", limit: 3, period: 1.day) do |req|
     if req.path == "/passwords" && req.post?
       req.params.dig("password", "email")&.downcase.presence
     end
