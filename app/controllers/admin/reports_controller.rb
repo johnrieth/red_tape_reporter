@@ -187,5 +187,4 @@ class Admin::ReportsController < Admin::BaseController
       end
     end
   end
-
 end
