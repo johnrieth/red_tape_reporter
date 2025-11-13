@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      color: #1a1a1a;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .header {
+      background: #0b3d66;
+      color: white;
+      padding: 20px;
+      border-radius: 8px 8px 0 0;
+    }
+    .content {
+      background: white;
+      border: 2px solid #e5e7eb;
+      border-top: none;
+      padding: 30px;
+      border-radius: 0 0 8px 8px;
+    }
+    .detail-row {
+      margin: 15px 0;
+      padding: 10px;
+      background: #f9fafb;
+      border-radius: 4px;
+    }
+    .detail-label {
+      font-weight: 600;
+      color: #0b3d66;
+      margin-bottom: 5px;
+    }
+    .button {
+      display: inline-block;
+      background: #f6b042;
+      color: #1a1a1a;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+      margin: 20px 0;
+    }
+    .footer {
+      text-align: center;
+      color: #6b7280;
+      font-size: 14px;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1 style="margin: 0; font-size: 24px;">New Report Verified</h1>
+    <p style="margin: 10px 0 0 0; opacity: 0.9;">Red Tape LA</p>
+  </div>
+
+  <div class="content">
+    <p>A new report has been verified and is ready for your review.</p>
+
+    <div class="detail-row">
+      <div class="detail-label">Project Type</div>
+      <div><%= @report.project_type %></div>
+    </div>
+
+    <div class="detail-row">
+      <div class="detail-label">Location</div>
+      <div><%= @report.location %></div>
+    </div>
+
+    <div class="detail-row">
+      <div class="detail-label">Timeline Impact</div>
+      <div><%= @report.timeline_impact %></div>
+    </div>
+
+    <div class="detail-row">
+      <div class="detail-label">Issue Description</div>
+      <div><%= simple_format(@report.issue_description) %></div>
+    </div>
+
+    <% if @report.departments.any? %>
+      <div class="detail-row">
+        <div class="detail-label">Departments Involved</div>
+        <div><%= @report.departments.join(", ") %></div>
+      </div>
+    <% end %>
+
+    <% if @report.issue_categories.any? %>
+      <div class="detail-row">
+        <div class="detail-label">Issue Categories</div>
+        <div><%= @report.issue_categories.join(", ") %></div>
+      </div>
+    <% end %>
+
+    <% if @report.financial_impact.present? %>
+      <div class="detail-row">
+        <div class="detail-label">Financial Impact</div>
+        <div><%= @report.financial_impact %></div>
+      </div>
+    <% end %>
+
+    <div style="text-align: center;">
+      <a href="<%= @admin_url %>" class="button">Review and Approve Report</a>
+    </div>
+
+    <div class="footer">
+      <p>Red Tape LA - Documenting LA's housing bureaucracy</p>
+    </div>
+  </div>
+</body>
+</html>
