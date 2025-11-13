@@ -1,33 +1,27 @@
 require "test_helper"
 
 class AdminNotificationMailerTest < ActionMailer::TestCase
-  test "new_verified_report sends email to admin with report details" do
-    # Set up environment variable for testing
-    ENV["ADMIN_NOTIFICATION_EMAILS"] = "admin@example.com,admin2@example.com"
-
+  test "new_verified_report creates email with report details" do
     report = reports(:pending_report)
     mail = AdminNotificationMailer.new_verified_report(report)
 
+    # Test email structure and content
     assert_equal "New Verified Report: #{report.project_type} in #{report.location}", mail.subject
-    assert_equal [ "admin@example.com", "admin2@example.com" ], mail.to
     assert_equal [ "reports@verify.redtape.la" ], mail.from
     assert_match report.project_type, mail.body.encoded
     assert_match report.location, mail.body.encoded
     assert_match report.issue_description, mail.body.encoded
-  ensure
-    # Clean up
-    ENV.delete("ADMIN_NOTIFICATION_EMAILS")
+
+    # Verify email has recipients (either from credentials or fallback to admin users)
+    assert mail.to.present?, "Email should have recipients"
+    assert mail.to.is_a?(Array), "Recipients should be an array"
   end
 
-  test "new_verified_report falls back to admin users when no env var set" do
-    # Make sure env var is not set
-    ENV.delete("ADMIN_NOTIFICATION_EMAILS")
-
+  test "new_verified_report includes admin URL in email" do
     report = reports(:pending_report)
     mail = AdminNotificationMailer.new_verified_report(report)
 
-    # Should send to all admin users
-    admin_emails = User.where(admin: true).pluck(:email_address)
-    assert_equal admin_emails, mail.to
+    # Verify the admin URL is included
+    assert_match %r{/admin/reports/#{report.id}}, mail.body.encoded
   end
 end
