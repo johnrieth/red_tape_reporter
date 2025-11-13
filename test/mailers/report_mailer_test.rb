@@ -13,7 +13,7 @@ class ReportMailerTest < ActionMailer::TestCase
       email.deliver_now
     end
 
-    assert_equal [report.email], email.to
+    assert_equal [ report.email ], email.to
   end
 
   test "verification email has correct subject" do
@@ -27,7 +27,7 @@ class ReportMailerTest < ActionMailer::TestCase
     report = reports(:unverified_report)
     email = ReportMailer.verification(report)
 
-    assert_equal ["reports@verify.redtape.la"], email.from
+    assert_equal [ "reports@verify.redtape.la" ], email.from
   end
 
   test "verification email includes verification token" do
@@ -50,11 +50,11 @@ class ReportMailerTest < ActionMailer::TestCase
 
   test "verification email can be sent for any report" do
     # Test with different reports
-    [reports(:approved_report), reports(:pending_report), reports(:unverified_report)].each do |report|
+    [ reports(:approved_report), reports(:pending_report), reports(:unverified_report) ].each do |report|
       email = ReportMailer.verification(report)
 
       assert_not_nil email
-      assert_equal [report.email], email.to
+      assert_equal [ report.email ], email.to
       assert_match report.verification_token, email.body.encoded
     end
   end

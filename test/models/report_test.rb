@@ -211,21 +211,21 @@ class ReportTest < ActiveSupport::TestCase
 
   test "should serialize departments as JSON array" do
     report = Report.create!(valid_report_params.merge(
-      departments: ["Building & Safety", "Planning"]
+      departments: [ "Building & Safety", "Planning" ]
     ))
 
     report.reload
-    assert_equal ["Building & Safety", "Planning"], report.departments
+    assert_equal [ "Building & Safety", "Planning" ], report.departments
     assert_instance_of Array, report.departments
   end
 
   test "should serialize issue_categories as JSON array" do
     report = Report.create!(valid_report_params.merge(
-      issue_categories: ["Permits", "Inspections", "Fees"]
+      issue_categories: [ "Permits", "Inspections", "Fees" ]
     ))
 
     report.reload
-    assert_equal ["Permits", "Inspections", "Fees"], report.issue_categories
+    assert_equal [ "Permits", "Inspections", "Fees" ], report.issue_categories
     assert_instance_of Array, report.issue_categories
   end
 end
