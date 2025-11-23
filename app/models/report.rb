@@ -59,6 +59,7 @@ class Report < ApplicationRecord
 
     before_create :generate_verification_token
     after_initialize :set_defaults
+    after_commit :invalidate_caches, if: :approval_status_changed?
 
     def verified?
         verified_at.present?
@@ -91,5 +92,16 @@ class Report < ApplicationRecord
 
     def generate_verification_token
         self.verification_token = SecureRandom.urlsafe_base64(32)
+    end
+
+    def approval_status_changed?
+        saved_change_to_approved_at? || saved_change_to_deleted_at?
+    end
+
+    def invalidate_caches
+        Rails.cache.delete("reports/approved_count")
+        Rails.cache.delete("reports/transparency_stats")
+        Rails.cache.delete("reports/transparency_cache_key")
+        Rails.cache.delete("views/transparency_dashboard")
     end
 end

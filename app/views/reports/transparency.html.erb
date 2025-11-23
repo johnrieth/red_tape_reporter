@@ -1,6 +1,7 @@
 <% content_for :meta_title, "Transparency Dashboard | Red Tape LA" %>
 <% content_for :meta_description, "Real data on LA's housing bureaucracy. See which departments cause the most delays, common issues, and timeline impacts from verified reports." %>
 
+<% cache "transparency_dashboard" do %>
 <div class="container">
   <header>
     <h1 class="hero-title">Transparency Dashboard</h1>
@@ -199,3 +200,4 @@
 
   <% end %>
 </div>
+<% end %>
