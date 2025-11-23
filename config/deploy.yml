@@ -9,7 +9,6 @@ servers:
   web:
     hosts:
       - 5.78.45.227
-    scale: 3
   # job:
   #   hosts:
   #     - 192.168.0.1
