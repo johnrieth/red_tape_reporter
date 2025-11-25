@@ -1,7 +1,8 @@
 class Rack::Attack
-  # Custom response for blocked requests
+  # Custom response for blocked requests - serve the branded 429.html page
   Rack::Attack.blocklisted_responder = lambda do |env|
-    [ 429, { "Content-Type" => "text/plain" }, [ "Too Many Requests. Please try again later." ] ]
+    html_content = File.read(Rails.root.join("public", "429.html"))
+    [ 429, { "Content-Type" => "text/html" }, [ html_content ] ]
   end
 
   # Instrumentation for monitoring
@@ -21,11 +22,11 @@ class Rack::Attack
 
   # Throttles - More permissive limits to allow legitimate use
   # Allow multiple reports from the same person/location throughout the day
-  throttle("reports/ip", limit: 20, period: 1.hour) do |req|
+  throttle("reports/ip", limit: 30, period: 1.hour) do |req|
     req.ip if req.path == "/reports" && req.post?
   end
 
-  throttle("reports/email", limit: 10, period: 1.day) do |req|
+  throttle("reports/email", limit: 30, period: 1.day) do |req|
     if req.path == "/reports" && req.post?
       req.params.dig("report", "email")&.strip&.downcase.presence
     end
