@@ -10,10 +10,10 @@ Rails.application.configure do
     policy.font_src    :self, :https, :data, "fonts.googleapis.com", "fonts.gstatic.com"
     policy.img_src     :self, :https, :data
     policy.object_src  :none
-    policy.script_src  :self, :https, "plausible.io"
-    policy.style_src   :self, :https, :unsafe_inline, "fonts.googleapis.com"
+    policy.script_src  :self, "plausible.io"
+    policy.style_src   :self, :unsafe_inline, "fonts.googleapis.com"
     policy.style_src_attr :unsafe_inline  # Allow Turbo to add inline style attributes
-    policy.connect_src :self, :https, "plausible.io"
+    policy.connect_src :self, "plausible.io"
 
     # Specify URI for violation reports (optional)
     # policy.report_uri "/csp-violation-report-endpoint"
