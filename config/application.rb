@@ -18,7 +18,11 @@ module RedTapeReporter
 
     # Configuration for the application, engines, and railties goes here.
     config.middleware.use Rack::Attack
-
+    config.action_dispatch.default_headers = {
+    "X-Content-Type-Options" => "nosniff",
+    "X-Frame-Options" => "DENY",
+    "X-XSS-Protection" => "0"  # Modern browsers ignore this, CSP handles it
+    }
     # Register Resend as a delivery method
     config.action_mailer.add_delivery_method :resend, Resend::Mailer
 
