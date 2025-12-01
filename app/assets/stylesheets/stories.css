@@ -1,3 +1,64 @@
+/* Minimal, quieted styles for Public Stories (Stripe/37Signals-inspired, but simpler) */
+
+:root {
+  --max-width: 1100px;
+  --gutter: 20px;
+  --card-radius: 8px;
+  --card-bg: #fff;
+  --muted: var(--text-muted, #6b7280);
+  --accent: var(--text-primary, #1f2937);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 40px var(--gutter);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--accent);
+}
+
+header .hero-title { font-size: 30px; line-height:1.12; margin:0 0 6px; font-weight:700 }
+header .hero-subtitle { color: var(--muted); margin:0 0 16px; font-size:15px }
+
+/* Metrics - simplified */
+.dashboard-stats { display:flex; gap:12px; padding:8px 0; margin-bottom:18px; align-items:center }
+.stat-card { flex:1; text-align:center; padding:2px 6px }
+.stat-number { font-size:20px; font-weight:700; color:var(--accent) }
+.stat-label { color:var(--muted); font-size:12px; margin-top:4px }
+
+/* Cards */
+.card { background:var(--card-bg); border:1px solid rgba(0,0,0,0.04); border-radius:var(--card-radius); padding:12px }
+
+.filter-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px; margin-bottom:10px }
+.form-actions { display:flex; gap:10px; align-items:center }
+.btn-gold, .btn-primary { border-radius:6px; padding:8px 12px; font-weight:600 }
+
+/* Breakdown */
+.breakdown-list { display:flex; flex-direction:column; gap:10px }
+.breakdown-item { padding:12px; border-radius:8px; border:1px solid rgba(0,0,0,0.04); background:var(--card-bg) }
+.breakdown-label { font-weight:700; font-size:14px }
+
+/* Stories */
+.stories-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:12px }
+.story-card { display:flex; flex-direction:column; padding:10px; border-radius:8px; border:1px solid rgba(0,0,0,0.04); background:var(--card-bg) }
+.story-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px }
+.story-type { font-weight:600; color:var(--accent); font-size:14px }
+.story-location { color:var(--muted); font-size:12px }
+.story-description { color:var(--muted); line-height:1.45; font-size:14px }
+.story-meta { display:flex; justify-content:space-between; align-items:center; margin-top:10px }
+.story-actions { color:var(--muted); font-size:12px }
+
+.badge { background:#f5f7fb; color:var(--accent); padding:4px 8px; border-radius:999px; font-weight:600; font-size:12px }
+.tag { background:transparent; color:var(--muted); padding:3px 6px; border-radius:6px; font-size:12px; border:1px solid rgba(0,0,0,0.03) }
+
+.cta-section { margin-top:22px }
+.cta-card { padding:16px; text-align:center }
+
+@media (max-width:760px) {
+  .container { padding:20px }
+  header .hero-title { font-size:20px }
+  .stories-grid { gap:10px }
+}
 /* Stripe / 37Signals inspired minimal styles for Public Stories (extracted from view) */
 
 :root {
