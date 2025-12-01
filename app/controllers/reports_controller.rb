@@ -67,6 +67,7 @@ class ReportsController < ApplicationController
       :timeline_impact,
       :financial_impact,
       :solution_ideas,
+      :share_publicly,
       issue_categories: [],
       departments: []
     )

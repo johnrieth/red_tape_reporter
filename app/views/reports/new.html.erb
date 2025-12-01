@@ -145,6 +145,20 @@
         </div>
       </fieldset>
 
+      <!-- SECTION 3: Public Sharing -->
+      <fieldset>
+        <legend class="form-section-header">Sharing Options</legend>
+        <div class="form-group">
+          <div class="checkbox-item">
+            <%= form.check_box :share_publicly, id: "report_share_publicly" %>
+            <%= form.label :share_publicly, "Share my story publicly (optional)", class: "checkbox-label" %>
+          </div>
+          <div id="share_publicly_help" class="help-text">
+            If checked, your approved story will appear on our public stories page where others can read about similar issues and show support. Your story will always be anonymous - we never share names or emails publicly. You can help others see they're not alone in facing bureaucratic delays.
+          </div>
+        </div>
+      </fieldset>
+
       <!-- Submit Button -->
       <div class="form-actions">
         <%= form.submit "Submit Your Story", class: "btn btn-gold btn-large", data: { disable_with: "Submitting..." } %>

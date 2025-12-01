@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+comment_one:
+  report: approved_report
+  content: "Same issue here! Had to wait 6 months for permits."
+  commenter_token: <%= SecureRandom.urlsafe_base64(32) %>
+
+comment_two:
+  report: pending_report
+  content: "This is exactly what happened to me in Santa Monica!"
+  commenter_token: <%= SecureRandom.urlsafe_base64(32) %>

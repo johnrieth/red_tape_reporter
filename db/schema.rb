@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_12_214814) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_01_000919) do
   create_table "audit_logs", force: :cascade do |t|
     t.integer "report_id", null: false
     t.integer "user_id", null: false
@@ -24,6 +24,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_12_214814) do
     t.index ["report_id"], name: "index_audit_logs_on_report_id"
     t.index ["user_id", "created_at"], name: "index_audit_logs_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_audit_logs_on_user_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "report_id", null: false
+    t.text "content", null: false
+    t.string "commenter_token", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["report_id", "created_at"], name: "index_comments_on_report_id_and_created_at"
+    t.index ["report_id"], name: "index_comments_on_report_id"
   end
 
   create_table "reports", force: :cascade do |t|
@@ -46,6 +56,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_12_214814) do
     t.datetime "approved_at"
     t.datetime "deleted_at"
     t.text "solution_ideas"
+    t.boolean "share_publicly", default: false, null: false
     t.index ["approved_at"], name: "index_reports_on_approved_at"
     t.index ["deleted_at"], name: "index_reports_on_deleted_at"
     t.index ["verification_token"], name: "index_reports_on_verification_token", unique: true
@@ -69,7 +80,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_12_214814) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  create_table "votes", force: :cascade do |t|
+    t.integer "report_id", null: false
+    t.string "voter_token", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["report_id", "voter_token"], name: "index_votes_on_report_id_and_voter_token", unique: true
+    t.index ["report_id"], name: "index_votes_on_report_id"
+  end
+
   add_foreign_key "audit_logs", "reports"
   add_foreign_key "audit_logs", "users"
+  add_foreign_key "comments", "reports"
   add_foreign_key "sessions", "users"
+  add_foreign_key "votes", "reports"
 end
