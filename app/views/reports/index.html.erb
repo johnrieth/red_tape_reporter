@@ -22,7 +22,7 @@
         <div class="story-counter__number"><%= @verified_reports_count %></div>
         <div class="story-counter__label"><%= @verified_reports_count == 1 ? 'verified story collected' : 'verified stories collected' %></div>
         <div style="margin-top: 1rem;">
-          <%= link_to "View Transparency Dashboard →", transparency_path, class: "btn btn-secondary" %>
+          <%= link_to "Browse Public Stories →", stories_path, class: "btn btn-secondary" %>
         </div>
       </div>
     </section>
