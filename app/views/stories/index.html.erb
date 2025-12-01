@@ -95,7 +95,7 @@
     <!-- Stories List -->
     <section class="section">
       <h2 class="section-title mb-md">
-        <%= params.any? { |k, v| k != "controller" && k != "action" && v.present? } ? "Filtered Stories" : "All Stories" %>
+        <%= params.keys.any? { |k| k != "controller" && k != "action" && params[k].present? } ? "Filtered Stories" : "All Stories" %>
       </h2>
 
       <div class="stories-grid">
