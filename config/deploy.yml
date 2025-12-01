@@ -48,7 +48,11 @@ env:
 
     # Match this to any external database server to configure Active Record correctly
     # Use red_tape_reporter-db for a db accessory server on same machine via local kamal docker network.
-    # DB_HOST: 192.168.0.2
+    # Use an accessory Postgres server started by Kamal on the same host.
+    DB_HOST: red_tape_reporter-db
+    DB_PORT: 5432
+    # DB_USER: postgres
+    # DB_PASSWORD: use .kamal/secrets (see accessories/db.secret below)
 
     # Log everything from Rails
     # RAILS_LOG_LEVEL: debug
@@ -101,25 +105,31 @@ ssh:
     - ~/.ssh/hetzner_rieth_site
 
 # Use accessory services (secrets come from .kamal/secrets).
-# accessories:
-#   db:
-#     image: mysql:8.0
-#     host: 192.168.0.2
-#     # Change to 3306 to expose port to the world instead of just local network.
-#     port: "127.0.0.1:3306:3306"
-#     env:
-#       clear:
-#         MYSQL_ROOT_HOST: '%'
-#       secret:
-#         - MYSQL_ROOT_PASSWORD
-#     files:
-#       - config/mysql/production.cnf:/etc/mysql/my.cnf
-#       - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
-#     directories:
-#       - data:/var/lib/mysql
-#   redis:
-#     image: redis:7.0
-#     host: 192.168.0.2
-#     port: 6379
-#     directories:
-#       - data:/data
+accessories:
+  db:
+    image: postgres:15
+    # The accessory will be reachable from the app at this hostname on the
+    # Kamal-managed Docker network. We set `DB_HOST` above to this value.
+    host: red_tape_reporter-db
+    # Only expose to localhost on the host machine by default. Change if you
+    # need external access.
+    port: "127.0.0.1:5432:5432"
+    env:
+      clear:
+        # Allow connections from any host in the Docker network
+        POSTGRES_HOST_AUTH_METHOD: trust
+      secret:
+        - POSTGRES_PASSWORD
+        - POSTGRES_USER
+    # Initialize database (optional): drop-in SQL or scripts
+    # files:
+    #  - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
+    directories:
+      - data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7.0
+    host: 192.168.0.2
+    port: 6379
+    directories:
+      - data:/data

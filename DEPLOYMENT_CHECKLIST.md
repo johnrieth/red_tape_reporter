@@ -144,11 +144,63 @@ kamal app details
 
 - **App Domain**: redtape.la
 - **Mail From**: noreply@verify.redtape.la
-- **Database**: SQLite with persistent Docker volume
+- **Database**: PostgreSQL recommended for production (see below)
 - **Job Queue**: Solid Queue (in-process)
-- **Cache**: Solid Cache (SQLite)
+- **Cache**: Solid Cache (SQLite or external)
 - **Web Server**: Puma + Thruster
 - **SSL**: Let's Encrypt (auto-managed by Kamal)
+
+## Database: migrate from SQLite → PostgreSQL (recommended)
+
+This repository was developed with SQLite for local development. For production we recommend PostgreSQL. You can either run a Postgres accessory container with Kamal (the deploy config includes an example) or use a managed Postgres instance (e.g. RDS, Cloud SQL).
+
+Two options:
+
+- Option A — Run Postgres as a Kamal accessory on the same host (quick):
+   - Ensure `config/deploy.yml` has the `accessories.db` section enabled (this repo includes an example).
+   - Add Postgres secrets to `.kamal/secrets`:
+
+      ```bash
+      POSTGRES_USER=postgres
+      POSTGRES_PASSWORD=your_strong_password_here
+      RAILS_MASTER_KEY=... (already required)
+      ```
+
+   - `bin/kamal deploy` will start a Postgres container and set `DB_HOST` in the web container to talk to it.
+
+- Option B — Use a managed Postgres (recommended for production):
+   - Provision the database and set a single `DATABASE_URL` secret in `.kamal/secrets`:
+
+      ```bash
+      # example format
+      DATABASE_URL=postgres://user:password@hostname:5432/red_tape_reporter_production
+      RAILS_MASTER_KEY=...
+      ```
+
+   - The app will prefer `DATABASE_URL` when present.
+
+Data migration (if you have data in SQLite you want to keep):
+
+- Preferred: `pgloader` — it converts types and data for you.
+
+   1. Install `pgloader` on your machine or use a container.
+   2. Run:
+
+       ```bash
+       pgloader sqlite:///path/to/development.sqlite3 postgresql://user:password@host:5432/red_tape_reporter_production
+       ```
+
+   3. Verify data in Postgres and run Rails migrations/seeds on the production DB:
+
+       ```bash
+       # on the server or via kamal app exec
+       bin/rails db:migrate RAILS_ENV=production
+       bin/rails db:seed RAILS_ENV=production
+       ```
+
+- Alternative (small/simple datasets): export/import via CSV for individual tables.
+
+After switching to Postgres, deploy and check logs. If you see connection refused errors, either the Postgres accessory didn't start or your `DB_HOST`/`DATABASE_URL` is incorrect; check `kamal app logs` and `.kamal/secrets`.
 
 ## Security Features Enabled
 

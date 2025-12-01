@@ -25,8 +25,13 @@ test:
   <<: *default
   database: red_tape_reporter_test
 
-
-# Store production database credentials via environment variables
+# Production configuration. Prefer a single `DATABASE_URL` when available
+# (e.g. when using a managed DB or Docker accessory). When `DATABASE_URL`
+# is not present we fall back to individual typed databases below.
+<% if ENV['DATABASE_URL'] && !ENV['DATABASE_URL'].empty? %>
+production:
+  url: <%= ENV['DATABASE_URL'] %>
+<% else %>
 production:
   primary:
     <<: *default
@@ -43,3 +48,4 @@ production:
     <<: *default
     database: red_tape_reporter_cable
     migrations_paths: db/cable_migrate
+<% end %>
