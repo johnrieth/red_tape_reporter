@@ -108,12 +108,14 @@ ssh:
 accessories:
   db:
     image: postgres:15
-    # The accessory will be reachable from the app at this hostname on the
-    # Kamal-managed Docker network. We set `DB_HOST` above to this value.
-    host: red_tape_reporter-db
-    # Only expose to localhost on the host machine by default. Change if you
-    # need external access.
-    port: "127.0.0.1:5432:5432"
+    role: web
+    # The accessory container will be started on the same deploy host.
+    # Do NOT set `host:` here to an arbitrary name — Kamal will interpret
+    # that as an SSH target. The app will reach the DB at the Docker network
+    # alias `red_tape_reporter-db` (see `env.clear DB_HOST` above).
+    # If you need to expose Postgres on the host, change the mapping below.
+    # By default we let the accessory listen only on the Kamal Docker network.
+    port: 5432
     env:
       clear:
         # Allow connections from any host in the Docker network
