@@ -2,7 +2,8 @@ class VotesController < ApplicationController
   allow_unauthenticated_access
 
   def create
-    @story = Report.publicly_shared.find(params[:story_id])
+    story_id = params[:story_id] || params[:id]
+    @story = Report.publicly_shared.find(story_id)
     voter_token = get_or_create_voter_token
 
     # Try to create the vote (will fail if already voted due to unique constraint)
@@ -24,7 +25,8 @@ class VotesController < ApplicationController
   end
 
   def destroy
-    @story = Report.publicly_shared.find(params[:story_id])
+    story_id = params[:story_id] || params[:id]
+    @story = Report.publicly_shared.find(story_id)
     voter_token = get_or_create_voter_token
 
     @vote = @story.votes.find_by(voter_token: voter_token)
