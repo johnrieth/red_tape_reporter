@@ -37,55 +37,47 @@
       </div>
     </section>
 
-    <!-- Filters -->
-    <section class="card mb-lg">
-      <h2 class="section-title">Filter Stories</h2>
+    <!-- NOTE: Filters moved lower on the page to de-emphasize them visually -->
 
-      <%= form_with url: stories_path, method: :get, local: true, class: "filter-form" do |f| %>
-        <div class="filter-grid">
-          <div class="form-group">
-            <%= f.label :location, "Location" %>
-            <%= f.text_field :location, value: params[:location], placeholder: "e.g., Los Angeles, Downtown" %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :category, "Issue Category" %>
-            <%= f.select :category,
-                options_for_select(Report::ISSUE_CATEGORIES, params[:category]),
-                { prompt: "All categories" } %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :department, "Department" %>
-            <%= f.select :department,
-                options_for_select(Report::DEPARTMENTS, params[:department]),
-                { prompt: "All departments" } %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :timeline, "Timeline Impact" %>
-            <%= f.select :timeline,
-                options_for_select(Report::TIMELINE_IMPACTS, params[:timeline]),
-                { prompt: "All timelines" } %>
-          </div>
-        </div>
-
-        <div class="form-actions">
-          <%= f.submit "Apply Filters", class: "btn btn-primary" %>
-          <%= link_to "Clear Filters", stories_path, class: "btn btn-secondary" %>
-        </div>
-      <% end %>
-    </section>
-
-    <!-- Top Issues Breakdown -->
-    <% if @category_breakdown.any? %>
+    <!-- Top 3 Issues (detailed cards) -->
+    <% if @top_issues.present? %>
       <section class="card mb-lg">
         <h2 class="section-title">Most Common Issues</h2>
         <div class="breakdown-list">
-          <% @category_breakdown.each do |category, count| %>
+          <% @top_issues.each do |issue| %>
             <div class="breakdown-item">
-              <span class="breakdown-label"><%= category %></span>
-              <span class="breakdown-count"><%= count %> <%= "story".pluralize(count) %></span>
+              <div style="display:flex; justify-content:space-between; align-items:flex-start">
+                <div>
+                  <div class="breakdown-label"><%= issue[:category] %></div>
+                </div>
+                <div>
+                  <span class="tag"><%= issue[:category] %></span>
+                </div>
+              </div>
+
+              <div class="breakdown-meta" style="margin-top:12px">
+                <div class="meta-item">
+                  <span class="meta-label">Others Affected</span>
+                  <div class="meta-value"><%= issue[:count] %></div>
+                </div>
+
+                <div class="meta-item">
+                  <span class="meta-label">Cost Impact</span>
+                  <div class="meta-value"><%= issue[:sample_cost] || "—" %></div>
+                </div>
+
+                <div class="meta-item">
+                  <span class="meta-label">Scale</span>
+                  <div class="meta-value"><%= issue[:scale] %> <%= issue[:scale] == 1 ? "project" : "projects" %></div>
+                </div>
+              </div>
+
+              <% if issue[:stories].any? %>
+                <hr style="margin:12px 0; border:none; border-top:1px solid var(--border-light)">
+                <% issue[:stories].each do |s| %>
+                  <p class="meta-small" style="margin:6px 0"><strong><%= truncate(s.location, length: 40) %>:</strong> <%= truncate(s.issue_description, length: 120) %></p>
+                <% end %>
+              <% end %>
             </div>
           <% end %>
         </div>
@@ -147,6 +139,46 @@
       <% if @stories.empty? %>
         <div class="card">
           <p class="text-large">No stories match your filters. Try adjusting your criteria.</p>
+        </div>
+      <% end %>
+    </section>
+
+    <!-- Filters (moved here to make stories and breakdown the primary focus) -->
+    <section id="filters" class="card mb-lg filter-card">
+      <h2 class="section-title">Filter Stories</h2>
+
+      <%= form_with url: stories_path, method: :get, local: true, class: "filter-form" do |f| %>
+        <div class="filter-grid">
+          <div class="form-group">
+            <%= f.label :location, "Location" %>
+            <%= f.text_field :location, value: params[:location], placeholder: "e.g., Los Angeles, Downtown" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :category, "Issue Category" %>
+            <%= f.select :category,
+                options_for_select(Report::ISSUE_CATEGORIES, params[:category]),
+                { prompt: "All categories" } %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :department, "Department" %>
+            <%= f.select :department,
+                options_for_select(Report::DEPARTMENTS, params[:department]),
+                { prompt: "All departments" } %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :timeline, "Timeline Impact" %>
+            <%= f.select :timeline,
+                options_for_select(Report::TIMELINE_IMPACTS, params[:timeline]),
+                { prompt: "All timelines" } %>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <%= f.submit "Apply Filters", class: "btn btn-primary" %>
+          <%= link_to "Clear Filters", stories_path, class: "btn btn-secondary" %>
         </div>
       <% end %>
     </section>

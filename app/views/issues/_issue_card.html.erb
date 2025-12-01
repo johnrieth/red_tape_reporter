@@ -1,0 +1,21 @@
+<div class="issue-card">
+  <div class="issue-header">
+    <h3><%= link_to issue.title, issue_path(issue) %></h3>
+    <span class="category-badge"><%= issue.category.humanize %></span>
+  </div>
+
+  <div class="issue-stats">
+    <div class="stat">
+      <span class="stat-label">Others Affected</span>
+      <span class="stat-value"><%= issue.support_count %></span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Cost Impact</span>
+      <span class="stat-value">$<%= (issue.cost_impact_total / 1000).round %>k</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Scale</span>
+      <span class="stat-value"><%= issue.projects_affected %> projects</span>
+    </div>
+  </div>
+</div>

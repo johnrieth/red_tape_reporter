@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_12_01_000919) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_01_020747) do
   create_table "audit_logs", force: :cascade do |t|
     t.integer "report_id", null: false
     t.integer "user_id", null: false
@@ -34,6 +34,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_01_000919) do
     t.datetime "updated_at", null: false
     t.index ["report_id", "created_at"], name: "index_comments_on_report_id_and_created_at"
     t.index ["report_id"], name: "index_comments_on_report_id"
+  end
+
+  create_table "issues", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.integer "category"
+    t.integer "status"
+    t.integer "submitted_by_id", null: false
+    t.boolean "is_public"
+    t.json "metadata"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["submitted_by_id"], name: "index_issues_on_submitted_by_id"
   end
 
   create_table "reports", force: :cascade do |t|
@@ -71,6 +84,31 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_01_000919) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
+  create_table "support_comments", force: :cascade do |t|
+    t.integer "support_id", null: false
+    t.integer "user_id", null: false
+    t.text "content"
+    t.integer "visibility"
+    t.json "impact_data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["support_id"], name: "index_support_comments_on_support_id"
+    t.index ["user_id"], name: "index_support_comments_on_user_id"
+  end
+
+  create_table "supports", force: :cascade do |t|
+    t.integer "issue_id", null: false
+    t.integer "user_id", null: false
+    t.integer "visibility"
+    t.string "anonymity_token"
+    t.decimal "estimated_cost"
+    t.string "project_reference"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["issue_id"], name: "index_supports_on_issue_id"
+    t.index ["user_id"], name: "index_supports_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email_address", null: false
     t.string "password_digest", null: false
@@ -92,6 +130,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_01_000919) do
   add_foreign_key "audit_logs", "reports"
   add_foreign_key "audit_logs", "users"
   add_foreign_key "comments", "reports"
+  add_foreign_key "issues", "submitted_bies"
   add_foreign_key "sessions", "users"
+  add_foreign_key "support_comments", "supports"
+  add_foreign_key "support_comments", "users"
+  add_foreign_key "supports", "issues"
+  add_foreign_key "supports", "users"
   add_foreign_key "votes", "reports"
 end

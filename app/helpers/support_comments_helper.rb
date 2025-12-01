@@ -1,0 +1,2 @@
+module SupportCommentsHelper
+end

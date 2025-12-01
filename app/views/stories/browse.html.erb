@@ -1,0 +1,59 @@
+<% content_for :meta_title, "Browse Issues | Red Tape LA" %>
+<% content_for :meta_description, "Browse reported issues by impact, number of reports, and trend. Filter and sort to find what matters in your neighborhood." %>
+
+<div class="container">
+  <header>
+    <h1 class="hero-title">Browse Issues</h1>
+    <p class="hero-subtitle">Filter by category, department, and impact. Sort by highest impact, most reports, or rising trend.</p>
+  </header>
+
+  <section class="card mb-lg">
+    <div style="display:flex; gap:12px; align-items:center; margin-bottom:16px">
+      <%= link_to "Filter & Sort", "#filters", class: "btn btn-outline" %>
+      <%= link_to "Highest Impact", browse_stories_path(sort: :highest_impact), class: "tag" %>
+      <%= link_to "Most Reports", browse_stories_path(sort: :most_reports), class: "tag" %>
+      <%= link_to "Rising Trend", browse_stories_path(sort: :rising_trend), class: "tag" %>
+    </div>
+
+    <div class="stories-grid">
+      <% @stories.each do |story| %>
+        <div class="card story-card">
+          <div class="story-header">
+            <span class="story-type"><%= story.project_type %></span>
+            <% if story.issue_categories.first %>
+              <span class="story-badge"><%= story.issue_categories.first %></span>
+            <% end %>
+          </div>
+
+          <div class="breakdown-meta" style="margin-top:8px">
+            <div class="meta-item">
+              <span class="meta-label">Others Affected</span>
+              <div class="meta-strong"><%= story.comments.count + 1 %></div>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Cost Impact</span>
+              <div class="meta-strong"><%= story.financial_impact || "—" %></div>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Scale</span>
+              <div class="meta-strong"><%= story.vote_count %> support</div>
+            </div>
+          </div>
+
+          <hr style="margin:12px 0; border:none; border-top:1px solid var(--border-light)">
+
+          <div class="story-description"><%= truncate(story.issue_description, length: 220) %></div>
+
+          <div style="margin-top:12px">
+            <%= link_to "View details", story_path(story), class: "btn btn-primary" %>
+            <%= link_to "View all #{story.comments.count} +1s", story_path(story, anchor: 'comments'), class: "view-all" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div style="margin-top:18px; text-align:center">
+      <%= link_to "View All Issues →", stories_path, class: "btn btn-primary view-all" %>
+    </div>
+  </section>
+</div>

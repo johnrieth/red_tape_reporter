@@ -1,0 +1,68 @@
+<div class="redtape-container">
+  <div class="issue-detail">
+    <div class="issue-title-section">
+      <h1><%= @issue.title %></h1>
+      <span class="category-badge"><%= @issue.category.humanize %></span>
+    </div>
+
+    <div class="issue-metrics">
+      <div class="metric">
+        <div class="metric-label">People Affected</div>
+        <div class="metric-value"><%= @issue.support_count %></div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Cost Impact</div>
+        <div class="metric-value">$<%= (@issue.cost_impact_total / 1000).round %>k</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Trend</div>
+        <div class="metric-value <%= @issue.trend_direction %>"><%= @issue.trend_direction.upcase %></div>
+      </div>
+    </div>
+
+    <div class="issue-description">
+      <%= simple_format(@issue.description) %>
+    </div>
+
+    <div class="support-section">
+      <h2>Add Your Support</h2>
+      <%= form_with model: [@issue, @new_support], local: true do |f| %>
+        <div class="form-group">
+          <%= f.label :project_reference, "Your Project (optional)" %>
+          <%= f.text_field :project_reference, placeholder: "e.g., 8-unit multifamily, downtown LA" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :estimated_cost, "Cost Impact (optional)" %>
+          <%= f.number_field :estimated_cost, placeholder: "e.g., 250000" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :visibility, "Show your name?" %>
+          <%= f.select :visibility, { "Anonymous" => "anonymous", "Attributed" => "attributed" } %>
+        </div>
+        <%= f.submit "Add +1 Support" %>
+      <% end %>
+    </div>
+
+    <div class="supports-section">
+      <h2>Support from Others (<%= @supports.count %>)</h2>
+      <% @supports.each do |support| %>
+        <div class="support-card">
+          <div class="support-header">
+            <% if support.attributed? && support.user %>
+              <strong><%= support.user.email %></strong>
+            <% else %>
+              <strong>Anonymous Supporter</strong>
+            <% end %>
+            <span class="support-date"><%= time_ago_in_words(support.created_at) %> ago</span>
+          </div>
+          <% if support.project_reference.present? %>
+            <p class="project-ref"><%= support.project_reference %></p>
+          <% end %>
+          <% if support.estimated_cost.present? %>
+            <p class="cost-info">Cost impact: $<%= number_with_delimiter(support.estimated_cost) %></p>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

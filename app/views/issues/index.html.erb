@@ -1,0 +1,37 @@
+<div class="redtape-container">
+  <div class="redtape-header">
+    <h1>LA County's Bureaucratic Obstacles</h1>
+    <p class="subtitle">Real stories. Shared data. Policy change.</p>
+  </div>
+
+  <div class="redtape-stats">
+    <div class="stat-card">
+      <div class="stat-number"><%= Issue.public_visible.count %></div>
+      <div class="stat-label">Obstacles Reported</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">$<%= (Issue.public_visible.sum { |i| i.cost_impact_total } / 1_000_000).round(1) %>B+</div>
+      <div class="stat-label">Estimated Cost Impact</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number"><%= Issue.public_visible.sum { |i| i.projects_affected } %></div>
+      <div class="stat-label">Projects Affected</div>
+    </div>
+  </div>
+
+  <div class="redtape-filters">
+    <%= form_with url: issues_path, method: :get, local: true do |f| %>
+      <div class="filter-group">
+        <%= f.select :sort, { "Most Supported" => "supported", "Highest Impact" => "impact", "Trending" => "trending" }, { include_blank: false } %>
+        <%= f.select :category, options_for_select(Issue.categories.keys, params[:category]), { include_blank: "All Categories" } %>
+        <%= f.submit "Filter" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="redtape-issues">
+    <% @issues.each do |issue| %>
+      <%= render 'issue_card', issue: issue %>
+    <% end %>
+  </div>
+</div>

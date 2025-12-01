@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "support_comments/create"
+  get "supports/create"
+  get "issues/index"
+  get "issues/show"
   resource :session
   resources :passwords, param: :token
 
@@ -16,11 +20,20 @@ Rails.application.routes.draw do
 
   # Public stories with voting and comments (replaces transparency page)
   resources :stories, only: [ :index, :show ] do
+    collection do
+      get :browse
+    end
     member do
       post "vote", to: "votes#create"
       delete "vote", to: "votes#destroy"
       post "comments", to: "comments#create"
     end
+  end
+
+  # Public issues with support and comments
+  resources :issues, only: [ :index, :show ] do
+    resources :supports, only: [ :create ]
+    resources :support_comments, only: [ :create ]
   end
 
   namespace :admin do
