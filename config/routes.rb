@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get "admin/index"
   resource :session
   resources :passwords, param: :token
 
@@ -10,9 +9,19 @@ Rails.application.routes.draw do
     end
   end
 
-  get "transparency", to: "reports#transparency", as: :transparency
+  # Redirect old transparency page to stories
+  get "transparency", to: redirect("/stories")
 
   get "verify/:token", to: "report_verifications#verify", as: :verify_report
+
+  # Public stories with voting and comments (replaces transparency page)
+  resources :stories, only: [ :index, :show ] do
+    member do
+      post "vote", to: "votes#create"
+      delete "vote", to: "votes#destroy"
+      post "comments", to: "comments#create"
+    end
+  end
 
   namespace :admin do
     resources :reports, only: [ :index, :show, :destroy ] do

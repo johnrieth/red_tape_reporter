@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+vote_one:
+  report: approved_report
+  voter_token: <%= SecureRandom.urlsafe_base64(32) %>
+
+vote_two:
+  report: approved_report
+  voter_token: <%= SecureRandom.urlsafe_base64(32) %>

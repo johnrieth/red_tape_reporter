@@ -1,0 +1,365 @@
+<% content_for :meta_title, "#{@story.project_type} Story | Red Tape LA" %>
+<% content_for :meta_description, truncate(@story.issue_description, length: 155) %>
+
+<div class="container">
+  <!-- Back Link -->
+  <div class="mb-md">
+    <%= link_to "← Back to Stories", stories_path, class: "back-link" %>
+  </div>
+
+  <!-- Story Header -->
+  <div class="card story-detail-card">
+    <div class="story-detail-header">
+      <div>
+        <h1 class="story-detail-title"><%= @story.project_type %></h1>
+        <p class="story-detail-meta">
+          <%= @story.location %> • Posted <%= time_ago_in_words(@story.approved_at) %> ago
+        </p>
+      </div>
+
+      <!-- Vote Button -->
+      <div id="vote_section_<%= @story.id %>">
+        <% if @has_voted %>
+          <%= button_to vote_story_path(@story), method: :delete, class: "vote-button voted", data: { turbo_frame: "vote_section_#{@story.id}" } do %>
+            <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M2 10h2v5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-5h2a1 1 0 0 0 .707-1.707l-6-6a1 1 0 0 0-1.414 0l-6 6A1 1 0 0 0 2 10z"/>
+            </svg>
+            <span><%= @story.vote_count %> Voted</span>
+          <% end %>
+        <% else %>
+          <%= button_to vote_story_path(@story), method: :post, class: "vote-button", data: { turbo_frame: "vote_section_#{@story.id}" } do %>
+            <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M2 10h2v5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-5h2a1 1 0 0 0 .707-1.707l-6-6a1 1 0 0 0-1.414 0l-6 6A1 1 0 0 0 2 10z"/>
+            </svg>
+            <span><%= @story.vote_count %> Support This</span>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Impact Badges -->
+    <div class="story-detail-badges">
+      <span class="badge badge-timeline"><%= @story.timeline_impact %></span>
+      <% if @story.financial_impact.present? %>
+        <span class="badge badge-financial"><%= @story.financial_impact %></span>
+      <% end %>
+    </div>
+
+    <!-- Story Content -->
+    <div class="story-detail-content">
+      <h2>What Happened</h2>
+      <p class="story-detail-text"><%= simple_format(@story.issue_description) %></p>
+    </div>
+
+    <!-- Details Grid -->
+    <div class="story-details-grid">
+      <div class="story-detail-section">
+        <h3>Project Description</h3>
+        <p><%= @story.project_description %></p>
+      </div>
+
+      <% if @story.departments.any? %>
+        <div class="story-detail-section">
+          <h3>Departments Involved</h3>
+          <div class="tag-list">
+            <% @story.departments.each do |dept| %>
+              <span class="tag"><%= dept %></span>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <% if @story.issue_categories.any? %>
+        <div class="story-detail-section">
+          <h3>Issue Categories</h3>
+          <div class="tag-list">
+            <% @story.issue_categories.each do |category| %>
+              <span class="tag"><%= category %></span>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <% if @story.solution_ideas.present? %>
+        <div class="story-detail-section">
+          <h3>Proposed Solutions</h3>
+          <p><%= simple_format(@story.solution_ideas) %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Related Stories -->
+  <% if @related_stories.any? %>
+    <section class="section">
+      <h2 class="section-title">Related Stories (<%= @related_stories.count %>)</h2>
+      <p class="text-muted mb-md">
+        Other reports with similar issues or from the same area
+      </p>
+
+      <div class="related-stories-grid">
+        <% @related_stories.each do |related| %>
+          <div class="card related-story-card">
+            <div class="related-story-header">
+              <span class="story-type"><%= related.project_type %></span>
+              <span class="story-location"><%= related.location %></span>
+            </div>
+            <p class="related-story-excerpt">
+              <%= truncate(related.issue_description, length: 100) %>
+            </p>
+            <div class="related-story-footer">
+              <span class="vote-count-small">
+                <%= related.vote_count %> support
+              </span>
+              <%= link_to "Read Story", story_path(related), class: "btn btn-sm btn-secondary" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </section>
+  <% end %>
+
+  <!-- Comments Section -->
+  <section class="section">
+    <h2 class="section-title">Community Comments (<%= @comments.count %>)</h2>
+    <p class="text-muted mb-md">
+      Share your experience if you've faced similar issues. All comments are anonymous.
+    </p>
+
+    <!-- Comment Form -->
+    <div class="card mb-lg">
+      <%= form_with url: comments_story_path(@story), method: :post, local: true, id: "comment_form" do |f| %>
+        <div class="form-group">
+          <%= f.label :content, "Add Your Experience" %>
+          <%= f.text_area :content, rows: 4, placeholder: "Same issue here! I had to wait 8 months for...", required: true, maxlength: 1000 %>
+          <div class="help-text">3-1000 characters. Anonymous - no email or name required.</div>
+        </div>
+        <%= f.submit "Post Comment", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+
+    <!-- Comments List -->
+    <% if @comments.any? %>
+      <div class="comments-list">
+        <% @comments.each do |comment| %>
+          <div class="card comment-card">
+            <div class="comment-meta">
+              <span class="comment-author">Anonymous</span>
+              <span class="comment-date"><%= time_ago_in_words(comment.created_at) %> ago</span>
+            </div>
+            <p class="comment-text"><%= simple_format(comment.content) %></p>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="card">
+        <p class="text-muted">No comments yet. Be the first to share your experience!</p>
+      </div>
+    <% end %>
+  </section>
+</div>
+
+<style>
+.back-link {
+  color: var(--text-muted, #6b7280);
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.back-link:hover {
+  color: var(--text-primary, #1f2937);
+}
+
+.story-detail-card {
+  margin-bottom: 2rem;
+}
+
+.story-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  gap: 2rem;
+}
+
+.story-detail-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary, #1f2937);
+  margin: 0 0 0.5rem 0;
+}
+
+.story-detail-meta {
+  color: var(--text-muted, #6b7280);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.vote-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.5rem;
+  color: var(--text-primary, #1f2937);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.vote-button:hover {
+  border-color: var(--la-gold, #D4AF37);
+  background-color: #fffbf0;
+}
+
+.vote-button.voted {
+  border-color: var(--la-gold, #D4AF37);
+  background-color: var(--la-gold, #D4AF37);
+  color: white;
+}
+
+.story-detail-badges {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.story-detail-content {
+  margin-bottom: 2rem;
+}
+
+.story-detail-content h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary, #1f2937);
+}
+
+.story-detail-text {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: var(--text-primary, #1f2937);
+}
+
+.story-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-light, #e5e7eb);
+}
+
+.story-detail-section h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary, #1f2937);
+}
+
+.story-detail-section p {
+  color: var(--text-muted, #6b7280);
+  line-height: 1.6;
+}
+
+.tag-list {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.related-stories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.related-story-card {
+  padding: 1rem;
+}
+
+.related-story-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-light, #e5e7eb);
+}
+
+.related-story-excerpt {
+  color: var(--text-muted, #6b7280);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.related-story-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vote-count-small {
+  font-size: 0.875rem;
+  color: var(--text-muted, #6b7280);
+}
+
+.btn-sm {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.comment-card {
+  padding: 1rem;
+}
+
+.comment-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-light, #e5e7eb);
+}
+
+.comment-author {
+  font-weight: 600;
+  color: var(--text-primary, #1f2937);
+}
+
+.comment-date {
+  font-size: 0.875rem;
+  color: var(--text-muted, #6b7280);
+}
+
+.comment-text {
+  color: var(--text-primary, #1f2937);
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .story-detail-header {
+    flex-direction: column;
+  }
+
+  .story-detail-title {
+    font-size: 1.5rem;
+  }
+
+  .story-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .related-stories-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>

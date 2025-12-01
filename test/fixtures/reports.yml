@@ -14,6 +14,7 @@ approved_report:
   timeline_impact: 6-12 months
   financial_impact: $10,000-$50,000
   anonymous: true
+  share_publicly: true
   verification_token: <%= SecureRandom.urlsafe_base64(32) %>
   verified_at: <%= 3.days.ago %>
   approved_at: <%= 1.day.ago %>

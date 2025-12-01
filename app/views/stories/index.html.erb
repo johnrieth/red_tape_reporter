@@ -1,0 +1,321 @@
+<% content_for :meta_title, "Public Stories | Red Tape LA" %>
+<% content_for :meta_description, "Read real stories from LA residents facing bureaucratic delays. Filter by location, issue type, and timeline impact. Add your support to similar issues." %>
+
+<div class="container">
+  <header>
+    <h1 class="hero-title">Public Stories</h1>
+    <p class="hero-subtitle">
+      Real experiences from <%= @total_stories %> people who opted to share their stories publicly.
+      All stories are anonymous. Find issues similar to yours and show your support.
+    </p>
+  </header>
+
+  <% if @total_stories == 0 %>
+    <section class="card">
+      <p class="text-large">No public stories yet. When people opt-in to share their approved stories publicly, they'll appear here.</p>
+      <p class="text-large mt-md">
+        <%= link_to "Share your own story", new_report_path, class: "btn btn-gold" %>
+      </p>
+    </section>
+  <% else %>
+
+    <!-- Aggregate Statistics -->
+    <section class="dashboard-stats mb-lg">
+      <div class="stat-card">
+        <div class="stat-number"><%= @total_stories %></div>
+        <div class="stat-label">Public Stories</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-number"><%= @total_votes %></div>
+        <div class="stat-label">Community Support Votes</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-number"><%= @stories_with_financial_impact %></div>
+        <div class="stat-label">With Financial Impact</div>
+      </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="card mb-lg">
+      <h2 class="section-title">Filter Stories</h2>
+
+      <%= form_with url: stories_path, method: :get, local: true, class: "filter-form" do |f| %>
+        <div class="filter-grid">
+          <div class="form-group">
+            <%= f.label :location, "Location" %>
+            <%= f.text_field :location, value: params[:location], placeholder: "e.g., Los Angeles, Downtown" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :category, "Issue Category" %>
+            <%= f.select :category,
+                options_for_select(Report::ISSUE_CATEGORIES, params[:category]),
+                { prompt: "All categories" } %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :department, "Department" %>
+            <%= f.select :department,
+                options_for_select(Report::DEPARTMENTS, params[:department]),
+                { prompt: "All departments" } %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :timeline, "Timeline Impact" %>
+            <%= f.select :timeline,
+                options_for_select(Report::TIMELINE_IMPACTS, params[:timeline]),
+                { prompt: "All timelines" } %>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <%= f.submit "Apply Filters", class: "btn btn-primary" %>
+          <%= link_to "Clear Filters", stories_path, class: "btn btn-secondary" %>
+        </div>
+      <% end %>
+    </section>
+
+    <!-- Top Issues Breakdown -->
+    <% if @category_breakdown.any? %>
+      <section class="card mb-lg">
+        <h2 class="section-title">Most Common Issues</h2>
+        <div class="breakdown-list">
+          <% @category_breakdown.each do |category, count| %>
+            <div class="breakdown-item">
+              <span class="breakdown-label"><%= category %></span>
+              <span class="breakdown-count"><%= count %> <%= "story".pluralize(count) %></span>
+            </div>
+          <% end %>
+        </div>
+      </section>
+    <% end %>
+
+    <!-- Stories List -->
+    <section class="section">
+      <h2 class="section-title mb-md">
+        <%= params.any? { |k, v| k != "controller" && k != "action" && v.present? } ? "Filtered Stories" : "All Stories" %>
+      </h2>
+
+      <div class="stories-grid">
+        <% @stories.each do |story| %>
+          <div class="card story-card">
+            <div class="story-header">
+              <span class="story-type"><%= story.project_type %></span>
+              <span class="story-location"><%= story.location %></span>
+            </div>
+
+            <div class="story-impact-badges">
+              <span class="badge badge-timeline"><%= story.timeline_impact %></span>
+              <% if story.financial_impact.present? %>
+                <span class="badge badge-financial"><%= story.financial_impact %></span>
+              <% end %>
+            </div>
+
+            <div class="story-content">
+              <p class="story-description">
+                <%= truncate(story.issue_description, length: 200) %>
+              </p>
+            </div>
+
+            <div class="story-meta">
+              <div class="story-tags">
+                <% story.departments.first(3).each do |dept| %>
+                  <span class="tag"><%= dept %></span>
+                <% end %>
+              </div>
+
+              <div class="story-actions">
+                <span class="vote-count">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M2 10h2v5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-5h2a1 1 0 0 0 .707-1.707l-6-6a1 1 0 0 0-1.414 0l-6 6A1 1 0 0 0 2 10z"/>
+                  </svg>
+                  <%= story.vote_count %> support
+                </span>
+                <span class="comment-count">
+                  <%= story.comments.count %> <%= "comment".pluralize(story.comments.count) %>
+                </span>
+              </div>
+            </div>
+
+            <%= link_to "Read Full Story", story_path(story), class: "btn btn-secondary btn-block mt-md" %>
+          </div>
+        <% end %>
+      </div>
+
+      <% if @stories.empty? %>
+        <div class="card">
+          <p class="text-large">No stories match your filters. Try adjusting your criteria.</p>
+        </div>
+      <% end %>
+    </section>
+
+  <% end %>
+
+  <!-- Call to Action -->
+  <section class="cta-section">
+    <div class="card cta-card">
+      <h2 class="section-title">Have a similar experience?</h2>
+      <p class="text-large mb-md">
+        Share your story and help build the case for bureaucratic reform in LA.
+        You can choose to make it public so others can see they're not alone.
+      </p>
+      <%= link_to "Share Your Story", new_report_path, class: "btn btn-gold btn-large" %>
+    </div>
+  </section>
+</div>
+
+<style>
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.story-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.story-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-light, #e5e7eb);
+}
+
+.story-type {
+  font-weight: 600;
+  color: var(--text-primary, #1f2937);
+}
+
+.story-location {
+  color: var(--text-muted, #6b7280);
+  font-size: 0.875rem;
+}
+
+.story-impact-badges {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.badge-timeline {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.badge-financial {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.story-content {
+  flex: 1;
+  margin-bottom: 1rem;
+}
+
+.story-description {
+  color: var(--text-primary, #1f2937);
+  line-height: 1.6;
+}
+
+.story-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-light, #e5e7eb);
+}
+
+.story-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  padding: 0.25rem 0.5rem;
+  background-color: #f3f4f6;
+  color: #4b5563;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+}
+
+.story-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-size: 0.875rem;
+  color: var(--text-muted, #6b7280);
+}
+
+.vote-count, .comment-count {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.breakdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.breakdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+}
+
+.breakdown-label {
+  font-weight: 500;
+  color: var(--text-primary, #1f2937);
+}
+
+.breakdown-count {
+  color: var(--text-muted, #6b7280);
+  font-size: 0.875rem;
+}
+
+.cta-section {
+  margin-top: 3rem;
+}
+
+.cta-card {
+  text-align: center;
+  padding: 2rem;
+}
+
+@media (max-width: 640px) {
+  .stories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
