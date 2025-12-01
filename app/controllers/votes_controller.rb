@@ -12,12 +12,12 @@ class VotesController < ApplicationController
     if @vote.save
       respond_to do |format|
         format.html { redirect_to story_path(@story), notice: "Thanks for your support!" }
-        format.turbo_stream
+        format.turbo_stream { head :ok }
       end
     else
       respond_to do |format|
         format.html { redirect_to story_path(@story), alert: "You've already voted on this story." }
-        format.turbo_stream { render turbo_stream: turbo_stream.replace("vote_button_#{@story.id}", partial: "votes/button", locals: { story: @story, has_voted: true }) }
+        format.turbo_stream { head :ok }
       end
     end
   rescue ActiveRecord::RecordNotFound
@@ -34,12 +34,12 @@ class VotesController < ApplicationController
     if @vote&.destroy
       respond_to do |format|
         format.html { redirect_to story_path(@story), notice: "Vote removed." }
-        format.turbo_stream
+        format.turbo_stream { head :ok }
       end
     else
       respond_to do |format|
         format.html { redirect_to story_path(@story), alert: "You haven't voted on this story." }
-        format.turbo_stream
+        format.turbo_stream { head :ok }
       end
     end
   rescue ActiveRecord::RecordNotFound
