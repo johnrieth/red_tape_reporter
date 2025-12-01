@@ -1,0 +1,132 @@
+/* Stripe / 37Signals inspired minimal styles for Public Stories (extracted from view) */
+
+:root {
+  --max-width: 1100px;
+  --gutter: 24px;
+  --card-radius: 10px;
+  --card-bg: #fff;
+  --muted: var(--text-muted, #6b7280);
+  --accent: var(--text-primary, #1f2937);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 48px var(--gutter);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--accent);
+}
+
+header .hero-title {
+  font-size: 34px;
+  line-height: 1.15;
+  margin: 0 0 8px 0;
+  font-weight: 700;
+}
+
+header .hero-subtitle {
+  color: var(--muted);
+  margin: 0 0 22px 0;
+  font-size: 16px;
+}
+
+/* Metrics */
+.dashboard-stats {
+  display: flex;
+  gap: 16px;
+  background: linear-gradient(180deg,#ffffff,#fbfdff);
+  border-radius: var(--card-radius);
+  padding: 22px;
+  box-shadow: 0 1px 0 rgba(16,24,40,0.03), 0 8px 24px rgba(16,24,40,0.06);
+  margin-bottom: 28px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat-card {
+  flex: 1 1 0;
+  text-align: center;
+  padding: 6px 10px;
+}
+
+.stat-number {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.stat-label {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+/* Filters card */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-light, #e9ecef);
+  border-radius: var(--card-radius);
+  padding: 18px;
+  box-shadow: none;
+}
+
+.filter-form .form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--accent);
+}
+
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.form-actions { display:flex; gap:12px; align-items:center }
+
+.btn-gold { background: #f59e0b; color: #111; border-radius:8px; padding:10px 14px }
+.btn-primary { background:#0b63ff; color:#fff; border-radius:8px; padding:10px 14px }
+
+/* Most common issues */
+.breakdown-list { display:flex; flex-direction:column; gap:14px }
+.breakdown-item { padding:18px; border-radius:10px; border:1px solid var(--border-light, #e9ecef); box-shadow:0 6px 18px rgba(16,24,40,0.04); background:var(--card-bg) }
+.breakdown-label { font-weight:700; font-size:16px }
+
+/* Stories grid */
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px;
+}
+
+.story-card {
+  display:flex; flex-direction:column; height:100%; padding:18px; border-radius:10px; background:var(--card-bg);
+  border:1px solid var(--border-light, #e9ecef);
+  box-shadow: 0 6px 20px rgba(16,24,40,0.04);
+}
+
+.story-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px }
+.story-type { font-weight:700; color:var(--accent) }
+.story-location { color:var(--muted); font-size:13px }
+
+.story-impact-badges { margin-bottom:12px }
+.badge { font-weight:600; font-size:12px; padding:6px 10px; border-radius:999px }
+
+.story-description { color:var(--muted); line-height:1.5 }
+
+.story-meta { display:flex; justify-content:space-between; align-items:center; margin-top:14px }
+.story-actions { color:var(--muted); font-size:13px }
+
+.tag { background:#f3f4f6; color:#334155; padding:6px 8px; border-radius:999px; font-size:12px }
+
+.cta-section { margin-top:36px }
+.cta-card { padding:28px; text-align:center }
+
+@media (max-width: 760px) {
+  .container { padding: 24px }
+  header .hero-title { font-size:24px }
+  .dashboard-stats { flex-direction:column; gap:12px; align-items:stretch }
+}
+
