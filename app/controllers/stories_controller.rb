@@ -4,37 +4,6 @@ class StoriesController < ApplicationController
   def index
     @stories = Report.publicly_shared.recent
 
-    # Filter by location
-    if params[:location].present?
-      location_query = "%#{params[:location]}%"
-      @stories = @stories.where("location LIKE ?", location_query)
-    end
-
-    # Filter by issue category
-    if params[:category].present?
-      @stories = @stories.select { |s| s.issue_categories.include?(params[:category]) }
-    end
-
-    # Filter by timeline impact
-    if params[:timeline].present?
-      @stories = @stories.where(timeline_impact: params[:timeline])
-    end
-
-    # Filter by financial impact
-    if params[:financial_impact].present?
-      @stories = @stories.where(financial_impact: params[:financial_impact])
-    end
-
-    # Filter by department
-    if params[:department].present?
-      @stories = @stories.select { |s| s.departments.include?(params[:department]) }
-    end
-
-    # Convert back to ActiveRecord::Relation if we used select
-    if @stories.is_a?(Array)
-      @stories = Report.where(id: @stories.map(&:id)).order(created_at: :desc)
-    end
-
     # Calculate aggregate statistics
     calculate_aggregates
     build_top_issues

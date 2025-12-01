@@ -20,25 +20,25 @@
   </div>
 
   <!-- Export Section -->
-  <div class="card" style="margin-bottom: 1.5rem; background-color: #f9fafb;">
-    <h2 style="margin-top: 0; margin-bottom: 1rem; font-size: 1.25rem; color: var(--la-navy);">Generate Bi-Monthly Report</h2>
-    <p style="margin-bottom: 1rem; color: var(--la-muted);">Export approved reports from a date range for your advocacy work.</p>
+  <div class="card export-card">
+    <h2>Generate Bi-Monthly Report</h2>
+    <p>Export approved reports from a date range for your advocacy work.</p>
 
     <div data-controller="export">
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+      <div class="export-date-grid">
         <div>
-          <label for="start_date" style="display: block; font-weight: 600; margin-bottom: 0.25rem;">Start Date</label>
-          <input type="date" data-export-target="startDate" value="<%= 2.months.ago.to_date %>" style="width: 100%; padding: 0.5rem; border: 2px solid #ccc; border-radius: 4px;">
+          <label for="start_date">Start Date</label>
+          <input type="date" data-export-target="startDate" value="<%= 2.months.ago.to_date %>">
         </div>
         <div>
-          <label for="end_date" style="display: block; font-weight: 600; margin-bottom: 0.25rem;">End Date</label>
-          <input type="date" data-export-target="endDate" value="<%= Date.today %>" style="width: 100%; padding: 0.5rem; border: 2px solid #ccc; border-radius: 4px;">
+          <label for="end_date">End Date</label>
+          <input type="date" data-export-target="endDate" value="<%= Date.today %>">
         </div>
       </div>
 
-      <div style="display: flex; gap: 0.75rem;">
-        <button data-action="click->export#exportCsv" type="button" class="btn-primary" style="background-color: var(--la-navy); color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; width: auto;">Export CSV</button>
-        <button data-action="click->export#exportPdf" type="button" class="btn-primary" style="background-color: #E6AF2E; color: var(--la-charcoal); padding: 0.75rem 1.5rem; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; width: auto;">Generate PDF Report</button>
+      <div class="export-buttons">
+        <button data-action="click->export#exportCsv" type="button" class="btn-primary">Export CSV</button>
+        <button data-action="click->export#exportPdf" type="button" class="btn-primary btn-pdf">Generate PDF Report</button>
       </div>
     </div>
   </div>
@@ -56,30 +56,30 @@
 
   <!-- Active Filters -->
   <% if @filter_email.present? || @filter_department.present? || @filter_issue_category.present? %>
-    <div style="margin: 1rem 0; padding: 1rem; background-color: #f0f8fb; border: 1px solid #0b3d66; border-radius: 4px;">
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
-        <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
-          <strong style="color: var(--la-navy);">Active filters:</strong>
+    <div class="active-filters">
+      <div class="active-filters-content">
+        <div class="active-filters-tags">
+          <strong>Active filters:</strong>
           <% if @filter_email.present? %>
-            <span style="background-color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+            <span class="filter-badge">
               <strong>Email:</strong> <%= @filter_email %>
-              <%= link_to "×", admin_reports_path(filter: @filter, department: @filter_department, issue_category: @filter_issue_category), style: "color: #dc2626; text-decoration: none; font-size: 1.25rem; font-weight: bold; margin-left: 0.25rem;" %>
+              <%= link_to "×", admin_reports_path(filter: @filter, department: @filter_department, issue_category: @filter_issue_category), class: "filter-badge-remove" %>
             </span>
           <% end %>
           <% if @filter_department.present? %>
-            <span style="background-color: #FEF4E6; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+            <span class="filter-badge filter-badge--department">
               <strong>Department:</strong> <%= @filter_department %>
-              <%= link_to "×", admin_reports_path(filter: @filter, email: @filter_email, issue_category: @filter_issue_category), style: "color: #dc2626; text-decoration: none; font-size: 1.25rem; font-weight: bold; margin-left: 0.25rem;" %>
+              <%= link_to "×", admin_reports_path(filter: @filter, email: @filter_email, issue_category: @filter_issue_category), class: "filter-badge-remove" %>
             </span>
           <% end %>
           <% if @filter_issue_category.present? %>
-            <span style="background-color: #E7F6F8; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+            <span class="filter-badge filter-badge--issue">
               <strong>Issue:</strong> <%= @filter_issue_category %>
-              <%= link_to "×", admin_reports_path(filter: @filter, email: @filter_email, department: @filter_department), style: "color: #dc2626; text-decoration: none; font-size: 1.25rem; font-weight: bold; margin-left: 0.25rem;" %>
+              <%= link_to "×", admin_reports_path(filter: @filter, email: @filter_email, department: @filter_department), class: "filter-badge-remove" %>
             </span>
           <% end %>
         </div>
-        <%= link_to "Clear all filters", admin_reports_path(filter: @filter), style: "color: var(--la-navy); text-decoration: underline; font-size: 0.875rem; font-weight: 600;" %>
+        <%= link_to "Clear all filters", admin_reports_path(filter: @filter), class: "btn-clear-filters" %>
       </div>
     </div>
   <% end %>

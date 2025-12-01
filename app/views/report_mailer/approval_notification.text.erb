@@ -1,0 +1,27 @@
+Red Tape LA
+============================
+
+Your story is now published!
+
+Thank you for sharing your experience with LA's building process. Your story about your <%= @report.project_type.presence || "project" %> has been reviewed and approved by our team.
+
+<% if @report.share_publicly %>
+Your story is now visible on our Public Stories page where others facing similar issues can see they're not alone.
+
+View your story: <%= story_url(@report) %>
+<% else %>
+Your story is now part of our database. While you chose not to share it publicly, it's still helping us build the case for reform.
+<% end %>
+
+How your story helps:
+- We analyze all stories to find common barriers and systemic issues
+- We use anonymized, aggregated data in meetings with city officials
+- We publish findings every two months to maintain pressure for reform
+
+Privacy reminder: Your name and email are never shared. We only use anonymized data when advocating for solutions.
+
+Thank you for making your story count toward fixing the system.
+
+---
+Questions? Email us at john@redtape.la
+Red Tape LA – Building the case for housing reform

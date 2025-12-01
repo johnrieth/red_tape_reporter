@@ -102,7 +102,14 @@ class Admin::ReportsController < Admin::BaseController
 
   def approve
     @report = Report.not_deleted.find(params[:id])
+    was_previously_approved = @report.approved?
+
     if @report.approve
+      # Send approval notification email if this is a new approval
+      unless was_previously_approved
+        ReportMailer.approval_notification(@report).deliver_later
+      end
+
       # Log approval action
       AuditLog.log_action(
         report: @report,

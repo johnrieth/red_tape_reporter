@@ -2,11 +2,146 @@
  * Admin Dashboard - Professional LA + USWDS Style
  */
 
+/* Export Section */
+.export-card {
+    background-color: #f9fafb;
+    margin-bottom: var(--spacing-xl, 1.5rem);
+}
+
+.export-card h2 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-lg, 1rem);
+    font-size: 1.25rem;
+    color: var(--la-navy, #0b3d66);
+}
+
+.export-card p {
+    margin-bottom: var(--spacing-lg, 1rem);
+    color: var(--text-muted, #6b7280);
+}
+
+.export-date-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg, 1rem);
+    margin-bottom: var(--spacing-lg, 1rem);
+}
+
+.export-date-grid label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs, 0.25rem);
+}
+
+.export-date-grid input[type="date"] {
+    width: 100%;
+    padding: var(--spacing-sm, 0.5rem);
+    border: 2px solid #ccc;
+    border-radius: var(--radius-sm, 4px);
+}
+
+.export-buttons {
+    display: flex;
+    gap: var(--spacing-md, 0.75rem);
+    flex-wrap: wrap;
+}
+
+.export-buttons .btn-primary {
+    width: auto;
+}
+
+.btn-pdf {
+    background-color: #E6AF2E;
+    color: var(--la-charcoal, #22252a);
+}
+
+.btn-pdf:hover {
+    background-color: #d89a1f;
+    color: var(--la-charcoal, #22252a);
+}
+
+/* Active Filters Section */
+.active-filters {
+    margin: var(--spacing-lg, 1rem) 0;
+    padding: var(--spacing-lg, 1rem);
+    background-color: #f0f8fb;
+    border: 1px solid #0b3d66;
+    border-radius: var(--radius-sm, 4px);
+}
+
+.active-filters-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm, 0.5rem);
+}
+
+.active-filters-tags {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm, 0.5rem);
+    flex-wrap: wrap;
+}
+
+.active-filters-tags strong {
+    color: var(--la-navy, #0b3d66);
+}
+
+.filter-badge {
+    background-color: white;
+    padding: var(--spacing-xs, 0.25rem) var(--spacing-md, 0.75rem);
+    border-radius: var(--radius-sm, 4px);
+    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm, 0.5rem);
+}
+
+.filter-badge--department {
+    background-color: #FEF4E6;
+}
+
+.filter-badge--issue {
+    background-color: #E7F6F8;
+}
+
+.filter-badge-remove {
+    color: #dc2626;
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-left: var(--spacing-xs, 0.25rem);
+}
+
+.filter-badge-remove:hover {
+    color: #b91c1c;
+}
+
+/* Clear Filters Button */
+.btn-clear-filters {
+    background-color: white;
+    color: var(--la-navy, #0b3d66);
+    border: 1px solid #0b3d66;
+    padding: var(--spacing-xs, 0.25rem) var(--spacing-md, 0.75rem);
+    border-radius: var(--radius-sm, 4px);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-clear-filters:hover {
+    background-color: var(--la-navy, #0b3d66);
+    color: white;
+}
+
 /* Card */
 .card {
     background: white;
     border: 2px solid #d1ccc1;
-    border-radius: var(--border-radius-md);
+    border-radius: var(--border-radius-md, 0.5rem);
     padding: 2rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }

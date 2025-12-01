@@ -130,7 +130,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_01_020747) do
   add_foreign_key "audit_logs", "reports"
   add_foreign_key "audit_logs", "users"
   add_foreign_key "comments", "reports"
-  add_foreign_key "issues", "submitted_bies"
+  add_foreign_key "issues", "users", column: "submitted_by_id"
   add_foreign_key "sessions", "users"
   add_foreign_key "support_comments", "supports"
   add_foreign_key "support_comments", "users"
