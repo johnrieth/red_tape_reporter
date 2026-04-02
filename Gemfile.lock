@@ -280,7 +280,7 @@ GEM
     regexp_parser (2.11.3)
     reline (0.6.3)
       io-console (~> 0.5)
-    resend (1.0.0)
+    resend (1.1.0)
       httparty (>= 0.21.0)
     rexml (3.4.4)
     rubocop (1.84.2)
@@ -413,7 +413,7 @@ DEPENDENCIES
   rack-attack (~> 6.7)
   rails (~> 8.0.3)
   rails-controller-testing
-  resend (~> 1.0)
+  resend (~> 1.1)
   rubocop-rails-omakase
   selenium-webdriver
   sentry-rails
